@@ -9,9 +9,17 @@ notifications:
   email: false
 
 install:
-  - cd $TRAVIS_BUILD_DIR/fluffy-shop/ && mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+  - cd $TRAVIS_BUILD_DIR/fluffy-stock/ && mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
   - cd $TRAVIS_BUILD_DIR/jaxrs-server/ && mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V 
 
 test:
-  - cd $TRAVIS_BUILD_DIR/fluffy-shop/ && mvn test
+  - cd $TRAVIS_BUILD_DIR/fluffy-stock/ && mvn test
   - cd $TRAVIS_BUILD_DIR/jaxrs-server/ && mvn test
+
+addons:
+  sonarqube: true
+env:
+  global:
+  - secure:
+script:
+  - sonar-scanner -Dsonar.login=$SONAR_TOKEN

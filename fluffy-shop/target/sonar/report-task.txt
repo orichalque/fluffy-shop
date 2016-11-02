@@ -1,5 +1,0 @@
-projectKey=com.alma.groupe8:fluffy-shop
-serverUrl=http://localhost:9000
-dashboardUrl=http://localhost:9000/dashboard/index/com.alma.groupe8:fluffy-shop
-ceTaskId=AVgG6PrFUzvBEz5r0tVF
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AVgG6PrFUzvBEz5r0tVF
