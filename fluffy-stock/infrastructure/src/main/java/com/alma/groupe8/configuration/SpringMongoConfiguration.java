@@ -14,11 +14,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SpringMongoConfiguration{
 
-    @Bean
-    public MongoCollection<?> mongoCollection() {
-        MongoClientURI mongoClientURI = new MongoClientURI(String.format("%s/%s", CommonVariables.MONGO_CLIENT_URI, CommonVariables.MONGO_DATABASE_NAME));
-        MongoClient mongoClient = new MongoClient(mongoClientURI);
-        return mongoClient.getDatabase(CommonVariables.MONGO_DATABASE_NAME).getCollection(CommonVariables.COLLECTION_NAME);
-    }
+//    @Bean
+//    public MongoCollection<?> mongoCollection() {
+//        MongoClientURI mongoClientURI = new MongoClientURI(String.format("%s/%s", CommonVariables.MONGO_CLIENT_URI, CommonVariables.MONGO_DATABASE_NAME));
+//        MongoClient mongoClient = new MongoClient(mongoClientURI);
+//        return mongoClient.getDatabase(CommonVariables.MONGO_DATABASE_NAME).getCollection(CommonVariables.COLLECTION_NAME);
+//    }
 
 }
