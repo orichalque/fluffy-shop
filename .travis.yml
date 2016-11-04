@@ -14,3 +14,10 @@ install:
 test:
   - cd $TRAVIS_BUILD_DIR/fluffy-stock/ && mvn test
 
+addons:
+  sonarqube: true
+env:
+  global:
+  - secure:
+script:
+  - sonar-scanner -Dsonar.login=$SONAR_TOKEN
