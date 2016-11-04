@@ -18,6 +18,9 @@ addons:
   sonarqube: true
 env:
   global:
-  - secure:
+  - secure: fEwUwvdXLRdq+ABeRM21YCGqkLT/2ulJgPSYYw0Fac5aiZFxGrzBnbIThhuzXS77udNldXsebN6WvbVQvmC2pkMlKAxxJdmDGJ/U/w6f8h+nb8gHx6QzPLUyxkb2kipq/o/+wm8czobOHHZwJnf1+zHnPMY6cROWBw8/9CMY0EVaOME+FvAAHXrWnCFd5RnQny8+hj/yKrShapOULPO/D3uqNGotiq87u1I95IChHSRH0W++2ctKJPn5BFs/MG+cUg9Xx66CBq1YR+k72oos+2mQbYJKgQr1j565O2Y4om1Jm7ZV0LGdn8aw88U7PXZUy8d9hYVFV8Qvl9Sm8kExY3eM5BJMXC0FRIRsxVjtk8dPYDIjZQQwaH9rtiiuXNDyS8/B9ukqw7BD6jGPCEPyzRVAngQzuirc//EVDdjqiHKPpM+Pn51PwNtT9SX556y6fYsLNOJ6EhYUAFjyjgJ6JuqCZ4NJCM0uDq79bkhopQ6ODSWA0SfbZ1O/5MBvFWcPJyNqenF3aNzy86ursgX8NJXPIDlciTDPdKxLuDYZvTRkgm0/PWODnGOPs2wSA5qxTJTqBCrUqvkTp1h5+9pYHGMzjwmwENlcy8zZk757QkpdAyhhURAwmeN7/nxoBo7hnEIWqzGdvmmkXFzfoQTG2Juk06nI0XaCb4W3q2+eVDc=
 script:
   - sonar-scanner -Dsonar.login=$SONAR_TOKEN
+
+ # the following command line builds the project, runs the tests with coverage and then execute the SonarQube analysis
+#  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.login=$SONAR_TOKEN
