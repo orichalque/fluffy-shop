@@ -1,5 +1,0 @@
-projectKey=com.alma.groupe8:fluffy-stock
-serverUrl=http://localhost:9000
-dashboardUrl=http://localhost:9000/dashboard/index/com.alma.groupe8:fluffy-stock
-ceTaskId=AVgqRFiuZdp0Gq77MBcs
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AVgqRFiuZdp0Gq77MBcs
