@@ -17,12 +17,12 @@
       <profile default="true" name="Default" enabled="false">
         <processorPath useClasspath="true" />
       </profile>
-      <profile default="false" name="Annotation profile for presentation" enabled="true">
+      <profile default="false" name="Annotation profile for domain" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="presentation" />
+        <module name="domain" />
       </profile>
       <profile default="false" name="Annotation profile for application" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -31,12 +31,12 @@
         <processorPath useClasspath="true" />
         <module name="application" />
       </profile>
-      <profile default="false" name="Annotation profile for domain" enabled="true">
+      <profile default="false" name="Annotation profile for presentation" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="domain" />
+        <module name="presentation" />
       </profile>
       <profile default="false" name="Annotation profile for infrastructure" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -56,9 +56,8 @@
     <bytecodeTargetLevel>
       <module name="api" target="1.8" />
       <module name="application" target="1.8" />
-      <module name="boutique" target="1.8" />
       <module name="domain" target="1.8" />
-      <module name="fluffy-shop" target="1.8" />
+      <module name="fluffy-stock" target="1.8" />
       <module name="fournisseur" target="1.8" />
       <module name="infrastructure" target="1.8" />
       <module name="presentation" target="1.8" />
