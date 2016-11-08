@@ -13,12 +13,6 @@ install:
 
 addons:
   sonarqube: true
-env:
-  global:
 script:
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.login=$SONAR_TOKEN
 
-deploy:
-  provider: heroku
-  api_key:
-    secure: $HEROKU_KEY
