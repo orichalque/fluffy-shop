@@ -21,3 +21,8 @@ env:
   - secure:
 script:
   - sonar-scanner -Dsonar.login=$SONAR_TOKEN
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: $HEROKU_KEY
