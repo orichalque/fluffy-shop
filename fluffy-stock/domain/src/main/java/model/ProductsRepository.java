@@ -17,7 +17,7 @@ public interface ProductsRepository {
      * @param uuid the id of the product
      * @return the product with the corresponding name
      */
-    Product find(UUID uuid) throws ProductNotFoundException;
+    Product find(UUID uuid);
 
     /**
      * Get all the products of the database
