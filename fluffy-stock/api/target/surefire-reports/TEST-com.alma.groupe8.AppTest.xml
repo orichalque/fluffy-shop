@@ -1,68 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.alma.groupe8.AppTest" time="0.055" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.alma.groupe8.AppTest" time="0.043" tests="1" errors="0" skipped="0" failures="0">
   <properties>
-    <property name="idea.version" value="2016.1.4"/>
+    <property name="idea.version" value="14.1.7"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
-    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_91\jre\bin"/>
-    <property name="java.vm.version" value="25.91-b15"/>
+    <property name="sun.boot.library.path" value="/comptes/E104607D/Documents/jdk1.8.0_101/jre/lib/amd64"/>
+    <property name="java.vm.version" value="25.101-b13"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
-    <property name="path.separator" value=";"/>
+    <property name="path.separator" value=":"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
     <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
     <property name="file.encoding.pkg" value="sun.io"/>
-    <property name="idea.launcher.port" value="7532"/>
-    <property name="user.script" value=""/>
     <property name="user.country" value="FR"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
-    <property name="sun.os.patch.level" value=""/>
+    <property name="sun.os.patch.level" value="unknown"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="E:\Users\Vandorallen\Documents\M2\fluffy-stock\fluffy-stock"/>
-    <property name="java.runtime.version" value="1.8.0_91-b15"/>
-    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_91\jre\lib\endorsed"/>
+    <property name="user.dir" value="/comptes/E104607D/Desktop/fluffy-shop/fluffy-stock"/>
+    <property name="java.runtime.version" value="1.8.0_101-b13"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
+    <property name="java.endorsed.dirs" value="/comptes/E104607D/Documents/jdk1.8.0_101/jre/lib/endorsed"/>
     <property name="os.arch" value="amd64"/>
-    <property name="java.io.tmpdir" value="C:\Users\VANDOR~1\AppData\Local\Temp\"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="user.variant" value=""/>
-    <property name="os.name" value="Windows 10"/>
-    <property name="classworlds.conf" value="C:\Program Files (x86)\JetBrains\IntelliJ IDEA 2016.1.3\plugins\maven\lib\maven3\bin\m2.conf"/>
-    <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="sonar.login" value="ZOvF3Sy312hMteUpnB4NglukGg517Fdd+0FwfnK4K4z8vkr7rQXui47DZWPUYdikPJHzWOrWIl7wjIJMbjMzZBVlsejBpoErR8nCBLg+DbbMwb4tj812rr9o5AnkicDNWbLq0ethcU4UECC1x9fxnBbmLGdxMoqL+2XPHEZv8onCJ+ggPvvI9iUebbDjPpdUEugcGsI26YBGkWlLO39muqo9UJOpAF+f5EWMgn5np+g7VQqUJNjrLKaTCsZJaAKNy2GCD3sw7ZSkKkkCjuH+M5xWwkl8I/mD4acZ9xUM3/uZ9qKtuqVKydd0b2Y8MqlcHiYMqoa/DtmEVZ7QeHD3IRWgstGR3magezZDP+j6MH/LbDhphegMaPLnNWNvXTIA8LuTx1yT51F8zo7m/EieZxgLx0Op3qbmOycH+TnnBFWBCO0Bzy6klSkYz8gwwCLfP1zoMp6QPPvrHjhWx5P0D0vgri3i/36QFCVeDO7yCgZOoyMBAjhRasILil1ZxaIsPFrIElsjAvxeC1FJKGBb70hW/5IfS67hfZrq05DXf1wn0IJcUqLfxuePAHs3qsp6ACm/MsrGHQOnD89I8p3DfGvTH67HzUGPUJqjYo3hJKJFJqmbqKgNSGdUQFF1Owu2QktQGDBXFtBQe9MYPtP47TfDcMREMuPeQV02Oiq8hlo="/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_91\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Program Files (x86)\AMD APP\bin\x86_64;C:\Program Files (x86)\AMD APP\bin\x86;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\OpenCL SDK\3.0\bin\x86;C:\Program Files (x86)\Intel\OpenCL SDK\3.0\bin\x64;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files (x86)\Windows Live\Shared;C:\Program Files (x86)\Calibre2\;C:\Program Files (x86)\AMD\ATI.ACE\Core-Static;E:\Users\Vandorallen\Documents\Latex\miktex\bin\;C:\Program Files (x86)\Skype\Phone\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;E:\Program Files\nodejs\;E:\Users\Vandorallen\gem\Ruby23-x64\bin;C:\Users\Vandorallen\AppData\Local\Microsoft\WindowsApps;C:\Users\Vandorallen\AppData\Roaming\npm;."/>
+    <property name="os.name" value="Linux"/>
+    <property name="classworlds.conf" value="/media/D1/idea-IU-141.3058.30/plugins/maven/lib/maven3/bin/m2.conf"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/media/D1/idea-IU-141.3058.30/bin::/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="os.version" value="10.0"/>
-    <property name="user.home" value="C:\Users\Vandorallen"/>
+    <property name="os.version" value="3.13.0-57-generic"/>
+    <property name="user.home" value="/comptes/E104607D"/>
     <property name="user.timezone" value="Europe/Paris"/>
-    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
-    <property name="sonar.host.url" value="https://sonarqube.com"/>
-    <property name="java.specification.version" value="1.8"/>
-    <property name="idea.launcher.bin.path" value="C:\Program Files (x86)\JetBrains\IntelliJ IDEA 2016.1.3\bin"/>
+    <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
     <property name="file.encoding" value="UTF-8"/>
-    <property name="user.name" value="Vandorallen"/>
-    <property name="java.class.path" value="C:\Program Files (x86)\JetBrains\IntelliJ IDEA 2016.1.3\plugins\maven\lib\maven3\boot\plexus-classworlds-2.4.jar;C:\Program Files (x86)\JetBrains\IntelliJ IDEA 2016.1.3\lib\idea_rt.jar"/>
+    <property name="java.specification.version" value="1.8"/>
+    <property name="user.name" value="E104607D"/>
+    <property name="java.class.path" value="/media/D1/idea-IU-141.3058.30/plugins/maven/lib/maven3/boot/plexus-classworlds-2.4.jar"/>
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_91\jre"/>
-    <property name="sun.java.command" value="com.intellij.rt.execution.application.AppMain org.codehaus.classworlds.Launcher -Didea.version=2016.1.4 clean install sonar:sonar -Dsonar.host.url=https://sonarqube.com -Dsonar.login=ZOvF3Sy312hMteUpnB4NglukGg517Fdd+0FwfnK4K4z8vkr7rQXui47DZWPUYdikPJHzWOrWIl7wjIJMbjMzZBVlsejBpoErR8nCBLg+DbbMwb4tj812rr9o5AnkicDNWbLq0ethcU4UECC1x9fxnBbmLGdxMoqL+2XPHEZv8onCJ+ggPvvI9iUebbDjPpdUEugcGsI26YBGkWlLO39muqo9UJOpAF+f5EWMgn5np+g7VQqUJNjrLKaTCsZJaAKNy2GCD3sw7ZSkKkkCjuH+M5xWwkl8I/mD4acZ9xUM3/uZ9qKtuqVKydd0b2Y8MqlcHiYMqoa/DtmEVZ7QeHD3IRWgstGR3magezZDP+j6MH/LbDhphegMaPLnNWNvXTIA8LuTx1yT51F8zo7m/EieZxgLx0Op3qbmOycH+TnnBFWBCO0Bzy6klSkYz8gwwCLfP1zoMp6QPPvrHjhWx5P0D0vgri3i/36QFCVeDO7yCgZOoyMBAjhRasILil1ZxaIsPFrIElsjAvxeC1FJKGBb70hW/5IfS67hfZrq05DXf1wn0IJcUqLfxuePAHs3qsp6ACm/MsrGHQOnD89I8p3DfGvTH67HzUGPUJqjYo3hJKJFJqmbqKgNSGdUQFF1Owu2QktQGDBXFtBQe9MYPtP47TfDcMREMuPeQV02Oiq8hlo="/>
+    <property name="java.home" value="/comptes/E104607D/Documents/jdk1.8.0_101/jre"/>
+    <property name="sun.java.command" value="org.codehaus.classworlds.Launcher -Didea.version=14.1.7 clean package"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="fr"/>
-    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/>
     <property name="java.vm.info" value="mixed mode"/>
-    <property name="java.version" value="1.8.0_91"/>
-    <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.8.0_91\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext"/>
-    <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_91\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_91\jre\classes"/>
+    <property name="java.version" value="1.8.0_101"/>
+    <property name="java.ext.dirs" value="/comptes/E104607D/Documents/jdk1.8.0_101/jre/lib/ext:/usr/java/packages/lib/ext"/>
+    <property name="securerandom.source" value="file:/dev/./urandom"/>
+    <property name="sun.boot.class.path" value="/comptes/E104607D/Documents/jdk1.8.0_101/jre/lib/resources.jar:/comptes/E104607D/Documents/jdk1.8.0_101/jre/lib/rt.jar:/comptes/E104607D/Documents/jdk1.8.0_101/jre/lib/sunrsasign.jar:/comptes/E104607D/Documents/jdk1.8.0_101/jre/lib/jsse.jar:/comptes/E104607D/Documents/jdk1.8.0_101/jre/lib/jce.jar:/comptes/E104607D/Documents/jdk1.8.0_101/jre/lib/charsets.jar:/comptes/E104607D/Documents/jdk1.8.0_101/jre/lib/jfr.jar:/comptes/E104607D/Documents/jdk1.8.0_101/jre/classes"/>
     <property name="java.vendor" value="Oracle Corporation"/>
-    <property name="maven.home" value="C:\Program Files (x86)\JetBrains\IntelliJ IDEA 2016.1.3\plugins\maven\lib\maven3"/>
-    <property name="file.separator" value="\"/>
+    <property name="maven.home" value="/media/D1/idea-IU-141.3058.30/plugins/maven/lib/maven3"/>
+    <property name="file.separator" value="/"/>
     <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
-    <property name="sun.desktop" value="windows"/>
-    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase name="testApp" classname="com.alma.groupe8.AppTest" time="0.002"/>
+  <testcase name="testApp" classname="com.alma.groupe8.AppTest" time="0.001"/>
 </testsuite>
