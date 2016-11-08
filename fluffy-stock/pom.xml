@@ -43,7 +43,6 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <sonar.host.url>http://localhost:9000/</sonar.host.url>
       <argLine>-Xmx128m</argLine>
       <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
       <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
@@ -75,6 +74,12 @@
           <artifactId>commons-lang3</artifactId>
           <version>3.1</version>
       </dependency>
+      <dependency>
+          <groupId>com.google.guava</groupId>
+          <artifactId>guava</artifactId>
+          <version>20.0</version>
+      </dependency>
+
   </dependencies>
 
     <build>
