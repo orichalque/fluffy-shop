@@ -3,11 +3,9 @@ package com.alma.groupe8.repository;
 import com.alma.group8.dto.ProductDTO;
 import com.alma.groupe8.config.CommonTestVariables;
 import com.alma.groupe8.util.CommonVariables;
-import com.google.gson.Gson;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
-import model.Product;
 import model.exceptions.AlreadyExistingProductException;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -18,7 +16,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 /**
  * Created by Thibault on 09/11/2016.
