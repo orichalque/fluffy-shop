@@ -8,7 +8,10 @@ import model.ProductsRepository;
 import model.exceptions.AlreadyExistingProductException;
 import model.exceptions.ProductNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -19,6 +22,7 @@ import static com.mongodb.client.model.Filters.eq;
  * Created by Thibault on 04/11/16.
  * ProductRepository implementation using MongoDB collections
  */
+@Repository
 public class MongoRepository implements ProductsRepository {
 
     @Autowired
@@ -32,7 +36,7 @@ public class MongoRepository implements ProductsRepository {
 
     @Override
     public Collection<Product> findAll() {
-        return Lists.newArrayList(mongoCollection.find());
+        return Lists.newArrayList(mongoCollection.find(Product.class));
     }
 
     @Override
@@ -48,15 +52,10 @@ public class MongoRepository implements ProductsRepository {
 
     @Override
     public void updateProduct(Product product) throws ProductNotFoundException {
-        Product productFound = find(product.getId());
-        if (productFound != null) {
-            //We update it because it's already in the database
-            //FIXME: Update instead of delete / insert
-            delete(productFound.getId());
-            mongoCollection.insertOne(product);
-        } else {
-            throw new ProductNotFoundException();
-        }
+        //We delete the products before inserting it again
+        //The delete will throw the ProductNotFoundException if the product doesn't exist
+        delete(product.getId());
+        mongoCollection.insertOne(product);
     }
 
     @Override

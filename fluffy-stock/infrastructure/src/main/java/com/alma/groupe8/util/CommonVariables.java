@@ -1,8 +1,11 @@
 package com.alma.groupe8.util;
 
+import org.springframework.context.annotation.Configuration;
+
 /**
  * Created by Vandorallen on 04/11/2016.
  */
+@Configuration
 public class CommonVariables {
 
     public static final String MONGO_CLIENT_URI = "mongodb://orichalque:m2alma@ds139567.mlab.com:39567";
