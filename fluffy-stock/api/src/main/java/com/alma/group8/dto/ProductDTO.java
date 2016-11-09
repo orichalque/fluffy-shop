@@ -140,11 +140,16 @@ public class ProductDTO {
         this.productType = productType;
     }
 
+    /**
+     * Define the different product types
+     */
     @Generated("org.jsonschema2pojo")
-    public enum ProductType {;
+    public enum ProductType {
+
+        DIVERS("divers");
 
         private final String value;
-        private final static Map<String, ProductDTO.ProductType> CONSTANTS = new HashMap<String, ProductDTO.ProductType>();
+        private static final Map<String, ProductDTO.ProductType> CONSTANTS = new HashMap<>();
 
         static {
             for (ProductDTO.ProductType c: values()) {
@@ -161,6 +166,11 @@ public class ProductDTO {
             return this.value;
         }
 
+        /**
+         * generate a ProductType from a string value
+         * @param value the string
+         * @return the corresponding enum value
+         */
         public static ProductDTO.ProductType fromValue(String value) {
             ProductDTO.ProductType constant = CONSTANTS.get(value);
             if (constant == null) {
@@ -169,6 +179,5 @@ public class ProductDTO {
                 return constant;
             }
         }
-
     }
 }

@@ -8,10 +8,10 @@ import java.util.Map;
  * The usage of an enumeration instead of a specific java object allows to add types
  * after the creation of the model, and increase the maintainability
  */
-public enum ProductType {;
-
+public enum ProductType {
+    DIVERS("divers");
     private final String value;
-    private final static Map<String, ProductType> CONSTANTS = new HashMap<String, ProductType>();
+    private static final Map<String, ProductType> CONSTANTS = new HashMap<>();
 
     static {
         for (ProductType c: values()) {
@@ -28,6 +28,11 @@ public enum ProductType {;
         return this.value;
     }
 
+    /**
+     * Create a ProductType enum from the equivalent String value
+     * @param value the value as a String
+     * @return the ProductType enum object
+     */
     public static ProductType fromValue(String value) {
         ProductType constant = CONSTANTS.get(value);
         if (constant == null) {
