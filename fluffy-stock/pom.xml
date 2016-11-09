@@ -7,7 +7,6 @@
   <version>1.0-SNAPSHOT</version>
     <modules>
         <module>fournisseur</module>
-        <module>api</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -81,6 +80,11 @@
           <artifactId>guava</artifactId>
           <version>20.0</version>
       </dependency>
+      <dependency>
+          <groupId>com.google.code.gson</groupId>
+          <artifactId>gson</artifactId>
+          <version>RELEASE</version>
+      </dependency>
 
   </dependencies>
 
@@ -108,14 +112,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19.1</version>
                 <configuration>
                     <runOrder>random</runOrder>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.19.1</version>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
