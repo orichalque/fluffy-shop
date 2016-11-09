@@ -7,8 +7,11 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
 import model.exceptions.AlreadyExistingProductException;
+import org.bson.BsonDocument;
+import org.bson.Document;
+import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.UUID;
 
 /**
  * Created by Thibault on 09/11/2016.
@@ -29,16 +34,15 @@ public class MongoRepositoryTests {
     private MongoRepository mongoRepository;
 
     @Autowired
-    public MongoCollection<ProductDTO> mongoCollection;
+    public MongoCollection<Document> mongoCollection;
 
     @Configuration
     static class ContextConfiguration{
         @Bean
-        public MongoCollection<ProductDTO> mongoCollection() {
+        public MongoCollection<Document> mongoCollection() {
             MongoClientURI mongoClientURI = new MongoClientURI(String.format("%s/%s", CommonVariables.MONGO_CLIENT_URI, CommonVariables.MONGO_DATABASE_NAME));
             MongoClient mongoClient = new MongoClient(mongoClientURI);
-            MongoCollection<ProductDTO> mongoCollection = mongoClient.getDatabase(CommonVariables.MONGO_DATABASE_NAME).getCollection(CommonTestVariables.COLLECTION_NAME).withDocumentClass(ProductDTO.class);
-            return mongoCollection;
+            return mongoClient.getDatabase(CommonVariables.MONGO_DATABASE_NAME).getCollection(CommonTestVariables.COLLECTION_NAME).withDocumentClass(Document.class);
         }
 
         @Bean
@@ -49,21 +53,36 @@ public class MongoRepositoryTests {
 
     @Before
     public void setUp() {
+        Assert.assertTrue("The database is not empty", mongoCollection.count() == 0);
     }
 
-    @Ignore
     @Test
-    public void insertCheck() {
-        //TODO: Replace domain object in the Repository by Gson DTO
+    public void insertCheckAndFind() {
         ProductDTO productDTO = new ProductDTO();
         productDTO.setName("name");
         productDTO.setDescription("description");
+
+        UUID uuid = UUID.randomUUID();
+
+        productDTO.setId(uuid.toString());
+
         try {
             mongoRepository.store(productDTO);
         } catch (AlreadyExistingProductException e) {
-            e.printStackTrace();
+            Assert.fail("The database should be empty");
         }
+
+        ProductDTO productDTO1 = mongoRepository.find(uuid.toString());
+
+        Assert.assertEquals("The uuids are not the same", uuid.toString(), productDTO1.getId());
+        Assert.assertEquals("The name are not the same", productDTO.getName(), productDTO1.getName());
+        Assert.assertEquals("The description are not the same", productDTO.getDescription(), productDTO1.getDescription());
     }
 
+    @After
+    public void tearDown() {
+        //Empty the database
+        mongoCollection.deleteMany(new BsonDocument());
+    }
 
 }
