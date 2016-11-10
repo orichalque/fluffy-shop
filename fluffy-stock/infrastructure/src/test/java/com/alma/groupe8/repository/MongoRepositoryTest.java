@@ -135,6 +135,46 @@ public class MongoRepositoryTest {
         Assert.assertEquals("The name should have been updated", "newName", mongoRepository.find(productDTO.getId()).getName());
     }
 
+    @Test
+    public void checkFindAll() {
+        ProductDTO productDTO = new ProductDTO();
+        productDTO.setId(UUID.randomUUID().toString());
+
+        ProductDTO productDTO2 = new ProductDTO();
+        productDTO2.setId(UUID.randomUUID().toString());
+
+        try {
+            mongoRepository.store(productDTO);
+            mongoRepository.store(productDTO2);
+        } catch (AlreadyExistingProductException e) {
+            Assert.fail("The database should not contain the product");
+        }
+
+        Assert.assertEquals("The database does not contain the elements", 2, mongoRepository.findAll());
+    }
+
+    @Test(expected = AlreadyExistingProductException.class)
+    public void checkStoreSameElement() throws AlreadyExistingProductException {
+        ProductDTO productDTO = new ProductDTO();
+        productDTO.setId(UUID.randomUUID().toString());
+
+        ProductDTO productDTO1 = new ProductDTO();
+        productDTO1.setId(productDTO.getId());
+
+        try {
+            mongoRepository.store(productDTO);
+        } catch (AlreadyExistingProductException e) {
+            Assert.fail("The repository should not contain this product already");
+        }
+
+        mongoRepository.store(productDTO1);
+    }
+
+    @Test(expected = ProductNotFoundException.class)
+    public void checkDeleteNoElement() throws ProductNotFoundException {
+        mongoRepository.delete("uuid_not_in_the_database");
+    }
+
     @After
     public void tearDown() {
         //Empty the database
