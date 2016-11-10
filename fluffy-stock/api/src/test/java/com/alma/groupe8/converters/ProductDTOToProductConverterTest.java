@@ -3,6 +3,7 @@ package com.alma.groupe8.converters;
 import com.alma.group8.converters.ProductDTOToProductConverter;
 import com.alma.group8.dto.ProductDTO;
 import model.Product;
+import model.ProductType;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +23,7 @@ public class ProductDTOToProductConverterTest {
     }
 
     @Test
-    public void testConvertOkWithNoEnum() {
+    public void testConvertOk() {
         ProductDTO productDTO = new ProductDTO();
         UUID uuid = UUID.randomUUID();
 
@@ -31,6 +32,7 @@ public class ProductDTOToProductConverterTest {
         productDTO.setName("Name");
         productDTO.setDescription("Description");
         productDTO.setId(uuid.toString());
+        productDTO.setProductType(ProductDTO.ProductType.fromValue("divers"));
 
         Product productConverted = productDTOToProductConverter.convert(productDTO);
 
@@ -39,6 +41,7 @@ public class ProductDTOToProductConverterTest {
         Assert.assertEquals("Wrong quantity", 5, productConverted.getQuantity());
         Assert.assertEquals("Wrong price", 50.0, productConverted.getPrice(), 0.001);
         Assert.assertEquals("Wrong ID", uuid, productConverted.getId());
+        Assert.assertEquals("Wrong Enum", ProductType.DIVERS, productConverted.getProductType());
     }
 
     @Test

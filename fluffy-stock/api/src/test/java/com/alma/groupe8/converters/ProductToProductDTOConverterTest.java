@@ -3,6 +3,7 @@ package com.alma.groupe8.converters;
 import com.alma.group8.converters.ProductToProductDTOConverter;
 import com.alma.group8.dto.ProductDTO;
 import model.Product;
+import model.ProductType;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,6 +32,7 @@ public class ProductToProductDTOConverterTest {
         product.setDescription("Description");
         product.setQuantity(5);
         product.setId(uuid);
+        product.setProductType(ProductType.DIVERS);
 
         ProductDTO productDTO = productToProductDTOConverter.convert(product);
 
@@ -39,6 +41,7 @@ public class ProductToProductDTOConverterTest {
         Assert.assertEquals("Quantity not equal", 5, (long) productDTO.getQuantity());
         Assert.assertEquals("Price not equal", 50., productDTO.getPrice(), 0.01);
         Assert.assertEquals("id not equal", uuid.toString(), productDTO.getId());
+        Assert.assertEquals("type not equals", "divers", productDTO.getProductType().toString());
     }
 
     @Test

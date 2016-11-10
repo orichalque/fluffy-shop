@@ -2,7 +2,6 @@ package com.alma.groupe8.repository;
 
 import com.alma.group8.dto.ProductDTO;
 import com.alma.group8.interfaces.ProductsRepository;
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.mongodb.client.MongoCollection;
@@ -46,8 +45,7 @@ public class MongoRepository implements ProductsRepository {
     @Override
     public Collection<ProductDTO> findAll() {
         //Transform a List<Document> to a list<ProductDTO>
-        List<ProductDTO> productDTOs = Lists.transform(Lists.newArrayList(mongoCollection.find(Document.class)),
-                document -> GSON_MAPPER.fromJson(document.toJson(), ProductDTO.class));
+        List<ProductDTO> productDTOs = Lists.transform(Lists.newArrayList(mongoCollection.find(Document.class)), document -> GSON_MAPPER.fromJson(document.toJson(), ProductDTO.class));
 
         return productDTOs;
     }
