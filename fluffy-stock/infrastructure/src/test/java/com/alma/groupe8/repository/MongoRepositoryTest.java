@@ -97,7 +97,7 @@ public class MongoRepositoryTest {
             Assert.fail("The database should not contain the product");
         }
 
-        Assert.assertEquals(productDTO.getId(), mongoRepository.find(productDTO.getId()));
+        Assert.assertEquals(productDTO.getId(), mongoRepository.find(productDTO.getId()).getId());
 
         try {
             mongoRepository.delete(productDTO.getId());
