@@ -2,6 +2,7 @@ package com.alma.groupe8.repository;
 
 import com.alma.group8.dto.ProductDTO;
 import com.alma.group8.interfaces.ProductsRepository;
+import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.mongodb.client.MongoCollection;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
+import java.util.List;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -43,7 +45,11 @@ public class MongoRepository implements ProductsRepository {
 
     @Override
     public Collection<ProductDTO> findAll() {
-        return Lists.newArrayList(mongoCollection.find(ProductDTO.class));
+        //Transform a List<Document> to a list<ProductDTO>
+        List<ProductDTO> productDTOs = Lists.transform(Lists.newArrayList(mongoCollection.find(Document.class)),
+                document -> GSON_MAPPER.fromJson(document.toJson(), ProductDTO.class));
+
+        return productDTOs;
     }
 
     @Override
