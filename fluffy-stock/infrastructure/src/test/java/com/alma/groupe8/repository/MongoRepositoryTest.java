@@ -7,6 +7,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
 import model.exceptions.AlreadyExistingProductException;
+import model.exceptions.ProductNotFoundException;
 import org.bson.BsonDocument;
 import org.bson.Document;
 import org.junit.After;
@@ -58,7 +59,7 @@ public class MongoRepositoryTest {
     }
 
     @Test
-    public void insertCheckAndFind() {
+    public void checkInsertAndFind() {
         ProductDTO productDTO = new ProductDTO();
         productDTO.setName("name");
         productDTO.setDescription("description");
@@ -78,6 +79,60 @@ public class MongoRepositoryTest {
         Assert.assertEquals("The uuids are not the same", uuid.toString(), productDTO1.getId());
         Assert.assertEquals("The name are not the same", productDTO.getName(), productDTO1.getName());
         Assert.assertEquals("The description are not the same", productDTO.getDescription(), productDTO1.getDescription());
+    }
+
+    @Test
+    public void checkDelete() {
+        ProductDTO productDTO = new ProductDTO();
+        productDTO.setName("name");
+        productDTO.setDescription("description");
+
+        UUID uuid = UUID.randomUUID();
+
+        productDTO.setId(uuid.toString());
+
+        try {
+            mongoRepository.store(productDTO);
+        } catch (AlreadyExistingProductException e) {
+            Assert.fail("The database should not contain the product");
+        }
+
+        Assert.assertEquals(productDTO.getId(), mongoRepository.find(productDTO.getId()));
+
+        try {
+            mongoRepository.delete(productDTO.getId());
+        } catch (ProductNotFoundException e) {
+            Assert.fail("The product should be in the database");
+        }
+
+        Assert.assertNull("The item should be in the database anymore", mongoRepository.find(productDTO.getId()));
+    }
+
+    @Test
+    public void checkUpdate() {
+        ProductDTO productDTO = new ProductDTO();
+        productDTO.setName("name");
+        productDTO.setDescription("description");
+
+        UUID uuid = UUID.randomUUID();
+
+        productDTO.setId(uuid.toString());
+
+        try {
+            mongoRepository.store(productDTO);
+        } catch (AlreadyExistingProductException e) {
+            Assert.fail("The database should not contain the product");
+        }
+
+        productDTO.setName("newName");
+
+        try {
+            mongoRepository.updateProduct(productDTO);
+        } catch (ProductNotFoundException e) {
+            Assert.fail("The product should be in the database");
+        }
+
+        Assert.assertEquals("The name should have been updated", "newName", mongoRepository.find(productDTO.getId()).getName());
     }
 
     @After
