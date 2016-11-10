@@ -1,4 +1,3 @@
-com\alma\groupe8\config\TestConfig.class
-com\alma\groupe8\repository\MongoRepositoryTests.class
-com\alma\groupe8\repository\MongoRepositoryTests$ContextConfiguration.class
-com\alma\groupe8\config\CommonTestVariables.class
+com/alma/groupe8/config/CommonTestVariables.class
+com/alma/groupe8/repository/MongoRepositoryTest$ContextConfiguration.class
+com/alma/groupe8/repository/MongoRepositoryTest.class

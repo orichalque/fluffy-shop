@@ -27,8 +27,9 @@ import java.util.UUID;
  * Tests on the repository methods. Uses an alternative mongo collection
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {MongoRepositoryTests.ContextConfiguration.class})
-public class MongoRepositoryTests {
+@ContextConfiguration(classes = {MongoRepositoryTest.ContextConfiguration.class})
+public class MongoRepositoryTest {
+
 
     @Autowired
     private MongoRepository mongoRepository;
