@@ -150,7 +150,7 @@ public class MongoRepositoryTest {
             Assert.fail("The database should not contain the product");
         }
 
-        Assert.assertEquals("The database does not contain the elements", 2, mongoRepository.findAll());
+        Assert.assertEquals("The database does not contain the elements", 2, mongoRepository.findAll().size());
     }
 
     @Test(expected = AlreadyExistingProductException.class)
