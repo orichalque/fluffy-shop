@@ -2,6 +2,7 @@ package com.alma.group8.interfaces;
 
 import com.alma.group8.dto.ProductDTO;
 import model.exceptions.AlreadyExistingProductException;
+import model.exceptions.NotEnoughProductsException;
 import model.exceptions.ProductNotFoundException;
 
 import java.util.Collection;
@@ -26,6 +27,13 @@ public interface ProductsRepository {
     Collection<ProductDTO> findAll();
 
     /**
+     * Get all the products of a type from the database
+     * @param type the products type
+     * @return a List containing all the products, or an empty list if the database is empty
+     */
+    Collection<ProductDTO> findProductsByType(String type);
+
+    /**
      * Store a product in the database
      * @param product the product to add
      * @throws AlreadyExistingProductException if the product already exists
@@ -45,4 +53,13 @@ public interface ProductsRepository {
      * @throws ProductNotFoundException if the uuid doesn't match with any product
      */
     void delete(String uuid) throws ProductNotFoundException;
+
+    /**
+     * Reduce the quantity of the product in the database
+     * @param uuid the id of the product
+     * @param quantity the quantity of product to retrieve
+     * @throws NotEnoughProductsException if the quantity ordered is superior to the quantity of the object
+     * @return the product with the new quantity
+     */
+    ProductDTO orderProduct(String uuid, int quantity) throws NotEnoughProductsException;
 }
