@@ -61,6 +61,7 @@ public class ProductController {
     /**
      * Order a product using its name
      * @param id the product id
+     * @param quantity the quantity to order
      * @return a Gson containing the product with the corresponding name
      */
     @RequestMapping(value = "/product/{id}/order/{quantity}", method = RequestMethod.POST)
