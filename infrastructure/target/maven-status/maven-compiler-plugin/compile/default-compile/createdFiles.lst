@@ -1,0 +1,3 @@
+com/alma/groupe8/util/CommonVariables.class
+com/alma/groupe8/repository/MongoRepository.class
+com/alma/groupe8/configuration/SpringMongoConfiguration.class
