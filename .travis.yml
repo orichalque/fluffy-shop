@@ -23,5 +23,5 @@ deploy:
   provider: heroku
   api_key: $HEROKU_TOKEN
   run:
-    - "plugins:install heroku-cli-deploy"
-    - "war:deploy $TRAVIS_BUILD_DIR/presentation/target/presentation.war fluffy-stock"
+    - "heroku plugins:install heroku-cli-deploy"
+    - "heroku war:deploy $TRAVIS_BUILD_DIR/presentation/target/presentation.war fluffy-stock"
