@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -cp presentation/target/presentation.war FluffyStock
+web: java $JAVA_OPTS -jar target/dependency/webapp-runner.jar --port $PORT presentation/target/*.war
