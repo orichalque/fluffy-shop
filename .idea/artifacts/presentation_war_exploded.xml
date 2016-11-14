@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="presentation:war exploded">
-    <output-path>$PROJECT_DIR$/presentation/presentation</output-path>
+    <output-path>$PROJECT_DIR$/presentation/target/presentation</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -19,12 +19,6 @@
             <element id="module-output" name="application" />
           </element>
           <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:3.1.0" />
-          <element id="archive" name="api-1.0-SNAPSHOT.jar">
-            <element id="module-output" name="api" />
-          </element>
-          <element id="archive" name="domain-1.0-SNAPSHOT.jar">
-            <element id="module-output" name="domain" />
-          </element>
           <element id="archive" name="infrastructure-1.0-SNAPSHOT.jar">
             <element id="module-output" name="infrastructure" />
           </element>
@@ -34,6 +28,12 @@
           <element id="library" level="project" name="Maven: org.springframework.data:spring-data-commons:1.12.4.RELEASE" />
           <element id="library" level="project" name="Maven: org.slf4j:jcl-over-slf4j:1.7.21" />
           <element id="library" level="project" name="Maven: org.springframework:spring-test:4.3.3.RELEASE" />
+          <element id="archive" name="domain-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="domain" />
+          </element>
+          <element id="archive" name="api-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="api" />
+          </element>
           <element id="library" level="project" name="Maven: joda-time:joda-time:2.8.1" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.21" />
           <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.1" />
@@ -42,7 +42,7 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/presentation/presentation/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/presentation/target/presentation/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="presentation/web/Web" />
     </root>

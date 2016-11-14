@@ -9,7 +9,7 @@ notifications:
   email: false
 
 install:
-  - cd $TRAVIS_BUILD_DIR/ && mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+  - cd $TRAVIS_BUILD_DIR/ && mvn install war:war -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
 addons:
   sonarqube: true
@@ -22,4 +22,6 @@ script:
 deploy:
   provider: heroku
   api_key: $HEROKU_TOKEN
-  run: war:deploy $TRAVIS_BUILD_DIR/presentation/target/presentation.war fluffy-stock
+  run:
+    - "plugins:install heroku-cli-deploy"
+    - "war:deploy $TRAVIS_BUILD_DIR/presentation/target/presentation.war fluffy-stock"
