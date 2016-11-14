@@ -1,5 +1,5 @@
-model/exceptions/AlreadyExistingProductException.class
-model/Product.class
-model/exceptions/ProductNotFoundException.class
-model/ProductType.class
-model/exceptions/NotEnoughProductsException.class
+model\exceptions\ProductNotFoundException.class
+model\exceptions\NotEnoughProductsException.class
+model\Product.class
+model\exceptions\AlreadyExistingProductException.class
+model\ProductType.class

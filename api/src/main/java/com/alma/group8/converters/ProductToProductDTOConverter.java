@@ -3,6 +3,7 @@ package com.alma.group8.converters;
 import com.alma.group8.dto.ProductDTO;
 import model.Product;
 
+
 /**
  * Created by Thibault on 09/11/2016.
  * Convert a Product to a DTO Product

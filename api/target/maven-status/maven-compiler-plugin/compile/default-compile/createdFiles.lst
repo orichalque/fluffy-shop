@@ -1,5 +1,5 @@
-com/alma/group8/converters/ProductToProductDTOConverter.class
-com/alma/group8/dto/ProductDTO.class
-com/alma/group8/converters/ProductDTOToProductConverter.class
-com/alma/group8/interfaces/ProductsRepository.class
-com/alma/group8/dto/ProductDTO$ProductType.class
+com\alma\group8\interfaces\ProductsRepository.class
+com\alma\group8\dto\ProductDTO.class
+com\alma\group8\dto\ProductDTO$ProductType.class
+com\alma\group8\converters\ProductToProductDTOConverter.class
+com\alma\group8\converters\ProductDTOToProductConverter.class
