@@ -19,6 +19,7 @@ env:
 script:
 - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.login=$SONAR_TOKEN
 
+before_deploy: "cp presentation/target ."
 deploy:
   provider: heroku
   api_key: $HEROKU_TOKEN
