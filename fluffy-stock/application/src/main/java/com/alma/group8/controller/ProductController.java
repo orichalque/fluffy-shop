@@ -68,6 +68,7 @@ public class ProductController {
     public @ResponseBody String orderProductById(@PathVariable String id ,@PathVariable int quantity) throws NotEnoughProductsException {
 
         ProductDTO productDTO = productsRepository.orderProduct(id, quantity);
+        //FIXME : DTO -> Data -> Decrease Quantity -> DTO -> update bdd
         return GSON_MAPPER.toJson(productDTO);
     }
 }

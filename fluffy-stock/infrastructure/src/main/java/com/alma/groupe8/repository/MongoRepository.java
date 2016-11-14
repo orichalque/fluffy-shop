@@ -6,6 +6,7 @@ import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.mongodb.client.MongoCollection;
 import model.exceptions.AlreadyExistingProductException;
+import model.exceptions.NotEnoughProductsException;
 import model.exceptions.ProductNotFoundException;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,12 @@ public class MongoRepository implements ProductsRepository {
     }
 
     @Override
+    public Collection<ProductDTO> findProductsByType(String type) {
+        //TODO
+        return null;
+    }
+
+    @Override
     public void store(ProductDTO product) throws AlreadyExistingProductException {
         ProductDTO currentProduct = find(product.getId());
         if (currentProduct == null) {
@@ -79,5 +86,10 @@ public class MongoRepository implements ProductsRepository {
             mongoCollection.deleteOne(Document.parse(GSON_MAPPER.toJson(productDTO)));
        }
 
+    }
+
+    @Override
+    public ProductDTO orderProduct(String uuid, int quantity) throws NotEnoughProductsException {
+        return null;
     }
 }
