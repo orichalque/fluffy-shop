@@ -2,29 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dfe49eff-12a2-4728-9ea5-4caeaf89b753" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/target/api-1.0-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/api/target/api-1.0-SNAPSHOT.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/target/application-1.0-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/application/target/application-1.0-SNAPSHOT.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/domain/target/domain-1.0-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/domain/target/domain-1.0-SNAPSHOT.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/presentation/target/presentation.war" afterPath="$PROJECT_DIR$/presentation/target/presentation.war" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/presentation_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/presentation_war_exploded.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.travis.yml" afterPath="$PROJECT_DIR$/.travis.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/pom.xml" afterPath="$PROJECT_DIR$/api/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/api/target/maven-archiver/pom.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/target/surefire-reports/TEST-com.alma.groupe8.converters.ProductDTOToProductConverterTest.xml" afterPath="$PROJECT_DIR$/api/target/surefire-reports/TEST-com.alma.groupe8.converters.ProductDTOToProductConverterTest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/target/surefire-reports/TEST-com.alma.groupe8.converters.ProductToProductDTOConverterTest.xml" afterPath="$PROJECT_DIR$/api/target/surefire-reports/TEST-com.alma.groupe8.converters.ProductToProductDTOConverterTest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/target/surefire-reports/com.alma.groupe8.converters.ProductDTOToProductConverterTest.txt" afterPath="$PROJECT_DIR$/api/target/surefire-reports/com.alma.groupe8.converters.ProductDTOToProductConverterTest.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/target/surefire-reports/com.alma.groupe8.converters.ProductToProductDTOConverterTest.txt" afterPath="$PROJECT_DIR$/api/target/surefire-reports/com.alma.groupe8.converters.ProductToProductDTOConverterTest.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/pom.xml" afterPath="$PROJECT_DIR$/application/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/application/target/maven-archiver/pom.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/domain/pom.xml" afterPath="$PROJECT_DIR$/domain/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/domain/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/domain/target/maven-archiver/pom.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/domain/target/surefire-reports/TEST-com.alma.groupe8.model.ProductTest.xml" afterPath="$PROJECT_DIR$/domain/target/surefire-reports/TEST-com.alma.groupe8.model.ProductTest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/domain/target/surefire-reports/com.alma.groupe8.model.ProductTest.txt" afterPath="$PROJECT_DIR$/domain/target/surefire-reports/com.alma.groupe8.model.ProductTest.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/infrastructure/pom.xml" afterPath="$PROJECT_DIR$/infrastructure/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/presentation/pom.xml" afterPath="$PROJECT_DIR$/presentation/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/presentation/presentation.iml" afterPath="$PROJECT_DIR$/presentation/presentation.iml" />
     </list>
     <ignored path="fluffy-stock.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -56,8 +34,8 @@
       <file leaf-file-name=".travis.yml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.travis.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="26" column="86" selection-start-line="26" selection-start-column="86" selection-end-line="26" selection-end-column="86" />
+            <state relative-caret-position="187">
+              <caret line="11" column="41" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -916,12 +894,12 @@
       <option name="presentableId" value="Default" />
       <updated>1479145957092</updated>
       <workItem from="1479145976304" duration="2465000" />
-      <workItem from="1479148467651" duration="4745000" />
+      <workItem from="1479148467651" duration="4892000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7210000" />
+    <option name="totallyTimeSpent" value="7357000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -937,7 +915,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1198,8 +1176,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.travis.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="86" selection-start-line="26" selection-start-column="86" selection-end-line="26" selection-end-column="86" />
+        <state relative-caret-position="187">
+          <caret line="11" column="41" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
           <folding />
         </state>
       </provider>
