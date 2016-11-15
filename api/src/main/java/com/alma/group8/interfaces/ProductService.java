@@ -10,9 +10,10 @@ public interface ProductService<T>  {
     /**
      * Reduce the quantity of a Product
      * @param product the product
+     * @param quantity
      * @throws Exception if the quantity goes below 0
      */
-    void decreaseQuantity(T product) throws Exception;
+    void decreaseQuantity(T product, int quantity) throws Exception;
 
     /**
      * Increase the quantity of a Product

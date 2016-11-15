@@ -9,7 +9,7 @@ import model.exceptions.NotEnoughProductsException;
 public class ProductServiceImpl implements ProductService {
 
     @Override
-    public void decreaseQuantity(Object product) throws NotEnoughProductsException {
+    public void decreaseQuantity(Object product, int quantity) throws NotEnoughProductsException {
         //TODO
     }
 
