@@ -1,12 +1,9 @@
 package com.alma.group8.controller;
 
-import com.alma.group8.interfaces.ProductsRepository;
+import model.interfaces.ProductsRepository;
 import com.google.gson.Gson;
 import model.exceptions.NotEnoughProductsException;
-import model.exceptions.ProductNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;

@@ -116,7 +116,7 @@ public class MongoRepositoryTest {
         String currentProductInTheDatabaseAsJson = mongoRepository.find(product.getId().toString());
 
         try {
-            Assert.assertEquals(product.getId(), objectMapper.readValue(currentProductInTheDatabaseAsJson, Product.class));
+            Assert.assertEquals(product.getId(), objectMapper.readValue(currentProductInTheDatabaseAsJson, Product.class).getId());
         } catch (IOException e) {
             Assert.fail("Cannot read the product from the database");
         }
@@ -161,7 +161,7 @@ public class MongoRepositoryTest {
 
         String newProductAsString = mongoRepository.find(product.getId().toString());
         try {
-            Assert.assertEquals("The name should have been updated", "newName", objectMapper.readValue(newProductAsString, Product.class));
+            Assert.assertEquals("The name should have been updated", "newName", objectMapper.readValue(newProductAsString, Product.class).getName());
         } catch (IOException e) {
             Assert.fail("Failure : cannot serialize the product");
         }

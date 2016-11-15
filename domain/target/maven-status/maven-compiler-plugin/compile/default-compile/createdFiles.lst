@@ -1,5 +1,7 @@
 model/exceptions/AlreadyExistingProductException.class
+model/service/ProductServiceImpl.class
 model/Product.class
 model/exceptions/ProductNotFoundException.class
+model/interfaces/ProductsRepository.class
 model/exceptions/NotEnoughProductsException.class
 model/ProductType.class

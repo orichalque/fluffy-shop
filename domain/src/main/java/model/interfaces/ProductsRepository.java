@@ -1,4 +1,4 @@
-package com.alma.group8.interfaces;
+package model.interfaces;
 
 import model.exceptions.AlreadyExistingProductException;
 import model.exceptions.NotEnoughProductsException;
