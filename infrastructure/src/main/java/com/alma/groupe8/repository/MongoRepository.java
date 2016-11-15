@@ -50,12 +50,6 @@ public class MongoRepository implements ProductsRepository {
     }
 
     @Override
-    public Collection<String> findProductsByType(String type) {
-        //TODO
-        return null;
-    }
-
-    @Override
     public void store(String product) throws AlreadyExistingProductException {
         Document document = Document.parse(product);
         String currentProduct = find(document.getString("id").toString());
