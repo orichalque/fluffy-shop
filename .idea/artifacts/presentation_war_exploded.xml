@@ -19,6 +19,9 @@
             <element id="module-output" name="application" />
           </element>
           <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:3.1.0" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.8.4" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.8.0" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.8.4" />
           <element id="archive" name="infrastructure-1.0-SNAPSHOT.jar">
             <element id="module-output" name="infrastructure" />
           </element>

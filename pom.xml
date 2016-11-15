@@ -48,6 +48,8 @@
     </developers>
 
   <properties>
+      <maven.compiler.source>1.8</maven.compiler.source>
+      <maven.compiler.target>1.8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
       <argLine>-Xmx128m</argLine>
       <sonar.host.url>https://sonarqube.com/</sonar.host.url>

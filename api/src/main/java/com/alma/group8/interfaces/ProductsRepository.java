@@ -1,6 +1,5 @@
 package com.alma.group8.interfaces;
 
-import com.alma.group8.dto.ProductDTO;
 import model.exceptions.AlreadyExistingProductException;
 import model.exceptions.NotEnoughProductsException;
 import model.exceptions.ProductNotFoundException;
@@ -18,34 +17,34 @@ public interface ProductsRepository {
      * @param uuid the id of the product
      * @return the product with the corresponding name
      */
-    ProductDTO find(String uuid);
+    String find(String uuid);
 
     /**
      * Get all the products of the database
      * @return a List containing all the products, or an empty list if the database is empty
      */
-    Collection<ProductDTO> findAll();
+    Collection<String> findAll();
 
     /**
      * Get all the products of a type from the database
      * @param type the products type
      * @return a List containing all the products, or an empty list if the database is empty
      */
-    Collection<ProductDTO> findProductsByType(String type);
+    Collection<String> findProductsByType(String type);
 
     /**
      * Store a product in the database
      * @param product the product to add
      * @throws AlreadyExistingProductException if the product already exists
      */
-    void store(ProductDTO product) throws AlreadyExistingProductException;
+    void store(String product) throws AlreadyExistingProductException;
 
     /**
      * Replace a product in the database with a new one, by comparing their IDs
      * @param product the product to update
      * @throws ProductNotFoundException if the product doesn't exist in the database
      */
-    void updateProduct(ProductDTO product) throws ProductNotFoundException;
+    void updateProduct(String product) throws ProductNotFoundException;
 
     /**
      * Delete the product in the database with the ID
@@ -61,5 +60,5 @@ public interface ProductsRepository {
      * @throws NotEnoughProductsException if the quantity ordered is superior to the quantity of the object
      * @return the product with the new quantity
      */
-    ProductDTO orderProduct(String uuid, int quantity) throws NotEnoughProductsException;
+    String orderProduct(String uuid, int quantity) throws NotEnoughProductsException;
 }

@@ -1,6 +1,5 @@
 package com.alma.group8.controller;
 
-import com.alma.group8.dto.ProductDTO;
 import com.alma.group8.interfaces.ProductsRepository;
 import com.google.gson.Gson;
 import model.exceptions.NotEnoughProductsException;
@@ -30,7 +29,7 @@ public class ProductController {
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     public @ResponseBody String getAllProducts() {
 
-        Collection<ProductDTO> products = productsRepository.findAll();
+        Collection<String> products = productsRepository.findAll();
         return GSON_MAPPER.toJson(products);
     }
 
@@ -42,7 +41,8 @@ public class ProductController {
     @RequestMapping(value = "/products/{type}", method = RequestMethod.GET)
     public @ResponseBody String getAllProductsByType(@PathVariable String type) {
 
-        Collection<ProductDTO> products = productsRepository.findProductsByType(type);
+        //FIXME
+        Collection<String> products = productsRepository.findProductsByType(type);
         return GSON_MAPPER.toJson(products);
     }
 
@@ -54,8 +54,7 @@ public class ProductController {
     @RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
     public @ResponseBody String getProductById(@PathVariable String id) {
 
-        ProductDTO productDTO = productsRepository.find(id);
-        return GSON_MAPPER.toJson(productDTO);
+        return productsRepository.find(id);
     }
 
     /**
@@ -67,8 +66,8 @@ public class ProductController {
     @RequestMapping(value = "/product/{id}/order/{quantity}", method = RequestMethod.POST)
     public @ResponseBody String orderProductById(@PathVariable String id ,@PathVariable int quantity) throws NotEnoughProductsException {
 
-        ProductDTO productDTO = productsRepository.orderProduct(id, quantity);
+        String product = productsRepository.orderProduct(id, quantity);
         //FIXME : DTO -> Data -> Decrease Quantity -> DTO -> update bdd
-        return GSON_MAPPER.toJson(productDTO);
+        return GSON_MAPPER.toJson(product);
     }
 }

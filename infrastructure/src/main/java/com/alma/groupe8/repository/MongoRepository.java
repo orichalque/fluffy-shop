@@ -1,7 +1,7 @@
 package com.alma.groupe8.repository;
 
-import com.alma.group8.dto.ProductDTO;
 import com.alma.group8.interfaces.ProductsRepository;
+import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.mongodb.client.MongoCollection;
@@ -30,37 +30,32 @@ public class MongoRepository implements ProductsRepository {
     private MongoCollection<Document> mongoCollection;
 
     @Override
-    public ProductDTO find(String uuid) {
+    public String find(String uuid) {
         //Returning the first item corresponding. the UUID are unique in the database so there is only 1 product, or none
         Document document = mongoCollection.find(eq("id", uuid)).first();
-
-        ProductDTO productDto = null;
-
-        if (document != null) {
-            productDto = GSON_MAPPER.fromJson(document.toJson(), ProductDTO.class);
-        }
-
-        return productDto;
+        return document.toJson();
     }
 
     @Override
-    public Collection<ProductDTO> findAll() {
+    public Collection<String> findAll() {
         //Transform a List<Document> to a list<ProductDTO>
-        List<ProductDTO> productDTOs = Lists.transform(Lists.newArrayList(mongoCollection.find(Document.class)), document -> GSON_MAPPER.fromJson(document.toJson(), ProductDTO.class));
+        List<String> productDTOs = Lists.transform(Lists.newArrayList(mongoCollection.find(Document.class)), document -> document.toJson());
 
         return productDTOs;
     }
 
     @Override
-    public Collection<ProductDTO> findProductsByType(String type) {
+    public Collection<String> findProductsByType(String type) {
         //TODO
         return null;
     }
 
     @Override
-    public void store(ProductDTO product) throws AlreadyExistingProductException {
-        ProductDTO currentProduct = find(product.getId());
-        if (currentProduct == null) {
+    public void store(String product) throws AlreadyExistingProductException {
+        Document document = Document.parse(product);
+        String currentProduct = find(document.getString("id"));
+
+        if (Strings.isNullOrEmpty(currentProduct)) {
             //Product found, when we only want to insert it
             mongoCollection.insertOne(Document.parse(GSON_MAPPER.toJson(product)));
         } else {
@@ -69,27 +64,31 @@ public class MongoRepository implements ProductsRepository {
     }
 
     @Override
-    public void updateProduct(ProductDTO product) throws ProductNotFoundException {
+    public void updateProduct(String product) throws ProductNotFoundException {
+        Document document = Document.parse(product);
+
         //We delete the products before inserting it again
         //The delete will throw the ProductNotFoundException if the product doesn't exist
-        delete(product.getId());
+        delete(document.getString("id"));
+
         mongoCollection.insertOne(Document.parse(GSON_MAPPER.toJson(product)));
     }
 
     @Override
     public void delete(String uuid) throws ProductNotFoundException {
-        ProductDTO productDTO = find(uuid);
+        String currentProduct = find(uuid);
 
-        if (productDTO == null) {
+        if (Strings.isNullOrEmpty(currentProduct)) {
             throw new ProductNotFoundException();
         } else {
-            mongoCollection.deleteOne(Document.parse(GSON_MAPPER.toJson(productDTO)));
+            mongoCollection.deleteOne(Document.parse(GSON_MAPPER.toJson(currentProduct)));
        }
 
     }
 
     @Override
-    public ProductDTO orderProduct(String uuid, int quantity) throws NotEnoughProductsException {
+    public String orderProduct(String uuid, int quantity) throws NotEnoughProductsException {
+        //FIXME NOK
         return null;
     }
 }
