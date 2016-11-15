@@ -36,25 +36,6 @@ public class Product {
     }
 
     /**
-     * Increase the amount of products in the stock by numberToAdd
-     * @param numberToAdd the amount of item to add
-     */
-    public void increaseQuantityBy(int numberToAdd) {
-        quantity += numberToAdd;
-    }
-
-    /**
-     * Remove the amount of products in the stock by numberToRemove
-     * @param numberToRemove the amount of item to remove
-     */
-    public void decreaseQuantityBy(int numberToRemove) throws NotEnoughProductsException {
-        if (numberToRemove > quantity) {
-            throw new NotEnoughProductsException();
-        }
-        quantity -= numberToRemove;
-    }
-
-    /**
      * Return the name
      */
     public String getName() {
@@ -158,10 +139,25 @@ public class Product {
         return new HashCodeBuilder()
                 .append(id)
                 .append(name)
+                .append(productType)
                 .append(description)
                 .append(productType)
                 .append(price)
                 .append(quantity)
                 .toHashCode();
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", productType=" + productType +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                '}';
     }
 }

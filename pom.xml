@@ -60,8 +60,7 @@
       <spring.version>4.3.3.RELEASE</spring.version>
   </properties>
 
-
-  <dependencies>
+    <dependencies>
       <dependency>
           <groupId>joda-time</groupId>
           <artifactId>joda-time</artifactId>
@@ -90,11 +89,7 @@
           <artifactId>guava</artifactId>
           <version>20.0</version>
       </dependency>
-      <dependency>
-          <groupId>com.google.code.gson</groupId>
-          <artifactId>gson</artifactId>
-          <version>RELEASE</version>
-      </dependency>
+
 
   </dependencies>
 

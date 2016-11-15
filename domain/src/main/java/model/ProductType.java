@@ -10,6 +10,7 @@ import java.util.Map;
  */
 public enum ProductType {
     DIVERS("divers");
+
     private final String value;
     private static final Map<String, ProductType> CONSTANTS = new HashMap<>();
 
