@@ -1,7 +1,7 @@
-E:\Users\Vandorallen\PortableGit\fluffy-stock\domain\src\main\java\model\exceptions\ProductNotFoundException.java
-E:\Users\Vandorallen\PortableGit\fluffy-stock\domain\src\main\java\model\ProductType.java
-E:\Users\Vandorallen\PortableGit\fluffy-stock\domain\src\main\java\model\exceptions\AlreadyExistingProductException.java
-E:\Users\Vandorallen\PortableGit\fluffy-stock\domain\src\main\java\model\exceptions\NotEnoughProductsException.java
-E:\Users\Vandorallen\PortableGit\fluffy-stock\domain\src\main\java\model\Product.java
-E:\Users\Vandorallen\PortableGit\fluffy-stock\domain\src\main\java\model\service\ProductServiceImpl.java
-E:\Users\Vandorallen\PortableGit\fluffy-stock\domain\src\main\java\model\interfaces\ProductsRepository.java
+/comptes/E104607D/Desktop/fluffy-stock/domain/src/main/java/model/exceptions/ProductNotFoundException.java
+/comptes/E104607D/Desktop/fluffy-stock/domain/src/main/java/model/interfaces/ProductsRepository.java
+/comptes/E104607D/Desktop/fluffy-stock/domain/src/main/java/model/exceptions/AlreadyExistingProductException.java
+/comptes/E104607D/Desktop/fluffy-stock/domain/src/main/java/model/ProductType.java
+/comptes/E104607D/Desktop/fluffy-stock/domain/src/main/java/model/exceptions/NotEnoughProductsException.java
+/comptes/E104607D/Desktop/fluffy-stock/domain/src/main/java/model/service/ProductServiceImpl.java
+/comptes/E104607D/Desktop/fluffy-stock/domain/src/main/java/model/Product.java

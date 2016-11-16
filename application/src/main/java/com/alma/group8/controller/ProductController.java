@@ -17,6 +17,7 @@ import java.util.Collection;
  * Define the rest controller
  */
 @RestController
+@RequestMapping("/api")
 public class ProductController {
 
     //FIXME catch exceptions to do a custom answer handler
