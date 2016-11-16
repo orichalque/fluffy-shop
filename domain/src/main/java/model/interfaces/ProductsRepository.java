@@ -26,13 +26,6 @@ public interface ProductsRepository {
     Collection<String> findAll();
 
     /**
-     * Get all the products of a type from the database
-     * @param type the products type
-     * @return a List containing all the products, or an empty list if the database is empty
-     */
-    Collection<String> findProductsByType(String type);
-
-    /**
      * Store a product in the database
      * @param product the product to add
      * @throws AlreadyExistingProductException if the product already exists

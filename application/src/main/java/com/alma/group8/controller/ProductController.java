@@ -1,11 +1,16 @@
 package com.alma.group8.controller;
 
+import com.alma.group8.interfaces.ProductService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import model.Product;
 import model.interfaces.ProductsRepository;
 import com.google.gson.Gson;
 import model.exceptions.NotEnoughProductsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.Collection;
 
 /**
@@ -14,10 +19,15 @@ import java.util.Collection;
 @RestController
 public class ProductController {
 
-    private static final Gson GSON_MAPPER = new Gson();
+    //FIXME catch exceptions to do a custom answer handler
+
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     @Autowired
     ProductsRepository productsRepository;
+
+    @Autowired
+    ProductService<Product> productService;
 
     /**
      * Get all the products
@@ -27,20 +37,16 @@ public class ProductController {
     public @ResponseBody String getAllProducts() {
 
         Collection<String> products = productsRepository.findAll();
-        return GSON_MAPPER.toJson(products);
-    }
+        String jsonArrayOfProducts = null;
 
-    /**
-     * Get all the products of a type
-     * @param type the products type
-     * @return a Gson containing all the products, or an empty Gson
-     */
-    @RequestMapping(value = "/products/{type}", method = RequestMethod.GET)
-    public @ResponseBody String getAllProductsByType(@PathVariable String type) {
+        try {
+             jsonArrayOfProducts = OBJECT_MAPPER.writeValueAsString(products);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            //FIXME LOGGER
+        }
 
-        //FIXME
-        Collection<String> products = productsRepository.findProductsByType(type);
-        return GSON_MAPPER.toJson(products);
+        return jsonArrayOfProducts;
     }
 
     /**
@@ -61,10 +67,20 @@ public class ProductController {
      * @return a Gson containing the product with the corresponding name
      */
     @RequestMapping(value = "/product/{id}/order/{quantity}", method = RequestMethod.POST)
-    public @ResponseBody String orderProductById(@PathVariable String id ,@PathVariable int quantity) throws NotEnoughProductsException {
+    public @ResponseBody String orderProductById(@PathVariable String id ,@PathVariable int quantity) throws Exception {
+        String productAsString = productsRepository.find(id);
+        Product product = null;
 
-        String product = productsRepository.orderProduct(id, quantity);
-        //FIXME : DTO -> Data -> Decrease Quantity -> DTO -> update bdd
-        return GSON_MAPPER.toJson(product);
+        try {
+            product = OBJECT_MAPPER.readValue(productAsString, Product.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+            //FIXME LOG
+        }
+
+        productService.decreaseQuantity(product, quantity);
+        productAsString = OBJECT_MAPPER.writeValueAsString(product);
+        productsRepository.updateProduct(productAsString);
+        return productAsString;
     }
 }
