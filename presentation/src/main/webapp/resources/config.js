@@ -1,3 +1,3 @@
 const config ={
-    context : "/fluffy-stock/"
+    context : "admin/"
 };
