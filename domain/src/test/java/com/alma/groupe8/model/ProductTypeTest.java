@@ -26,5 +26,9 @@ public class ProductTypeTest {
         Assert.assertNotEquals("From value non fonctionnel", productType, ProductType.DIVERS);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testFromValueNull() {
+        ProductType.fromValue(null);
+    }
 
 }
