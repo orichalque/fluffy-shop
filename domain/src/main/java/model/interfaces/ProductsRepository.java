@@ -26,6 +26,14 @@ public interface ProductsRepository {
     Collection<String> findAll();
 
     /**
+     * Get all the products of the page
+     * @param page the page to check
+     * @param size
+     * @return a List containing all the products of the page, or an empty list if the page is empty
+     */
+    Collection<String> findPage(int page, int size);
+
+    /**
      * Store a product in the database
      * @param product the product to add
      * @throws AlreadyExistingProductException if the product already exists
@@ -54,4 +62,6 @@ public interface ProductsRepository {
      * @return the product with the new quantity
      */
     String orderProduct(String uuid, int quantity) throws NotEnoughProductsException;
+
+
 }

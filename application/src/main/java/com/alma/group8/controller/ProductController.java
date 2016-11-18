@@ -5,8 +5,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import model.Product;
 import model.interfaces.ProductsRepository;
-import com.google.gson.Gson;
-import model.exceptions.NotEnoughProductsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,6 +47,8 @@ public class ProductController {
 
         return jsonArrayOfProducts;
     }
+
+    //TODO : get paginated /products?page=x&size=20
 
     /**
      * Get a product using its name
