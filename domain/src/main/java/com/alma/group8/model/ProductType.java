@@ -9,7 +9,11 @@ import java.util.Map;
  * after the creation of the com.alma.group8.model, and increase the maintainability
  */
 public enum ProductType {
-    DIVERS("divers");
+    DIVERS("divers"),
+    METAL("metal"),
+    BOIS("bois"),
+    MINERAL("mineral");
+
 
     private final String value;
     private static final Map<String, ProductType> CONSTANTS = new HashMap<>();

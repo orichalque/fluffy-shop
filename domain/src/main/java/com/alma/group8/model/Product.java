@@ -115,21 +115,24 @@ public class Product {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (obj == this) {
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
         }
-        if (obj.getClass() != getClass()) {
+
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Product rhs = (Product) obj;
 
-        //The item are the same if their id are the same
+        Product product = (Product) o;
+
         return new EqualsBuilder()
-                .append(this.id, rhs.id)
+                .append(price, product.price)
+                .append(quantity, product.quantity)
+                .append(id, product.id)
+                .append(name, product.name)
+                .append(description, product.description)
+                .append(productType, product.productType)
                 .isEquals();
     }
 

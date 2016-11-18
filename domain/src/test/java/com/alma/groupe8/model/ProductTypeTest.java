@@ -1,0 +1,30 @@
+package com.alma.groupe8.model;
+
+import com.alma.group8.model.ProductType;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * Created by Thibault on 18/11/2016.
+ * Test the {@link com.alma.group8.model.ProductType} enum
+ */
+public class ProductTypeTest {
+
+    @Test
+    public void testToString() {
+        ProductType productType = ProductType.BOIS;
+
+        Assert.assertEquals("ToString non fonctionnel", "bois", productType.toString());
+        Assert.assertNotEquals("ToString non fonctionnel", "mineral", productType.toString());
+    }
+
+    @Test
+    public void testFromValue() {
+        ProductType productType = ProductType.fromValue("bois");
+
+        Assert.assertEquals("From value non fonctionnel", productType, ProductType.BOIS);
+        Assert.assertNotEquals("From value non fonctionnel", productType, ProductType.DIVERS);
+    }
+
+
+}

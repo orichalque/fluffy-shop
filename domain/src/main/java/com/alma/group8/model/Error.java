@@ -69,4 +69,12 @@ public class Error {
                 .append(message)
                 .toHashCode();
     }
+
+    @Override
+    public String toString() {
+        return "Error{" +
+                "code=" + code +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }
