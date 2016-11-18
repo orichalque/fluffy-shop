@@ -86,7 +86,7 @@
          */
 
         function getProducts() {
-            sendHttpRequest(config.context + 'rest/products', {}, 'GET').then(function(data) {
+            sendHttpRequest(config.context + 'products', {}, 'GET').then(function(data) {
                 $scope.products = data;
             });
         };
@@ -109,14 +109,14 @@
                 quantity: 0
             };
             //appel REST pour ajouter le product
-            sendHttpRequest(config.context + 'rest/products', $scope.jsonProduct, 'POST').then(function() {
+            sendHttpRequest(config.context + 'products', $scope.jsonProduct, 'POST').then(function() {
                 $scope.message = "Product Ajouté avec succès";
                 $scope.entityAdded = true;
-                //ajout dynamique du product pour l'affichage (pas besoin d'actualiser)
-                sendHttpRequest(config.context + 'rest/products', null, 'GET').then(function(data){
+                //actualisation des produits
+                sendHttpRequest(config.context + 'products', null, 'GET').then(function(data){
                     $scope.products=data;
                 });
-            }, function errorCallback(){
+            }, function (){//errorCallback
                 $scope.error = true;
                 $scope.message = "failure : n'existe-t-il pas déja dans la base ?";
             });
@@ -137,9 +137,9 @@
          */
         $scope.removeProduct = function (product) {
             //Fenetre modale
-            if (confirm('Voulez-vous vraiment supprimer ce product? Ceci supprimera aussi ses résultats')) {
+            if (confirm('Voulez-vous vraiment supprimer ce produit?')) {
                 //appel REST de suppression en fonction de l'id du product
-                sendHttpRequest(config.context + 'rest/products/' + product.id_product,{},'DELETE').then(function () {
+                sendHttpRequest(config.context + 'products/'+product.id,{},'DELETE').then(function () {
                     //on supprime aussi le product de l'affichage (pas besoin d'actualiser)
                     var index = $scope.products.indexOf(product);
                     if (index > -1) {
@@ -154,7 +154,7 @@
          * @param product le product modifié
          */
         $scope.change_product=function(product){
-            sendHttpRequest(config.context + "rest/products/update", product,'POST').then(function () {
+            sendHttpRequest(config.context + "products"+product.id, product,'POST').then(function () {
                 $scope.tomodif="";
             });
         };
@@ -183,12 +183,12 @@
                 mdp_user: encode($scope.user.password)
             };
             //appel REST pour creer l'administrateur en base
-            sendHttpRequest(config.context + 'rest/admins', $scope.jsonUser,'POST').then(function () {
+            sendHttpRequest(config.context + 'admins', $scope.jsonUser,'POST').then(function () {
                 $scope.message = "Utilisateur Ajouté avec succès";
                 $scope.entityAdded = true;
                 //MAJ de l'affichage
                 $scope.users.push($scope.jsonUser);
-            }, function errorCallback(){
+            }, function (){//errorCallback
                 $scope.error = true;
                 $scope.message = "failure : n'existe-t-il pas déja dans la base ?";
             });
@@ -210,7 +210,7 @@
             //fenetre modale
             if (confirm('Voulez-vous vraiment supprimer cet utilisateur ?')) {
                 //appel REST de suppression de l'admin à l'aide de son nom
-                sendHttpRequest(config.context + 'rest/admins/' + user.nom_user,{},'DELETE').then(function () {
+                sendHttpRequest(config.context + 'admins/' + user.nom_user,{},'DELETE').then(function () {
                     var index = $scope.users.indexOf(user);
                     if (index > -1) {
                         //MAJ affichage
