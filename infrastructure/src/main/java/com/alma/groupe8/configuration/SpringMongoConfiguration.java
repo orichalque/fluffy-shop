@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class SpringMongoConfiguration{
+
     @Bean
     public MongoCollection<Document> mongoCollection() {
         MongoCollection<Document> mongoCollection = null;
