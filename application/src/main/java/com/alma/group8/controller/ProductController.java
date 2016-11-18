@@ -3,8 +3,12 @@ package com.alma.group8.controller;
 import com.alma.group8.interfaces.ProductService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import model.Product;
-import model.interfaces.ProductsRepository;
+import com.alma.group8.model.Product;
+import com.alma.group8.model.exceptions.FunctionalException;
+import com.alma.group8.model.exceptions.NotEnoughProductsException;
+import com.alma.group8.model.interfaces.ProductsRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,13 +16,13 @@ import java.io.IOException;
 import java.util.Collection;
 
 /**
- * Define the rest controller
+ * Define the rest controller defining methods that can be called by clients
  */
 @RestController
 @RequestMapping("/")
 public class ProductController {
 
-    //FIXME catch exceptions to do a custom answer handler
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
@@ -30,7 +34,7 @@ public class ProductController {
 
     /**
      * Get all the products
-     * @return a Gson containing all the products, or an empty Gson
+     * @return a json containing all the products, or an empty Gson
      */
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     public @ResponseBody String getAllProducts() {
@@ -41,14 +45,31 @@ public class ProductController {
         try {
              jsonArrayOfProducts = OBJECT_MAPPER.writeValueAsString(products);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            //FIXME LOGGER
+            LOGGER.warn("An error expected while serializing all the data fetched from the database", e);
         }
 
         return jsonArrayOfProducts;
     }
 
-    //TODO : get paginated /products?page=x&size=20
+    /**
+     * Get the product with a paginated result
+     * @param page the page to see
+     * @param size the size of the page
+     * @return a json containing the products from the page
+     */
+    @RequestMapping(value = "/products")
+    public @ResponseBody String getProductsPaginated(@RequestParam("page") int page, @RequestParam("size") int size) {
+        Collection<String> products = productsRepository.findPage(page, size);
+        String jsonArrayOfProducts = null;
+
+        try {
+            jsonArrayOfProducts = OBJECT_MAPPER.writeValueAsString(products);
+        } catch (JsonProcessingException e) {
+            LOGGER.warn("An error expected while serializing the page fetched from the database", e);
+        }
+
+        return jsonArrayOfProducts;
+    }
 
     /**
      * Get a product using its name
@@ -57,7 +78,6 @@ public class ProductController {
      */
     @RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
     public @ResponseBody String getProductById(@PathVariable String id) {
-
         return productsRepository.find(id);
     }
 
@@ -66,21 +86,31 @@ public class ProductController {
      * @param id the product id
      * @param quantity the quantity to order
      * @return a Gson containing the product with the corresponding name
+     * @throws com.alma.group8.model.exceptions.NotEnoughProductsException
      */
     @RequestMapping(value = "/product/{id}/order/{quantity}", method = RequestMethod.POST)
-    public @ResponseBody String orderProductById(@PathVariable String id ,@PathVariable int quantity) throws Exception {
+    public @ResponseBody String orderProductById(@PathVariable String id ,@PathVariable int quantity) throws FunctionalException {
         String productAsString = productsRepository.find(id);
         Product product = null;
 
         try {
             product = OBJECT_MAPPER.readValue(productAsString, Product.class);
         } catch (IOException e) {
-            e.printStackTrace();
-            //FIXME LOG
+            LOGGER.warn("An error expected while requesting the product in the database", e);
         }
 
-        productService.decreaseQuantity(product, quantity);
-        productAsString = OBJECT_MAPPER.writeValueAsString(product);
+        try {
+            productService.decreaseQuantity(product, quantity);
+        } catch (Exception e) {
+            throw new NotEnoughProductsException(e);
+        }
+
+        try {
+            productAsString = OBJECT_MAPPER.writeValueAsString(product);
+        } catch (JsonProcessingException e) {
+            LOGGER.warn("An error expected while serializing the page fetched from the database", e);
+        }
+
         productsRepository.updateProduct(productAsString);
         return productAsString;
     }

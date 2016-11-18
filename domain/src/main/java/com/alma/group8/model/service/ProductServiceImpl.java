@@ -1,8 +1,8 @@
-package model.service;
+package com.alma.group8.model.service;
 
 import com.alma.group8.interfaces.ProductService;
-import model.Product;
-import model.exceptions.NotEnoughProductsException;
+import com.alma.group8.model.Product;
+import com.alma.group8.model.exceptions.NotEnoughProductsException;
 
 /**
  * Created by Thibault on 15/11/16.

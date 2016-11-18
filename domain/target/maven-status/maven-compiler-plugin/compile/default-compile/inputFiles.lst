@@ -1,7 +1,9 @@
-E:\Users\Vandorallen\Documents\M2\fluffy-stock\domain\src\main\java\model\exceptions\ProductNotFoundException.java
-E:\Users\Vandorallen\Documents\M2\fluffy-stock\domain\src\main\java\model\interfaces\ProductsRepository.java
-E:\Users\Vandorallen\Documents\M2\fluffy-stock\domain\src\main\java\model\service\ProductServiceImpl.java
-E:\Users\Vandorallen\Documents\M2\fluffy-stock\domain\src\main\java\model\exceptions\NotEnoughProductsException.java
-E:\Users\Vandorallen\Documents\M2\fluffy-stock\domain\src\main\java\model\Product.java
-E:\Users\Vandorallen\Documents\M2\fluffy-stock\domain\src\main\java\model\exceptions\AlreadyExistingProductException.java
-E:\Users\Vandorallen\Documents\M2\fluffy-stock\domain\src\main\java\model\ProductType.java
+E:\Users\Vandorallen\Documents\M2\fluffy-stock\domain\src\main\java\com\alma\group8\model\service\ProductServiceImpl.java
+E:\Users\Vandorallen\Documents\M2\fluffy-stock\domain\src\main\java\com\alma\group8\model\exceptions\ProductNotFoundException.java
+E:\Users\Vandorallen\Documents\M2\fluffy-stock\domain\src\main\java\com\alma\group8\model\Product.java
+E:\Users\Vandorallen\Documents\M2\fluffy-stock\domain\src\main\java\com\alma\group8\model\exceptions\AlreadyExistingProductException.java
+E:\Users\Vandorallen\Documents\M2\fluffy-stock\domain\src\main\java\com\alma\group8\model\Error.java
+E:\Users\Vandorallen\Documents\M2\fluffy-stock\domain\src\main\java\com\alma\group8\model\interfaces\ProductsRepository.java
+E:\Users\Vandorallen\Documents\M2\fluffy-stock\domain\src\main\java\com\alma\group8\model\exceptions\NotEnoughProductsException.java
+E:\Users\Vandorallen\Documents\M2\fluffy-stock\domain\src\main\java\com\alma\group8\model\ProductType.java
+E:\Users\Vandorallen\Documents\M2\fluffy-stock\domain\src\main\java\com\alma\group8\model\exceptions\FunctionalException.java

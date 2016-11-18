@@ -1,13 +1,12 @@
-package model;
+package com.alma.group8.model;
 
-import model.exceptions.NotEnoughProductsException;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.util.UUID;
 
 /**
- * Product model class definition
+ * Product com.alma.group8.model class definition
  * Define the products sold or stored in the stock
  */
 public class Product {
@@ -77,7 +76,7 @@ public class Product {
     /**
      * Set the field productType
      *
-     * @param productType as model.ProductType
+     * @param productType as com.alma.group8.model.ProductType
      */
     public void setProductType(ProductType productType) {
         this.productType = productType;

@@ -1,8 +1,8 @@
 package com.alma.group8.controller;
 
 import com.alma.group8.interfaces.ProductService;
-import model.Product;
-import model.interfaces.ProductsRepository;
+import com.alma.group8.model.Product;
+import com.alma.group8.model.interfaces.ProductsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 

@@ -1,10 +1,10 @@
 package com.alma.group8.configuration;
 
 import com.alma.group8.interfaces.ProductService;
-import model.Product;
-import model.interfaces.ProductsRepository;
+import com.alma.group8.model.Product;
+import com.alma.group8.model.interfaces.ProductsRepository;
 import com.alma.groupe8.repository.MongoRepository;
-import model.service.ProductServiceImpl;
+import com.alma.group8.model.service.ProductServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +24,7 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter{
     }
 
     @Bean
-    ProductService<Product> productService() {
+    public ProductService<Product> productService() {
         return new ProductServiceImpl();
     }
 

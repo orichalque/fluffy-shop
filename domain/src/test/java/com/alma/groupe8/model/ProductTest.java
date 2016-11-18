@@ -1,6 +1,6 @@
 package com.alma.groupe8.model;
 
-import model.Product;
+import com.alma.group8.model.Product;
 import org.junit.Test;
 import pl.pojo.tester.api.assertion.Method;
 

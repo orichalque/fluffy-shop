@@ -1,4 +1,4 @@
-package model;
+package com.alma.group8.model;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * Define the different possible types for the products stored in the stock
  * The usage of an enumeration instead of a specific java object allows to add types
- * after the creation of the model, and increase the maintainability
+ * after the creation of the com.alma.group8.model, and increase the maintainability
  */
 public enum ProductType {
     DIVERS("divers");

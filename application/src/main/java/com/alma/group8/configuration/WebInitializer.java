@@ -15,7 +15,6 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        //FIXME
         return new Class<?>[] {ApplicationConfiguration.class, SpringMongoConfiguration.class};
     }
 

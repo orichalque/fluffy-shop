@@ -1,8 +1,7 @@
-package model.interfaces;
+package com.alma.group8.model.interfaces;
 
-import model.exceptions.AlreadyExistingProductException;
-import model.exceptions.NotEnoughProductsException;
-import model.exceptions.ProductNotFoundException;
+import com.alma.group8.model.exceptions.AlreadyExistingProductException;
+import com.alma.group8.model.exceptions.ProductNotFoundException;
 
 import java.util.Collection;
 
@@ -28,7 +27,7 @@ public interface ProductsRepository {
     /**
      * Get all the products of the page
      * @param page the page to check
-     * @param size
+     * @param size the size of the page
      * @return a List containing all the products of the page, or an empty list if the page is empty
      */
     Collection<String> findPage(int page, int size);
@@ -53,15 +52,5 @@ public interface ProductsRepository {
      * @throws ProductNotFoundException if the uuid doesn't match with any product
      */
     void delete(String uuid) throws ProductNotFoundException;
-
-    /**
-     * Reduce the quantity of the product in the database
-     * @param uuid the id of the product
-     * @param quantity the quantity of product to retrieve
-     * @throws NotEnoughProductsException if the quantity ordered is superior to the quantity of the object
-     * @return the product with the new quantity
-     */
-    String orderProduct(String uuid, int quantity) throws NotEnoughProductsException;
-
 
 }
