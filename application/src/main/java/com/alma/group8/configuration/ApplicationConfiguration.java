@@ -16,7 +16,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  */
 @Configuration
 @ComponentScan({"com.alma.group8.controller"})
-public class SpringConfiguration extends WebMvcConfigurerAdapter{
+public class ApplicationConfiguration extends WebMvcConfigurerAdapter{
 
     @Bean
     public ProductsRepository productsRepository() {

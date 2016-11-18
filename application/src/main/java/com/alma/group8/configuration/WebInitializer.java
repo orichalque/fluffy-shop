@@ -1,6 +1,5 @@
-package com.alma.group8.dispatcher;
+package com.alma.group8.configuration;
 
-import com.alma.group8.configuration.SpringConfiguration;
 import com.alma.groupe8.configuration.SpringMongoConfiguration;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -17,7 +16,7 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
     @Override
     protected Class<?>[] getServletConfigClasses() {
         //FIXME
-        return new Class<?>[] {SpringConfiguration.class, SpringMongoConfiguration.class, WebConfiguration.class};
+        return new Class<?>[] {ApplicationConfiguration.class, SpringMongoConfiguration.class};
     }
 
     @Override

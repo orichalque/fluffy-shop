@@ -24,8 +24,8 @@
             <url>http://jcenter.bintray.com/</url>
         </repository>
     </repositories>
-    <dependencies>
 
+    <dependencies>
         <dependency>
             <groupId>com.alma.groupe8</groupId>
             <artifactId>api</artifactId>
