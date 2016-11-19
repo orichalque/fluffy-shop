@@ -22,7 +22,6 @@ public class SpringMongoConfiguration{
         MongoClient mongoClient = new MongoClient(mongoClientURI);
         mongoCollection= mongoClient.getDatabase(CommonVariables.MONGO_DATABASE_NAME).getCollection(CommonVariables.COLLECTION_NAME).withDocumentClass(Document.class);
 
-        mongoClient.close();
         return mongoCollection;
     }
 }
