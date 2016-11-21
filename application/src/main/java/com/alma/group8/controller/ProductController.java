@@ -34,7 +34,7 @@ public class ProductController {
     /**
      * Get all the products
      * @return a json containing all the products, or an empty Gson
-     */
+     */ /*
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     @ResponseBody public String getAllProducts() throws FunctionalException {
 
@@ -48,7 +48,7 @@ public class ProductController {
         }
 
         return jsonArrayOfProducts;
-    }
+    } */
 
     /**
      * Get the product with a paginated result
@@ -57,9 +57,17 @@ public class ProductController {
      * @return a json containing the products from the page
      */
     @RequestMapping(value = "/products", method = RequestMethod.GET)
-    @ResponseBody public String getProductsPaginated(@RequestParam("page") int page, @RequestParam("size") int size) throws FunctionalException {
-        Collection<String> products = productsRepository.findPage(page, size);
+    @ResponseBody public String getProducts(@RequestParam(value = "page", required = false) Integer page,
+                                            @RequestParam(value = "size", required = false) Integer size) throws FunctionalException {
+
         String jsonArrayOfProducts = null;
+        Collection<String> products;
+
+        if(page == null || size == null) {
+            products = productsRepository.findAll();
+        } else {
+            products = productsRepository.findPage(page, size);
+        }
 
         try {
             jsonArrayOfProducts = OBJECT_MAPPER.writeValueAsString(products);
