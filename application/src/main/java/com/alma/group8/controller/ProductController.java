@@ -37,7 +37,7 @@ public class ProductController {
      * @return a json containing all the products, or an empty Gson
      */
     @RequestMapping(value = "/products", method = RequestMethod.GET)
-    public @ResponseBody String getAllProducts() {
+    @ResponseBody public String getAllProducts() throws FunctionalException {
 
         Collection<String> products = productsRepository.findAll();
         String jsonArrayOfProducts = null;
@@ -57,8 +57,8 @@ public class ProductController {
      * @param size the size of the page
      * @return a json containing the products from the page
      */
-    @RequestMapping(value = "/products")
-    public @ResponseBody String getProductsPaginated(@RequestParam("page") int page, @RequestParam("size") int size) {
+    @RequestMapping(value = "/products", method = RequestMethod.GET)
+    @ResponseBody public String getProductsPaginated(@RequestParam("page") int page, @RequestParam("size") int size) throws FunctionalException {
         Collection<String> products = productsRepository.findPage(page, size);
         String jsonArrayOfProducts = null;
 
@@ -77,7 +77,7 @@ public class ProductController {
      * @return a Gson containing the product with the corresponding name
      */
     @RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
-    public @ResponseBody String getProductById(@PathVariable String id) {
+    @ResponseBody public String getProductById(@PathVariable String id) throws FunctionalException {
         return productsRepository.find(id);
     }
 
@@ -89,7 +89,7 @@ public class ProductController {
      * @throws com.alma.group8.model.exceptions.NotEnoughProductsException
      */
     @RequestMapping(value = "/product/{id}/order/{quantity}", method = RequestMethod.POST)
-    public @ResponseBody String orderProductById(@PathVariable String id ,@PathVariable int quantity) throws FunctionalException {
+    @ResponseBody public String orderProductById(@PathVariable String id ,@PathVariable int quantity) throws FunctionalException {
         String productAsString = productsRepository.find(id);
         Product product = null;
 

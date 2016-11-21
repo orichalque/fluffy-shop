@@ -18,11 +18,19 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @ComponentScan({"com.alma.group8.controller"})
 public class ApplicationConfiguration extends WebMvcConfigurerAdapter{
 
+    /**
+     * Create the {@link ProductsRepository} and add it in the SpringContext
+     * @return the {@link org.springframework.beans.factory.annotation.Autowired} {@link MongoRepository}
+     */
     @Bean
     public ProductsRepository productsRepository() {
         return new MongoRepository();
     }
 
+    /**
+     * Create the {@link ProductService} and add it in the SpringContext
+     * @return the {@link org.springframework.beans.factory.annotation.Autowired} {@link ProductService}
+     */
     @Bean
     public ProductService<Product> productService() {
         return new ProductServiceImpl();

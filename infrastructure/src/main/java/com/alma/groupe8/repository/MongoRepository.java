@@ -8,6 +8,7 @@ import com.alma.group8.model.exceptions.AlreadyExistingProductException;
 import com.alma.group8.model.exceptions.ProductNotFoundException;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
@@ -18,6 +19,7 @@ import static com.mongodb.client.model.Filters.eq;
  * Created by Thibault on 04/11/16.
  * ProductRepository implementation using MongoDB collections
  */
+@Order(2)
 @Repository
 public class MongoRepository implements ProductsRepository {
 
@@ -84,6 +86,5 @@ public class MongoRepository implements ProductsRepository {
         } else {
             mongoCollection.deleteOne(Document.parse(currentProduct));
        }
-
     }
 }
