@@ -20,7 +20,7 @@ public class AdminController {
     ProductsRepository productsRepository;
 
     @Autowired
-    ProductService<Product> productService;
+    ProductService<FunctionalException> productService;
 
     /**
      * Delete a product from the database

@@ -1,12 +1,11 @@
 package com.alma.group8.controller;
 
 import com.alma.group8.interfaces.ProductService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.alma.group8.model.Product;
 import com.alma.group8.model.exceptions.FunctionalException;
-import com.alma.group8.model.exceptions.NotEnoughProductsException;
 import com.alma.group8.model.interfaces.ProductsRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +29,7 @@ public class ProductController {
     ProductsRepository productsRepository;
 
     @Autowired
-    ProductService<Product> productService;
+    ProductService<FunctionalException> productService;
 
     /**
      * Get all the products
@@ -99,11 +98,7 @@ public class ProductController {
             LOGGER.warn("An error expected while requesting the product in the database", e);
         }
 
-        try {
-            productService.decreaseQuantity(product, quantity);
-        } catch (Exception e) {
-            throw new NotEnoughProductsException(e);
-        }
+        productAsString = productService.decreaseQuantity(productAsString, quantity);
 
         try {
             productAsString = OBJECT_MAPPER.writeValueAsString(product);
