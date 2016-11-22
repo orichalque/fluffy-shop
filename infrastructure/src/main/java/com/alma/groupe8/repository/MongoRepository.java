@@ -59,9 +59,9 @@ public class MongoRepository implements ProductsRepository {
     public void store(String product) throws AlreadyExistingProductException {
         Document document = Document.parse(product);
 
-        String currentProduct = mongoCollection.find(eq("id", document.get("id"))).first().toJson();
+        Document currentProduct = mongoCollection.find(eq("id", document.get("id"))).first();
 
-        if (Strings.isNullOrEmpty(currentProduct)) {
+        if (currentProduct == null) {
             //Product found, when we only want to insert it
             mongoCollection.insertOne(Document.parse(product));
         } else {

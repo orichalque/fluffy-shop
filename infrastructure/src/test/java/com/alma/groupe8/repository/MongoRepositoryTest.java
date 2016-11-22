@@ -140,8 +140,9 @@ public class  MongoRepositoryTest {
 
         try {
             Assert.assertNull("The item should be in the database anymore", mongoRepository.find(product.getId().toString()));
-        } catch (ProductNotFoundException e) {
             Assert.fail();
+        } catch (ProductNotFoundException e) {
+
         }
     }
 
