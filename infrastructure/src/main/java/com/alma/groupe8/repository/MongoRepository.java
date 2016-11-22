@@ -31,7 +31,7 @@ public class MongoRepository implements ProductsRepository {
         //Returning the first item corresponding. the UUID are unique in the database so there is only 1 product, or none
         Document document = mongoCollection.find(eq("id", uuid)).first();
 
-        String documentFoundAsString = null;
+        String documentFoundAsString;
         if (document != null) {
             //MongoDb adds an index that we don't need
             document.remove("_id");

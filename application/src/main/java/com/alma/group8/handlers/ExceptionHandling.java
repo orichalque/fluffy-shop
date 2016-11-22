@@ -30,6 +30,7 @@ public class ExceptionHandling {
     /**
      * Generate a custom error message when a {@link FunctionalException} is raised
      * @param e the {@link FunctionalException}
+     * @param response the {@link HttpServletResponse}
      * @return the corresponding {@link Error}
      */
     @ExceptionHandler(FunctionalException.class)
@@ -52,6 +53,7 @@ public class ExceptionHandling {
     /**
      * Generate a custom error message when a {@link AlreadyExistingProductException} is raised
      * @param e the {@link AlreadyExistingProductException}
+     * @param response the {@link HttpServletResponse}
      * @return the corresponding {@link Error}
      */
     @ExceptionHandler(AlreadyExistingProductException.class)
@@ -75,6 +77,7 @@ public class ExceptionHandling {
     /**
      * Generate a custom error message when a {@link ProductNotFoundException} is raised
      * @param e the {@link FunctionalException}
+     * @param response the {@link HttpServletResponse}
      * @return the corresponding {@link Error}
      */
     @ExceptionHandler(ProductNotFoundException.class)
@@ -98,6 +101,7 @@ public class ExceptionHandling {
     /**
      * Generate a custom error message when a {@link FunctionalException} is raised
      * @param e the {@link FunctionalException}
+     * @param response the {@link HttpServletResponse}
      * @return the corresponding {@link Error}
      */
     @ExceptionHandler(NotEnoughProductsException.class)
@@ -117,6 +121,12 @@ public class ExceptionHandling {
         return errorAsString;
     }
 
+    /**
+     * Generate a custom error message when an {@link IOException} is throwed
+     * @param e tje {@link IOException}
+     * @param response the {@link HttpServletResponse}
+     * @return the custom {@link Error}
+     */
     @ExceptionHandler(IOException.class)
     public String handleIOException(IOException e, HttpServletResponse response) {
         Error error = new Error();
@@ -137,6 +147,7 @@ public class ExceptionHandling {
     /**
      * Generate a custom error when a {@link RuntimeException} is raised
      * @param e the {@link RuntimeException}
+     * @param response the {@link HttpServletResponse}
      * @return the corresponding {@link Error}
      */
     @ExceptionHandler(RuntimeException.class)
