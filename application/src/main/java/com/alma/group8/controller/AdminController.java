@@ -1,7 +1,6 @@
 package com.alma.group8.controller;
 
 import com.alma.group8.interfaces.ProductService;
-import com.alma.group8.model.Product;
 import com.alma.group8.model.exceptions.FunctionalException;
 import com.alma.group8.model.interfaces.ProductsRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -17,6 +17,7 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -92,11 +93,11 @@ public class ProductControllerTest {
                                             .andExpect(jsonPath("$[1].id", is("e245e8cb-d616-4631-beb1-9cf8b4894d91")));
     }
 
-    @Ignore
+
     @Test
     public void testGetAllProductsPaginated() throws Exception {
-
-        Mockito.when(productsRepository.findAll()).then(invocationOnMock -> products);
+        
+        Mockito.when(productsRepository.findPage(1, 1)).then(invocationOnMock -> products.subList(0, 1));
         mockMvc.perform(get("/products?page=1&size=1").accept(MediaType.ALL))
                 .andExpect(status().isOk())
                 .andDo(print())

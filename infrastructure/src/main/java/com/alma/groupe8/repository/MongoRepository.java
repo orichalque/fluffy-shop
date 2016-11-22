@@ -43,14 +43,14 @@ public class MongoRepository implements ProductsRepository {
     @Override
     public Collection<String> findAll() {
         //Transform a List<Document> to a list<ProductDTO>
-        return Lists.transform(Lists.newArrayList(mongoCollection.find(Document.class)), document -> document.toJson());
+        return Lists.transform(Lists.newArrayList(mongoCollection.find(Document.class)), Document::toJson);
     }
 
     @Override
     public Collection<String> findPage(int page, int size) {
         //Skip the first results and returns the next page
         //Transform a List<Document> to a list<ProductDTO>
-        return Lists.transform(Lists.newArrayList(mongoCollection.find().skip((page-1)*size).limit(size)), document -> document.toJson());
+        return Lists.transform(Lists.newArrayList(mongoCollection.find().skip((page-1)*size).limit(size)), Document::toJson);
     }
 
     @Override

@@ -32,7 +32,7 @@ import java.util.UUID;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {MongoRepositoryTest.ContextConfiguration.class})
-public class MongoRepositoryTest {
+public class  MongoRepositoryTest {
 
 
     @Autowired
@@ -186,6 +186,27 @@ public class MongoRepositoryTest {
         }
 
         Assert.assertEquals("The database does not contain the elements", 2, mongoRepository.findAll().size());
+    }
+
+    @Test
+    public void checkFindPage() {
+        Product product = new Product();
+        product.setId(UUID.randomUUID());
+
+        Product productDTO2 = new Product();
+        productDTO2.setId(UUID.randomUUID());
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            mongoRepository.store(objectMapper.writeValueAsString(product));
+            mongoRepository.store(objectMapper.writeValueAsString(productDTO2));
+        } catch (AlreadyExistingProductException e) {
+            Assert.fail("The database should not contain the product");
+        } catch (JsonProcessingException e) {
+            Assert.fail("Cannot serialize the product");
+        }
+
+        Assert.assertEquals("The database does not contain the elements", 1, mongoRepository.findPage(1, 1).size());
     }
 
     @Test(expected = AlreadyExistingProductException.class)
