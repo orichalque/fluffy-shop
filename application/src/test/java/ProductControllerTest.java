@@ -1,5 +1,6 @@
 import com.alma.group8.model.Product;
 import com.alma.group8.model.interfaces.ProductsRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -21,6 +22,7 @@ import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -34,6 +36,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebAppConfiguration
 public class ProductControllerTest {
 
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+
     @Autowired
     private WebApplicationContext webApplicationContext;
 
@@ -45,7 +49,6 @@ public class ProductControllerTest {
     private Product product;
 
     private ArrayList<Product> products;
-
 
     @Before
     public void setUp() {
@@ -70,8 +73,6 @@ public class ProductControllerTest {
         product2.setId(uuid);
         product2.setPrice(20.);
         products.add(product2);
-
-
     }
 
     @Test
@@ -80,7 +81,6 @@ public class ProductControllerTest {
         Mockito.when(productsRepository.findAll()).then(invocationOnMock -> products);
         mockMvc.perform(get("/products").accept(MediaType.ALL))
                                             .andExpect(status().isOk())
-                                            .andDo(print())
                                             .andExpect(jsonPath("$[0].name", is("name")))
                                             .andExpect(jsonPath("$[0].description", is("description")))
                                             .andExpect(jsonPath("$[0].price", is(50.0)))
@@ -96,12 +96,34 @@ public class ProductControllerTest {
 
     @Test
     public void testGetAllProductsPaginated() throws Exception {
-        
+
         Mockito.when(productsRepository.findPage(1, 1)).then(invocationOnMock -> products.subList(0, 1));
         mockMvc.perform(get("/products?page=1&size=1").accept(MediaType.ALL))
                 .andExpect(status().isOk())
-                .andDo(print())
                 .andExpect(jsonPath("$", hasSize(1)));
     }
 
+    @Test
+    public void testFindById() throws Exception {
+        Mockito.when(productsRepository.find(Mockito.anyString())).then(invocationOnMock -> OBJECT_MAPPER.writeValueAsString(products.get(0)));
+        mockMvc.perform(get("/product/8f987fc2-e11f-474c-91c5-5f49104e471b").accept(MediaType.ALL))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name", is("name")))
+                .andExpect(jsonPath("$.description", is("description")))
+                .andExpect(jsonPath("$.price", is(50.0)))
+                .andExpect(jsonPath("$.quantity", is(5)))
+                .andExpect(jsonPath("$.id", is("8f987fc2-e11f-474c-91c5-5f49104e471b")));
+    }
+
+    @Test
+    public void testOrderProduct() throws Exception {
+        Mockito.when(productsRepository.find(Mockito.anyString())).then(invocationOnMock -> OBJECT_MAPPER.writeValueAsString(products.get(0)));
+        mockMvc.perform(post("/product/8f987fc2-e11f-474c-91c5-5f49104e471b/order/2").accept(MediaType.ALL))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name", is("name")))
+                .andExpect(jsonPath("$.description", is("description")))
+                .andExpect(jsonPath("$.price", is(50.0)))
+                .andExpect(jsonPath("$.quantity", is(3))) //Assert that the product quantity has been reduced
+                .andExpect(jsonPath("$.id", is("8f987fc2-e11f-474c-91c5-5f49104e471b")));
+    }
 }

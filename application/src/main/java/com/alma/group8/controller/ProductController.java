@@ -4,6 +4,7 @@ import com.alma.group8.interfaces.ProductService;
 import com.alma.group8.model.Product;
 import com.alma.group8.model.exceptions.FunctionalException;
 import com.alma.group8.model.interfaces.ProductsRepository;
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -32,25 +33,6 @@ public class ProductController {
     ProductService<FunctionalException> productService;
 
     /**
-     * Get all the products
-     * @return a json containing all the products, or an empty Gson
-     */ /*
-    @RequestMapping(value = "/products", method = RequestMethod.GET)
-    @ResponseBody public String getAllProducts() throws FunctionalException {
-
-        Collection<String> products = productsRepository.findAll();
-        String jsonArrayOfProducts = null;
-
-        try {
-             jsonArrayOfProducts = OBJECT_MAPPER.writeValueAsString(products);
-        } catch (JsonProcessingException e) {
-            LOGGER.warn("An error expected while serializing all the data fetched from the database", e);
-        }
-
-        return jsonArrayOfProducts;
-    } */
-
-    /**
      * Get the product with a paginated result
      * @param page the page to see
      * @param size the size of the page
@@ -58,7 +40,7 @@ public class ProductController {
      */
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     @ResponseBody public String getProducts(@RequestParam(value = "page", required = false) Integer page,
-                                            @RequestParam(value = "size", required = false) Integer size) throws FunctionalException {
+                                            @RequestParam(value = "size", required = false) Integer size) throws FunctionalException, JsonProcessingException {
 
         String jsonArrayOfProducts = null;
         Collection<String> products;
@@ -69,11 +51,7 @@ public class ProductController {
             products = productsRepository.findPage(page, size);
         }
 
-        try {
-            jsonArrayOfProducts = OBJECT_MAPPER.writeValueAsString(products);
-        } catch (JsonProcessingException e) {
-            LOGGER.warn("An error expected while serializing the page fetched from the database", e);
-        }
+        jsonArrayOfProducts = OBJECT_MAPPER.writeValueAsString(products);
 
         return jsonArrayOfProducts;
     }
@@ -96,23 +74,12 @@ public class ProductController {
      * @throws com.alma.group8.model.exceptions.NotEnoughProductsException
      */
     @RequestMapping(value = "/product/{id}/order/{quantity}", method = RequestMethod.POST)
-    @ResponseBody public String orderProductById(@PathVariable String id ,@PathVariable int quantity) throws FunctionalException {
+    @ResponseBody public String orderProductById(@PathVariable String id ,@PathVariable int quantity) throws FunctionalException, IOException {
         String productAsString = productsRepository.find(id);
-        Product product = null;
 
-        try {
-            product = OBJECT_MAPPER.readValue(productAsString, Product.class);
-        } catch (IOException e) {
-            LOGGER.warn("An error expected while requesting the product in the database", e);
-        }
+        Product product = OBJECT_MAPPER.readValue(productAsString, Product.class);
 
         productAsString = productService.decreaseQuantity(productAsString, quantity);
-
-        try {
-            productAsString = OBJECT_MAPPER.writeValueAsString(product);
-        } catch (JsonProcessingException e) {
-            LOGGER.warn("An error expected while serializing the page fetched from the database", e);
-        }
 
         productsRepository.updateProduct(productAsString);
         return productAsString;

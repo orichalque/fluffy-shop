@@ -12,6 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.io.IOException;
+
 /**
  * Created by Thibault on 18/11/2016.
  * Define exception handlers methods, used to set specific error message
@@ -104,6 +106,22 @@ public class ExceptionHandling {
             errorAsString = OBJECT_MAPPER.writeValueAsString(error);
         } catch (JsonProcessingException e1) {
             LOGGER.warn("An error occurred due to a lack of product in the stocks", e1);
+        }
+        return errorAsString;
+    }
+
+    @ExceptionHandler(IOException.class)
+    public String handleIOException(IOException e) {
+        Error error = new Error();
+        error.setCode(HttpStatus.BAD_REQUEST.value());
+        error.setMessage(e.getMessage());
+
+        String errorAsString = null;
+
+        try {
+            errorAsString = OBJECT_MAPPER.writeValueAsString(error);
+        } catch (JsonProcessingException e1) {
+            LOGGER.warn("An error occurred while parsing a file or a product", e1);
         }
         return errorAsString;
     }
