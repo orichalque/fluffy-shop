@@ -1,5 +1,4 @@
 import com.alma.group8.model.Product;
-import com.alma.group8.model.exceptions.FunctionalException;
 import com.alma.group8.model.exceptions.ProductNotFoundException;
 import com.alma.group8.model.interfaces.ProductsRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;

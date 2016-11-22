@@ -172,7 +172,12 @@
                 <version>0.7.7.201606060606</version>
                 <configuration>
                     <destFile>${sonar.jacoco.reportPath}</destFile>
-                     <append>true</append>
+                    <append>true</append>
+                    <excludes>
+                        <exclude>**/*Exception.*</exclude>
+                        <exclude>**/*Configuration.*</exclude>
+                        <exclude></exclude>
+                    </excludes>
                 </configuration>
                 <executions>
                     <execution>

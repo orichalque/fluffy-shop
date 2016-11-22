@@ -34,7 +34,6 @@ import java.util.UUID;
 @ContextConfiguration(classes = {MongoRepositoryTest.ContextConfiguration.class})
 public class  MongoRepositoryTest {
 
-
     @Autowired
     private MongoRepository mongoRepository;
 
