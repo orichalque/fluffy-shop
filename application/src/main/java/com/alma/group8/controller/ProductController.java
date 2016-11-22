@@ -5,10 +5,11 @@ import com.alma.group8.model.exceptions.FunctionalException;
 import com.alma.group8.model.interfaces.ProductsRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.Collection;
 
 /**
@@ -19,6 +20,8 @@ import java.util.Collection;
 public class ProductController {
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
 
     @Autowired
     ProductsRepository productsRepository;
@@ -34,9 +37,9 @@ public class ProductController {
      */
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     @ResponseBody public String getProducts(@RequestParam(value = "page", required = false) Integer page,
-                                            @RequestParam(value = "size", required = false) Integer size) throws FunctionalException, JsonProcessingException {
+                                            @RequestParam(value = "size", required = false) Integer size) throws FunctionalException {
 
-        String jsonArrayOfProducts;
+        String jsonArrayOfProducts = null;
         Collection<String> products;
 
         if(page == null || size == null) {
@@ -45,7 +48,11 @@ public class ProductController {
             products = productsRepository.findPage(page, size);
         }
 
-        jsonArrayOfProducts = OBJECT_MAPPER.writeValueAsString(products);
+        try {
+            jsonArrayOfProducts = OBJECT_MAPPER.writeValueAsString(products);
+        } catch (JsonProcessingException e) {
+            LOGGER.warn("Cannot return the products", e);
+        }
 
         return jsonArrayOfProducts;
     }
@@ -68,7 +75,7 @@ public class ProductController {
      * @throws com.alma.group8.model.exceptions.NotEnoughProductsException
      */
     @RequestMapping(value = "/product/{id}/order/{quantity}", method = RequestMethod.POST)
-    @ResponseBody public String orderProductById(@PathVariable String id ,@PathVariable int quantity) throws FunctionalException, IOException {
+    @ResponseBody public String orderProductById(@PathVariable String id ,@PathVariable int quantity) throws FunctionalException {
         String productAsString = productsRepository.find(id);
 
         productAsString = productService.decreaseQuantity(productAsString, quantity);
