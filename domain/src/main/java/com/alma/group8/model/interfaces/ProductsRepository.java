@@ -16,7 +16,7 @@ public interface ProductsRepository {
      * @param uuid the id of the product
      * @return the product with the corresponding name
      */
-    String find(String uuid);
+    String find(String uuid) throws ProductNotFoundException;
 
     /**
      * Get all the products of the database

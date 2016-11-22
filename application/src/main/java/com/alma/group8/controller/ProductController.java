@@ -1,14 +1,10 @@
 package com.alma.group8.controller;
 
 import com.alma.group8.interfaces.ProductService;
-import com.alma.group8.model.Product;
 import com.alma.group8.model.exceptions.FunctionalException;
 import com.alma.group8.model.interfaces.ProductsRepository;
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,8 +17,6 @@ import java.util.Collection;
 @RestController
 @RequestMapping("/")
 public class ProductController {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
@@ -42,7 +36,7 @@ public class ProductController {
     @ResponseBody public String getProducts(@RequestParam(value = "page", required = false) Integer page,
                                             @RequestParam(value = "size", required = false) Integer size) throws FunctionalException, JsonProcessingException {
 
-        String jsonArrayOfProducts = null;
+        String jsonArrayOfProducts;
         Collection<String> products;
 
         if(page == null || size == null) {
@@ -76,8 +70,6 @@ public class ProductController {
     @RequestMapping(value = "/product/{id}/order/{quantity}", method = RequestMethod.POST)
     @ResponseBody public String orderProductById(@PathVariable String id ,@PathVariable int quantity) throws FunctionalException, IOException {
         String productAsString = productsRepository.find(id);
-
-        Product product = OBJECT_MAPPER.readValue(productAsString, Product.class);
 
         productAsString = productService.decreaseQuantity(productAsString, quantity);
 

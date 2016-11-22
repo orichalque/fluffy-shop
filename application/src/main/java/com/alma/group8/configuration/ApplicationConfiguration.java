@@ -1,5 +1,6 @@
 package com.alma.group8.configuration;
 
+import com.alma.group8.handlers.ExceptionHandling;
 import com.alma.group8.interfaces.ProductService;
 import com.alma.group8.model.Product;
 import com.alma.group8.model.exceptions.FunctionalException;
@@ -35,6 +36,16 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter{
     @Bean
     public ProductService<FunctionalException> productService() {
         return new ProductServiceImpl();
+    }
+
+    /**
+     * Create the ExceptionHandling and add it in the spring context
+     * He'll catch the exceptions throwed by the controller and build a custom http servlet answer
+     * @return the newly created ExceptionHandling
+     */
+    @Bean
+    public ExceptionHandling exceptionHandling() {
+        return new ExceptionHandling();
     }
 
 }

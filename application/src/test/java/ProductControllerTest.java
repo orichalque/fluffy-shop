@@ -1,8 +1,9 @@
 import com.alma.group8.model.Product;
+import com.alma.group8.model.exceptions.FunctionalException;
+import com.alma.group8.model.exceptions.ProductNotFoundException;
 import com.alma.group8.model.interfaces.ProductsRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -18,7 +19,6 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -46,8 +46,6 @@ public class ProductControllerTest {
 
     private MockMvc mockMvc;
 
-    private Product product;
-
     private ArrayList<Product> products;
 
     @Before
@@ -55,7 +53,7 @@ public class ProductControllerTest {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
         products = new ArrayList<>();
-        product = new Product();
+        Product product = new Product();
 
         product.setQuantity(5);
         product.setDescription("description");
@@ -73,7 +71,11 @@ public class ProductControllerTest {
         product2.setId(uuid);
         product2.setPrice(20.);
         products.add(product2);
+
+        Mockito.reset(productsRepository);
     }
+
+    // cas passants
 
     @Test
     public void testGetAllProducts() throws Exception {
@@ -120,10 +122,30 @@ public class ProductControllerTest {
         Mockito.when(productsRepository.find(Mockito.anyString())).then(invocationOnMock -> OBJECT_MAPPER.writeValueAsString(products.get(0)));
         mockMvc.perform(post("/product/8f987fc2-e11f-474c-91c5-5f49104e471b/order/2").accept(MediaType.ALL))
                 .andExpect(status().isOk())
+                .andDo(print())
                 .andExpect(jsonPath("$.name", is("name")))
                 .andExpect(jsonPath("$.description", is("description")))
                 .andExpect(jsonPath("$.price", is(50.0)))
                 .andExpect(jsonPath("$.quantity", is(3))) //Assert that the product quantity has been reduced
                 .andExpect(jsonPath("$.id", is("8f987fc2-e11f-474c-91c5-5f49104e471b")));
+    }
+
+    //cas non passants
+    @Test
+    public void testNotFound() throws Exception {
+        Mockito.when(productsRepository.find(Mockito.anyString())).thenThrow(new ProductNotFoundException("Cannot find the product"));
+        mockMvc.perform(get("/product/id-not-in-the-database").accept(MediaType.ALL))
+                .andExpect(status().is(404));
+    }
+
+    @Test
+    public void testNotEnoughProducts() throws Exception {
+        Product product = new Product();
+        product.setQuantity(2);
+        String productAsString = OBJECT_MAPPER.writeValueAsString(product);
+
+        Mockito.when(productsRepository.find(Mockito.anyString())).thenReturn(productAsString);
+        mockMvc.perform(post("/product/id/order/5").accept(MediaType.ALL))
+                .andExpect(status().is(404));
     }
 }

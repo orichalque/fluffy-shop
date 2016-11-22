@@ -27,7 +27,7 @@ public class MongoRepository implements ProductsRepository {
     private MongoCollection<Document> mongoCollection;
 
     @Override
-    public String find(String uuid) {
+    public String find(String uuid) throws ProductNotFoundException {
         //Returning the first item corresponding. the UUID are unique in the database so there is only 1 product, or none
         Document document = mongoCollection.find(eq("id", uuid)).first();
 
@@ -36,6 +36,8 @@ public class MongoRepository implements ProductsRepository {
             //MongoDb adds an index that we don't need
             document.remove("_id");
             documentFoundAsString = document.toJson();
+        } else {
+            throw new ProductNotFoundException(String.format("The product with the id %s is not in the database", uuid));
         }
         return documentFoundAsString;
     }
@@ -56,7 +58,8 @@ public class MongoRepository implements ProductsRepository {
     @Override
     public void store(String product) throws AlreadyExistingProductException {
         Document document = Document.parse(product);
-        String currentProduct = find(document.getString("id"));
+
+        String currentProduct = mongoCollection.find(eq("id", document.get("id"))).first().toJson();
 
         if (Strings.isNullOrEmpty(currentProduct)) {
             //Product found, when we only want to insert it

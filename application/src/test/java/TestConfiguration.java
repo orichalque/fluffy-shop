@@ -1,4 +1,5 @@
 import com.alma.group8.controller.ProductController;
+import com.alma.group8.handlers.ExceptionHandling;
 import com.alma.group8.interfaces.ProductService;
 import com.alma.group8.model.exceptions.FunctionalException;
 import com.alma.group8.model.interfaces.ProductsRepository;
@@ -30,4 +31,7 @@ public class TestConfiguration {
     public ProductController productController() {
         return new ProductController();
     }
+
+    @Bean
+    public ExceptionHandling exceptionHandling() { return new ExceptionHandling(); }
 }

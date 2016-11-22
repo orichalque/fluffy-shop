@@ -80,7 +80,14 @@ public class  MongoRepositoryTest {
             Assert.fail("The product should be parsable");
         }
 
-        String productDTOAsString = mongoRepository.find(uuid.toString());
+        String productDTOAsString = null;
+
+        try {
+            productDTOAsString = mongoRepository.find(uuid.toString());
+        } catch (ProductNotFoundException e) {
+            Assert.fail();
+        }
+
         Product product1 = null;
         try {
              product1 = objectMapper.readValue(productDTOAsString, Product.class);
@@ -113,7 +120,12 @@ public class  MongoRepositoryTest {
             Assert.fail("Cannot read the product");
         }
 
-        String currentProductInTheDatabaseAsJson = mongoRepository.find(product.getId().toString());
+        String currentProductInTheDatabaseAsJson = null;
+        try {
+            currentProductInTheDatabaseAsJson = mongoRepository.find(product.getId().toString());
+        } catch (ProductNotFoundException e) {
+            Assert.fail();
+        }
 
         try {
             Assert.assertEquals(product.getId(), objectMapper.readValue(currentProductInTheDatabaseAsJson, Product.class).getId());
@@ -127,7 +139,11 @@ public class  MongoRepositoryTest {
             Assert.fail("The product should be in the database");
         }
 
-        Assert.assertNull("The item should be in the database anymore", mongoRepository.find(product.getId().toString()));
+        try {
+            Assert.assertNull("The item should be in the database anymore", mongoRepository.find(product.getId().toString()));
+        } catch (ProductNotFoundException e) {
+            Assert.fail();
+        }
     }
 
     @Test
@@ -159,7 +175,13 @@ public class  MongoRepositoryTest {
             Assert.fail("Cannot serialize the current Product");
         }
 
-        String newProductAsString = mongoRepository.find(product.getId().toString());
+        String newProductAsString = null;
+        try {
+            newProductAsString = mongoRepository.find(product.getId().toString());
+        } catch (ProductNotFoundException e) {
+            Assert.fail();
+        }
+
         try {
             Assert.assertEquals("The name should have been updated", "newName", objectMapper.readValue(newProductAsString, Product.class).getName());
         } catch (IOException e) {
