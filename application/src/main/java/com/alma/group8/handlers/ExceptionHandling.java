@@ -35,19 +35,8 @@ public class ExceptionHandling {
      */
     @ExceptionHandler(FunctionalException.class)
     public String handleFunctionalException(FunctionalException e, HttpServletResponse response) {
-        Error error = new Error();
-        error.setCode(HttpStatus.BAD_REQUEST.value());
-        error.setMessage(e.getMessage());
-
-        String errorAsString = null;
-
-        try {
-            errorAsString = OBJECT_MAPPER.writeValueAsString(error);
-        } catch (JsonProcessingException e1) {
-            LOGGER.warn("An error occurred due to a functional error", e1);
-        }
-        response.setStatus(error.getCode());
-        return errorAsString;
+        response.setStatus(HttpStatus.BAD_REQUEST.value());
+        return createErrorAsString(HttpStatus.BAD_REQUEST, e.getMessage());
     }
 
     /**
@@ -58,19 +47,8 @@ public class ExceptionHandling {
      */
     @ExceptionHandler(AlreadyExistingProductException.class)
     public String handleAlreadyExistingProductException(AlreadyExistingProductException e, HttpServletResponse response) {
-        Error error = new Error();
-        error.setCode(HttpStatus.CONFLICT.value());
-        error.setMessage(e.getMessage());
-
-        String errorAsString = null;
-
-        try {
-            errorAsString = OBJECT_MAPPER.writeValueAsString(error);
-        } catch (JsonProcessingException e1) {
-            LOGGER.warn("An error occurred due product already present", e1);
-        }
-        response.setStatus(error.getCode());
-        return errorAsString;
+        response.setStatus(HttpStatus.CONFLICT.value());
+        return createErrorAsString(HttpStatus.CONFLICT, e.getMessage());
     }
 
 
@@ -82,20 +60,8 @@ public class ExceptionHandling {
      */
     @ExceptionHandler(ProductNotFoundException.class)
     public String handleProductNotFoundException(ProductNotFoundException e, HttpServletResponse response) {
-        Error error = new Error();
-        error.setCode(HttpStatus.NOT_FOUND.value());
-        error.setMessage(e.getMessage());
-
-        String errorAsString = null;
-
-        try {
-            errorAsString = OBJECT_MAPPER.writeValueAsString(error);
-        } catch (JsonProcessingException e1) {
-            LOGGER.warn("An error occurred due to an absent product", e1);
-        }
-
-        response.setStatus(error.getCode());
-        return errorAsString;
+        response.setStatus(HttpStatus.NOT_FOUND.value());
+        return createErrorAsString(HttpStatus.NOT_FOUND, e.getMessage());
     }
 
     /**
@@ -106,19 +72,8 @@ public class ExceptionHandling {
      */
     @ExceptionHandler(NotEnoughProductsException.class)
     public String handleNotEnoughProductsException(NotEnoughProductsException e, HttpServletResponse response) {
-        Error error = new Error();
-        error.setCode(HttpStatus.NOT_FOUND.value());
-        error.setMessage(e.getMessage());
-
-        String errorAsString = null;
-
-        try {
-            errorAsString = OBJECT_MAPPER.writeValueAsString(error);
-        } catch (JsonProcessingException e1) {
-            LOGGER.warn("An error occurred due to a lack of product in the stocks", e1);
-        }
-        response.setStatus(error.getCode());
-        return errorAsString;
+        response.setStatus(HttpStatus.NOT_FOUND.value());
+        return createErrorAsString(HttpStatus.NOT_FOUND, e.getMessage());
     }
 
     /**
@@ -129,19 +84,8 @@ public class ExceptionHandling {
      */
     @ExceptionHandler(IOException.class)
     public String handleIOException(IOException e, HttpServletResponse response) {
-        Error error = new Error();
-        error.setCode(HttpStatus.BAD_REQUEST.value());
-        error.setMessage(e.getMessage());
-
-        String errorAsString = null;
-
-        try {
-            errorAsString = OBJECT_MAPPER.writeValueAsString(error);
-        } catch (JsonProcessingException e1) {
-            LOGGER.warn("An error occurred while parsing a file or a product", e1);
-        }
-        response.setStatus(error.getCode());
-        return errorAsString;
+        response.setStatus(HttpStatus.BAD_REQUEST.value());
+        return createErrorAsString(HttpStatus.BAD_REQUEST, e.getMessage());
     }
 
     /**
@@ -152,9 +96,21 @@ public class ExceptionHandling {
      */
     @ExceptionHandler(RuntimeException.class)
     public String handleTechnicalException(RuntimeException e, HttpServletResponse response) {
+        response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        return createErrorAsString(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+
+    }
+
+    /**
+     * Create an Error String
+     * @param httpStatus
+     * @param message
+     * @return
+     */
+    private String createErrorAsString(HttpStatus httpStatus, String message) {
         Error error = new Error();
-        error.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
-        error.setMessage(e.getMessage());
+        error.setCode(httpStatus.value());
+        error.setMessage(message);
 
         String errorAsString = null;
 
@@ -163,8 +119,7 @@ public class ExceptionHandling {
         } catch (JsonProcessingException e1) {
             LOGGER.warn("A technical error occurred", e1);
         }
-        response.setStatus(error.getCode());
+
         return errorAsString;
     }
-
 }
