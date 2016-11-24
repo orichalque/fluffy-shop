@@ -6,13 +6,13 @@ package com.alma.group8.util;
  */
 public class CommonVariables {
 
+    public static final String ROOT_URL = "/api";
+    public static final String ADMIN_URL = "/admin";
+
     /**
      * Private constructor so this Util class cannot be instantiated
      */
     private CommonVariables() {
 
     }
-
-    public static final String ROOT_URL = "/api";
-    public static final String ADMIN_URL = "/admin";
 }

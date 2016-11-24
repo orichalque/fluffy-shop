@@ -55,7 +55,7 @@
       <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
       <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
       <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
-      <sonar.exclusions>**/*Configuration.java, **/*Exception.java, **/*Initializer.java</sonar.exclusions>
+      <sonar.exclusions>**/*Configuration.java, **/*Exception.java, **/*Initializer.java, **/*Variables.java</sonar.exclusions>
       <sonar.language>java</sonar.language>
 
       <spring.version>4.3.3.RELEASE</spring.version>
