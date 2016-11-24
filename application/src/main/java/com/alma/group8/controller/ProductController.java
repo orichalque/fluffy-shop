@@ -43,6 +43,7 @@ public class ProductController {
     @ResponseBody public String getProducts(@RequestParam(value = "page", required = false) Integer page,
                                             @RequestParam(value = "size", required = false) Integer size) throws FunctionalException {
 
+        String jsonArrayOfProducts = null;
         Collection<String> products;
 
         if(page == null || size == null) {
@@ -51,18 +52,13 @@ public class ProductController {
             products = productsRepository.findPage(page, size);
         }
 
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[");
-
-        for (String prod : products) {
-            stringBuilder.append(" ");
-            stringBuilder.append(prod);
-            stringBuilder.append(",");
+        try {
+            jsonArrayOfProducts = OBJECT_MAPPER.writeValueAsString(products).replace("\\", "");
+        } catch (JsonProcessingException e) {
+            LOGGER.warn("Cannot return the products", e);
         }
 
-        stringBuilder.deleteCharAt(stringBuilder.length()-1);
-
-        return stringBuilder.toString();
+        return jsonArrayOfProducts;
     }
 
     /**
