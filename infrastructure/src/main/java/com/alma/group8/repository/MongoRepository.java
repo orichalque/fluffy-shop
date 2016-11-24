@@ -1,12 +1,11 @@
 package com.alma.group8.repository;
 
+import com.alma.group8.model.exceptions.AlreadyExistingProductException;
+import com.alma.group8.model.exceptions.ProductNotFoundException;
 import com.alma.group8.model.interfaces.ProductsRepository;
-import com.google.common.base.Function;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.mongodb.client.MongoCollection;
-import com.alma.group8.model.exceptions.AlreadyExistingProductException;
-import com.alma.group8.model.exceptions.ProductNotFoundException;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
@@ -49,8 +48,8 @@ public class MongoRepository implements ProductsRepository {
         //Transform a List<Document> to a list<ProductDTO> and removes the _id property from Mongo
         List<Document> documentList = Lists.newArrayList(mongoCollection.find(Document.class));
 
-        for (int i = 0; i < documentList.size(); ++i) {
-            documentList.get(i).remove("_id");
+        for (Document document : documentList) {
+            document.remove("_id");
         }
 
         return Lists.transform(documentList, Document::toJson);
@@ -61,9 +60,9 @@ public class MongoRepository implements ProductsRepository {
         //Skip the first results and returns the next page
         //Transform a List<Document> to a list<String> and removes the _id from mongoDb
         List<Document> documentList = Lists.newArrayList(mongoCollection.find().skip((page-1)*size).limit(size));
-        
-        for (int i = 0; i < documentList.size(); ++i) {
-            documentList.get(i).remove("_id");
+
+        for (Document document : documentList) {
+            document.remove("_id");
         }
 
         return Lists.transform(documentList, Document::toJson);

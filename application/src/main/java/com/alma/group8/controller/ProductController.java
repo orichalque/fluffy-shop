@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -18,7 +19,7 @@ import java.util.Collection;
  */
 @CrossOrigin
 @RestController
-@RequestMapping(CommonVariables.ROOT_URL)
+@RequestMapping(value = CommonVariables.ROOT_URL, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class ProductController {
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
