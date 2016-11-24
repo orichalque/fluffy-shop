@@ -1,6 +1,5 @@
 package com.alma.group8.configuration;
 
-import com.alma.groupe8.configuration.SpringMongoConfiguration;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**

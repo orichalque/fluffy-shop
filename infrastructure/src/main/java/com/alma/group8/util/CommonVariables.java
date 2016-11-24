@@ -1,4 +1,4 @@
-package com.alma.groupe8.util;
+package com.alma.group8.util;
 
 /**
  * Created by Thibault on 04/11/2016.

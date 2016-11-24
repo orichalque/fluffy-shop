@@ -1,4 +1,4 @@
-package com.alma.groupe8.repository;
+package com.alma.group8.repository;
 
 import com.alma.group8.model.interfaces.ProductsRepository;
 import com.google.common.base.Strings;

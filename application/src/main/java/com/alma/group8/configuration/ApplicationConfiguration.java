@@ -2,10 +2,9 @@ package com.alma.group8.configuration;
 
 import com.alma.group8.handlers.ExceptionHandling;
 import com.alma.group8.interfaces.ProductService;
-import com.alma.group8.model.Product;
 import com.alma.group8.model.exceptions.FunctionalException;
 import com.alma.group8.model.interfaces.ProductsRepository;
-import com.alma.groupe8.repository.MongoRepository;
+import com.alma.group8.repository.MongoRepository;
 import com.alma.group8.model.service.ProductServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

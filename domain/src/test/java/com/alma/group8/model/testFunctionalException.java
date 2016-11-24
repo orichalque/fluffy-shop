@@ -1,4 +1,4 @@
-package com.alma.groupe8.model;
+package com.alma.group8.model;
 
 import com.alma.group8.model.exceptions.FunctionalException;
 import org.junit.Test;

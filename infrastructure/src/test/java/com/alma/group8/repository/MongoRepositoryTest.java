@@ -1,7 +1,7 @@
-package com.alma.groupe8.repository;
+package com.alma.group8.repository;
 
-import com.alma.groupe8.config.CommonTestVariables;
-import com.alma.groupe8.util.CommonVariables;
+import com.alma.group8.config.CommonTestVariables;
+import com.alma.group8.util.CommonVariables;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.MongoClient;

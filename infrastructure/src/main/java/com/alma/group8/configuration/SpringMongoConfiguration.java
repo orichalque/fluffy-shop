@@ -1,6 +1,6 @@
-package com.alma.groupe8.configuration;
+package com.alma.group8.configuration;
 
-import com.alma.groupe8.util.CommonVariables;
+import com.alma.group8.util.CommonVariables;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
@@ -11,7 +11,7 @@ import org.springframework.context.annotation.DependsOn;
 
 import javax.annotation.PreDestroy;
 
-import static com.alma.groupe8.util.CommonVariables.MONGO_CLIENT;
+import static com.alma.group8.util.CommonVariables.MONGO_CLIENT;
 
 /**
  * Define the Spring Configuration class. Instantiate the Spring Beans for accessing to the mongo database

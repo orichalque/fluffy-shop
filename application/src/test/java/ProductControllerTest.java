@@ -1,6 +1,7 @@
 import com.alma.group8.model.Product;
 import com.alma.group8.model.exceptions.ProductNotFoundException;
 import com.alma.group8.model.interfaces.ProductsRepository;
+import com.alma.group8.util.CommonVariables;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
@@ -80,7 +81,8 @@ public class ProductControllerTest {
     public void testGetAllProducts() throws Exception {
 
         Mockito.when(productsRepository.findAll()).then(invocationOnMock -> products);
-        mockMvc.perform(get("/products").accept(MediaType.ALL))
+        mockMvc.perform(get(String.format("%s/products", CommonVariables.ROOT_URL))
+                                            .accept(MediaType.ALL))
                                             .andExpect(status().isOk())
                                             .andExpect(jsonPath("$[0].name", is("name")))
                                             .andExpect(jsonPath("$[0].description", is("description")))
@@ -99,7 +101,8 @@ public class ProductControllerTest {
     public void testGetAllProductsPaginated() throws Exception {
 
         Mockito.when(productsRepository.findPage(1, 1)).then(invocationOnMock -> products.subList(0, 1));
-        mockMvc.perform(get("/products?page=1&size=1").accept(MediaType.ALL))
+        mockMvc.perform(get(String.format("%s/products?page=1&size=1", CommonVariables.ROOT_URL))
+                .accept(MediaType.ALL))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)));
     }
@@ -107,7 +110,9 @@ public class ProductControllerTest {
     @Test
     public void testFindById() throws Exception {
         Mockito.when(productsRepository.find(Mockito.anyString())).then(invocationOnMock -> OBJECT_MAPPER.writeValueAsString(products.get(0)));
-        mockMvc.perform(get("/product/8f987fc2-e11f-474c-91c5-5f49104e471b").accept(MediaType.ALL))
+
+        mockMvc.perform(get(String.format("%s/product/8f987fc2-e11f-474c-91c5-5f49104e471b", CommonVariables.ROOT_URL))
+                .accept(MediaType.ALL))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name", is("name")))
                 .andExpect(jsonPath("$.description", is("description")))
@@ -119,7 +124,9 @@ public class ProductControllerTest {
     @Test
     public void testOrderProduct() throws Exception {
         Mockito.when(productsRepository.find(Mockito.anyString())).then(invocationOnMock -> OBJECT_MAPPER.writeValueAsString(products.get(0)));
-        mockMvc.perform(post("/product/8f987fc2-e11f-474c-91c5-5f49104e471b/order/2").accept(MediaType.ALL))
+
+        mockMvc.perform(post(String.format("%s/product/8f987fc2-e11f-474c-91c5-5f49104e471b/order/2", CommonVariables.ROOT_URL))
+                .accept(MediaType.ALL))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(jsonPath("$.name", is("name")))
@@ -133,7 +140,7 @@ public class ProductControllerTest {
     @Test
     public void testNotFound() throws Exception {
         Mockito.when(productsRepository.find(Mockito.anyString())).thenThrow(new ProductNotFoundException("Cannot find the product"));
-        mockMvc.perform(get("/product/id-not-in-the-database").accept(MediaType.ALL))
+        mockMvc.perform(get("/api/product/id-not-in-the-database").accept(MediaType.ALL))
                 .andExpect(status().is(404));
     }
 
@@ -144,7 +151,7 @@ public class ProductControllerTest {
         String productAsString = OBJECT_MAPPER.writeValueAsString(product);
 
         Mockito.when(productsRepository.find(Mockito.anyString())).thenReturn(productAsString);
-        mockMvc.perform(post("/product/id/order/5").accept(MediaType.ALL))
+        mockMvc.perform(post("/api/product/id/order/5").accept(MediaType.ALL))
                 .andExpect(status().is(404));
     }
 }

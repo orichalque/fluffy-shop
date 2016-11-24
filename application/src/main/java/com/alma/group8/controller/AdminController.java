@@ -4,6 +4,7 @@ import com.alma.group8.interfaces.ProductService;
 import com.alma.group8.model.Product;
 import com.alma.group8.model.exceptions.FunctionalException;
 import com.alma.group8.model.interfaces.ProductsRepository;
+import com.alma.group8.util.CommonVariables;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +19,7 @@ import java.io.IOException;
  * Is not meant to be used by outsiders
  */
 @CrossOrigin("http://fluffy-stock-presentation.herokuapp.com")
-@RequestMapping("/admin")
+@RequestMapping(CommonVariables.ADMIN_URL)
 public class AdminController {
     @Autowired
     ProductsRepository productsRepository;

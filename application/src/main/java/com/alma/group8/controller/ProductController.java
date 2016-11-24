@@ -3,6 +3,7 @@ package com.alma.group8.controller;
 import com.alma.group8.interfaces.ProductService;
 import com.alma.group8.model.exceptions.FunctionalException;
 import com.alma.group8.model.interfaces.ProductsRepository;
+import com.alma.group8.util.CommonVariables;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -16,7 +17,7 @@ import java.util.Collection;
  * Define the rest controller defining methods that can be called by clients
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping(CommonVariables.ROOT_URL)
 public class ProductController {
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();

@@ -1,6 +1,5 @@
-package com.alma.groupe8.model;
+package com.alma.group8.model;
 
-import com.alma.group8.model.ProductType;
 import org.junit.Assert;
 import org.junit.Test;
 

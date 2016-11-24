@@ -1,6 +1,5 @@
-package com.alma.groupe8.model;
+package com.alma.group8.model;
 
-import com.alma.group8.model.Error;
 import org.junit.Test;
 import pl.pojo.tester.api.assertion.Method;
 
