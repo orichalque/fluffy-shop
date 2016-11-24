@@ -4,6 +4,7 @@ import com.alma.group8.model.interfaces.ProductsRepository;
 import com.alma.group8.util.CommonVariables;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -31,6 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Created by Thibault on 21/11/2016.
  * Test the {@link com.alma.group8.controller.ProductController}
  */
+@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfiguration.class)
 @WebAppConfiguration

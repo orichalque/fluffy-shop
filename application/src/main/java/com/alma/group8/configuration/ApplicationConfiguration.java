@@ -58,7 +58,8 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter{
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedOrigins("*");
+        registry.addMapping("/api/**").allowedOrigins("*");
+        registry.addMapping("/admin/**").allowedOrigins("*");
     }
 
     @Override

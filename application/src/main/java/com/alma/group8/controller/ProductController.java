@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Define the rest controller defining methods that can be called by clients
@@ -40,10 +41,9 @@ public class ProductController {
      * @return a json containing the products from the page
      */
     @RequestMapping(value = "/products", method = RequestMethod.GET)
-    @ResponseBody public String getProducts(@RequestParam(value = "page", required = false) Integer page,
+    @ResponseBody public Collection<String> getProducts(@RequestParam(value = "page", required = false) Integer page,
                                             @RequestParam(value = "size", required = false) Integer size) throws FunctionalException {
 
-        String jsonArrayOfProducts = null;
         Collection<String> products;
 
         if(page == null || size == null) {
@@ -52,13 +52,15 @@ public class ProductController {
             products = productsRepository.findPage(page, size);
         }
 
-        try {
+/*        try {
             jsonArrayOfProducts = OBJECT_MAPPER.writeValueAsString(products).replace("\\", "");
+            jsonArrayOfProducts = jsonArrayOfProducts.replace("\"{", "{");
+            jsonArrayOfProducts = jsonArrayOfProducts.replace("}\"", "}");
         } catch (JsonProcessingException e) {
             LOGGER.warn("Cannot return the products", e);
-        }
+        }*/
 
-        return jsonArrayOfProducts;
+        return products;
     }
 
     /**

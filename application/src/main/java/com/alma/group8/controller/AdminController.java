@@ -18,7 +18,7 @@ import java.io.IOException;
  * Spring controller meant to access to the private functionalities of fluffy-stock
  * Is not meant to be used by outsiders
  */
-@CrossOrigin("http://fluffy-stock-presentation.herokuapp.com")
+@CrossOrigin
 @RequestMapping(CommonVariables.ADMIN_URL)
 public class AdminController {
     @Autowired
