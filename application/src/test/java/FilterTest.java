@@ -20,7 +20,7 @@ import java.util.Map;
  * Created by Thibault on 24/11/16.
  * Tests the Filter from Javax.Servlet
  */
-public class FilterTesting {
+public class FilterTest {
     private Filter filter;
 
     @Before
