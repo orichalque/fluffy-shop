@@ -48,7 +48,6 @@ public class AdminController {
             LOGGER.warn("Incorrect product received", e);
             throw new FunctionalException(e);
         }
-
     }
 
 }

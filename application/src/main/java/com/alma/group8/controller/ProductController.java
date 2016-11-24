@@ -6,18 +6,13 @@ import com.alma.group8.model.interfaces.ProductsRepository;
 import com.alma.group8.util.CommonVariables;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Define the rest controller defining methods that can be called by clients
@@ -55,8 +50,8 @@ public class ProductController {
             products = productsRepository.findPage(page, size);
         }
 
-
         try {
+            //The results serialized by the object mapper need some refactoring
             jsonArrayOfProducts = OBJECT_MAPPER.writeValueAsString(products).replace("\\", "");
             jsonArrayOfProducts = jsonArrayOfProducts.replace("\"{", "{");
             jsonArrayOfProducts = jsonArrayOfProducts.replace("}\"", "}");
