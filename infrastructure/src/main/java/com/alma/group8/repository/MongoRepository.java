@@ -52,7 +52,7 @@ public class MongoRepository implements ProductsRepository {
             document.remove("_id");
         }
 
-        return Lists.transform(documentList, Document::toJson);
+        return Lists.transform(documentList, input -> input.toJson());
     }
 
     @Override
@@ -65,7 +65,7 @@ public class MongoRepository implements ProductsRepository {
             document.remove("_id");
         }
 
-        return Lists.transform(documentList, Document::toJson);
+        return Lists.transform(documentList, input -> input.toJson());
     }
 
     @Override

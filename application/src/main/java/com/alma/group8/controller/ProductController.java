@@ -6,6 +6,7 @@ import com.alma.group8.model.interfaces.ProductsRepository;
 import com.alma.group8.util.CommonVariables;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,6 @@ public class ProductController {
     @ResponseBody public String getProducts(@RequestParam(value = "page", required = false) Integer page,
                                             @RequestParam(value = "size", required = false) Integer size) throws FunctionalException {
 
-        String jsonArrayOfProducts = null;
         Collection<String> products;
 
         if(page == null || size == null) {
@@ -51,13 +51,18 @@ public class ProductController {
             products = productsRepository.findPage(page, size);
         }
 
-        try {
-            jsonArrayOfProducts = OBJECT_MAPPER.writeValueAsString(products);
-        } catch (JsonProcessingException e) {
-            LOGGER.warn("Cannot return the products", e);
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[");
+
+        for (String prod : products) {
+            stringBuilder.append(" ");
+            stringBuilder.append(prod);
+            stringBuilder.append(",");
         }
 
-        return jsonArrayOfProducts;
+        stringBuilder.deleteCharAt(stringBuilder.length()-1);
+
+        return stringBuilder.toString();
     }
 
     /**
