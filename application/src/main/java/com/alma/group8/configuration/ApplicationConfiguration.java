@@ -48,6 +48,14 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter{
         return new ExceptionHandling();
     }
 
+    /**
+     * Create the CORSFilter and add it in the spring context
+     * @return the newly created CorsFilter
+     */
+    @Bean
+    public CORSFilter corsFilter() {
+        return new CORSFilter();
+    }
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
