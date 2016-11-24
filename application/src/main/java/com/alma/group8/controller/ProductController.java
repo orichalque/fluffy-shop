@@ -16,6 +16,7 @@ import java.util.Collection;
 /**
  * Define the rest controller defining methods that can be called by clients
  */
+@CrossOrigin
 @RestController
 @RequestMapping(CommonVariables.ROOT_URL)
 public class ProductController {
