@@ -2,6 +2,7 @@ package com.alma.group8.controller;
 
 import com.alma.group8.interfaces.ProductService;
 import com.alma.group8.model.Product;
+import com.alma.group8.model.exceptions.AlreadyExistingProductException;
 import com.alma.group8.model.exceptions.FunctionalException;
 import com.alma.group8.model.interfaces.ProductsRepository;
 import com.alma.group8.util.CommonVariables;
@@ -19,6 +20,7 @@ import java.io.IOException;
  * Is not meant to be used by outsiders
  */
 @CrossOrigin
+@RestController
 @RequestMapping(CommonVariables.ADMIN_URL)
 public class AdminController {
     @Autowired
@@ -46,6 +48,13 @@ public class AdminController {
             OBJECT_MAPPER.readValue(productAsString, Product.class);
         } catch (IOException e) {
             LOGGER.warn("Incorrect product received", e);
+            throw new FunctionalException(e);
+        }
+        try {
+            productsRepository.store(productAsString);
+        }catch (AlreadyExistingProductException e){
+            LOGGER.warn("Already exists", e);
+            //TODO renvoyer des codes erreurs
             throw new FunctionalException(e);
         }
     }
