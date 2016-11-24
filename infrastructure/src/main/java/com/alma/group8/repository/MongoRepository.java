@@ -1,6 +1,7 @@
 package com.alma.group8.repository;
 
 import com.alma.group8.model.interfaces.ProductsRepository;
+import com.google.common.base.Function;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.mongodb.client.MongoCollection;
@@ -46,8 +47,13 @@ public class MongoRepository implements ProductsRepository {
     @Override
     public Collection<String> findAll() {
         //Transform a List<Document> to a list<ProductDTO> and removes the _id property from Mongo
-        List<Document> documents = Lists.transform(Lists.newArrayList(mongoCollection.find(Document.class)), input -> (Document) input.remove("_id"));
-        return Lists.transform(documents, Document::toJson);
+        List<Document> documentList = Lists.newArrayList(mongoCollection.find(Document.class));
+
+        for (int i = 0; i < documentList.size(); ++i) {
+            documentList.get(i).remove("_id");
+        }
+
+        return Lists.transform(documentList, Document::toJson);
     }
 
     @Override
