@@ -16,7 +16,7 @@ import java.util.Collection;
  * Define the rest controller defining methods that can be called by clients
  */
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api")
 public class ProductController {
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
