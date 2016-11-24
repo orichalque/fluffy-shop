@@ -53,8 +53,8 @@ public class MongoRepository implements ProductsRepository {
     @Override
     public Collection<String> findPage(int page, int size) {
         //Skip the first results and returns the next page
-        //Transform a List<Document> to a list<ProductDTO>
-        return Lists.transform(Lists.newArrayList(mongoCollection.find().skip((page-1)*size).limit(size)), Document::toJson);
+        //Transform a List<Document> to a list<String> and removes the _id from mongoDb
+        return Lists.transform(Lists.transform(Lists.newArrayList(mongoCollection.find().skip((page-1)*size).limit(size)), input -> (Document) input.remove("_id")), Document::toJson);
     }
 
     @Override
