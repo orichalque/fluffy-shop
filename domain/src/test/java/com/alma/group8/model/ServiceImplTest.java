@@ -8,6 +8,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -21,9 +23,11 @@ public class ServiceImplTest {
     private ProductService productService;
     private Product product;
     private final static ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+    private static final Logger LOGGER = LoggerFactory.getLogger(ServiceImplTest.class);
 
     @Before
     public void setUp() {
+        LOGGER.warn("Salut");
         product = new Product();
         product.setId(UUID.randomUUID());
         product.setQuantity(5);
