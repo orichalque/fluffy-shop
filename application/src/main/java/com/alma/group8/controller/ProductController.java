@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Collection;
 import java.util.List;
 
@@ -41,9 +44,9 @@ public class ProductController {
      * @return a json containing the products from the page
      */
     @RequestMapping(value = "/products", method = RequestMethod.GET)
-    @ResponseBody public Collection<String> getProducts(@RequestParam(value = "page", required = false) Integer page,
+    @ResponseBody public String getProducts(@RequestParam(value = "page", required = false) Integer page,
                                             @RequestParam(value = "size", required = false) Integer size) throws FunctionalException {
-
+        String jsonArrayOfProducts = null;
         Collection<String> products;
 
         if(page == null || size == null) {
@@ -52,15 +55,16 @@ public class ProductController {
             products = productsRepository.findPage(page, size);
         }
 
-/*        try {
+
+        try {
             jsonArrayOfProducts = OBJECT_MAPPER.writeValueAsString(products).replace("\\", "");
             jsonArrayOfProducts = jsonArrayOfProducts.replace("\"{", "{");
             jsonArrayOfProducts = jsonArrayOfProducts.replace("}\"", "}");
         } catch (JsonProcessingException e) {
-            LOGGER.warn("Cannot return the products", e);
-        }*/
+            LOGGER.warn("Cannot serialize the result", e);
+        }
 
-        return products;
+        return jsonArrayOfProducts;
     }
 
     /**
