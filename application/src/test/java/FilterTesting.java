@@ -8,7 +8,9 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 import javax.servlet.Filter;
+import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
@@ -26,21 +28,24 @@ public class FilterTesting {
         filter = new CORSFilter();
     }
 
-    @Ignore
     @Test
     public void testHttpRequest() throws IOException, ServletException {
         HttpServletResponse httpServletResponse = Mockito.mock(HttpServletResponse.class);
+        HttpServletRequest httpServletRequest = Mockito.mock(HttpServletRequest.class);
+        FilterChain filterChain = Mockito.mock(FilterChain.class);
         Map<String, String> map = new HashMap<>();
 
-        Mockito.doAnswer(new Answer<Void>() {
-            @Override
-            public Void answer(InvocationOnMock invocationOnMock) throws Throwable {
-                map.put((String) invocationOnMock.getArguments()[0], (String) invocationOnMock.getArguments()[1]);
-                return null;
-            }
+        Mockito.doAnswer(invocationOnMock -> {
+            map.put((String) invocationOnMock.getArguments()[0], (String) invocationOnMock.getArguments()[1]);
+            return null;
         }).when(httpServletResponse).setHeader(Mockito.anyString(), Mockito.anyString());
 
-        Assert.assertNotNull("Access-Control-Allow-Origin");
+        filter.doFilter(httpServletRequest, httpServletResponse, filterChain);
+
+        Assert.assertNotNull(map.get("Access-Control-Allow-Credentials"));
+        Assert.assertNotNull(map.get("Access-Control-Allow-Methods"));
+        Assert.assertNotNull(map.get("Access-Control-Max-Age"));
+        Assert.assertNotNull(map.get("Access-Control-Allow-Headers"));
 
     }
 }
