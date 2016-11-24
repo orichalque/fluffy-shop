@@ -1,9 +1,10 @@
 package com.alma.group8.configuration;
 
-import org.springframework.web.filter.OncePerRequestFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -12,20 +13,33 @@ import java.io.IOException;
  * Created by Thibault on 24/11/16.
  * Adds header to the request so the controller can answer with the Cross-Domain
  */
-public class CORSFilter extends OncePerRequestFilter {
+@Component
+public class CORSFilter implements Filter {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CORSFilter.class);
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        response.addHeader("Access-Control-Allow-Origin", "*");
+    public void init(FilterConfig filterConfig) throws ServletException {
 
-        if (request.getHeader("Access-Control-Request-Method") != null && "OPTIONS".equals(request.getMethod())) {
-            logger.info("Addind the CORS header to a request");
-            // CORS "pre-flight" request
-            response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-            response.addHeader("Access-Control-Allow-Headers", "Content-Type");
-            response.addHeader("Access-Control-Max-Age", "1");
-        }
+    }
 
-        filterChain.doFilter(request, response);
+    @Override
+    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
+        LOGGER.info("Filtering a request");
+        HttpServletRequest request = (HttpServletRequest) req;
+        HttpServletResponse response = (HttpServletResponse) res;
+
+        response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me");
+
+        chain.doFilter(req, res);
+    }
+
+    @Override
+    public void destroy() {
+
     }
 }
