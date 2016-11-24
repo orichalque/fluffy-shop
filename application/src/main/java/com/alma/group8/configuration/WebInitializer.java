@@ -2,6 +2,8 @@ package com.alma.group8.configuration;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import javax.servlet.Filter;
+
 /**
  * Created by Thibault on 10/11/2016.
  * Launch the Spring Context. This class will be run automatically by the servlet container
@@ -22,5 +24,8 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
         return new String[] {"/"};
     }
 
-
+    @Override
+    protected Filter[] getServletFilters() {
+        return new Filter[]{new CORSFilter()};
+    }
 }
