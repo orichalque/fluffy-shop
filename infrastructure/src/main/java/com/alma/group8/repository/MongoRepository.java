@@ -12,6 +12,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
+import java.util.List;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -44,8 +45,9 @@ public class MongoRepository implements ProductsRepository {
 
     @Override
     public Collection<String> findAll() {
-        //Transform a List<Document> to a list<ProductDTO>
-        return Lists.transform(Lists.newArrayList(mongoCollection.find(Document.class)), Document::toJson);
+        //Transform a List<Document> to a list<ProductDTO> and removes the _id property from Mongo
+        List<Document> documents = Lists.transform(Lists.newArrayList(mongoCollection.find(Document.class)), input -> (Document) input.remove("_id"));
+        return Lists.transform(documents, Document::toJson);
     }
 
     @Override

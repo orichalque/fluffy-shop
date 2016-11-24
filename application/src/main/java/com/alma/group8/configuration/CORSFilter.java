@@ -1,7 +1,5 @@
 package com.alma.group8.configuration;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
@@ -16,16 +14,14 @@ import java.io.IOException;
 @Component
 public class CORSFilter implements Filter {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CORSFilter.class);
-
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
+        //No init needed
     }
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-        
+
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
 
@@ -40,6 +36,6 @@ public class CORSFilter implements Filter {
 
     @Override
     public void destroy() {
-
+        //No destroy needed
     }
 }
