@@ -1,5 +1,7 @@
 package com.alma.group8.interfaces;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 /**
  * Convert Business object to String and String to Business object
  * Created by Dennis on 25/11/16.
@@ -18,5 +20,5 @@ public interface ProductFactory<Metier>{
      * @param object to serialize
      * @return the object in Json stringify
      */
-     String serialize(Metier object);
+     String serialize(Metier object) throws JsonProcessingException;
 }
