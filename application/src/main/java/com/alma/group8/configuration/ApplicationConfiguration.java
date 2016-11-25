@@ -58,7 +58,7 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter{
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**").allowedOrigins("*");
-        registry.addMapping("/admin/**").allowedOrigins("*");//FIXME set * for tests in localhost("https://fluffy-stock-presentation.herokuapp.com");
+        registry.addMapping("/admin/**").allowedOrigins("*").allowedMethods("POST", "GET", "DELETE");//FIXME set * for tests in localhost("https://fluffy-stock-presentation.herokuapp.com");
     }
 
     @Override

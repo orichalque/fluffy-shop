@@ -6,12 +6,14 @@ import com.alma.group8.model.exceptions.AlreadyExistingProductException;
 import com.alma.group8.exceptions.FunctionalException;
 import com.alma.group8.model.interfaces.ProductsRepository;
 import com.alma.group8.util.CommonVariables;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Collection;
 
 /**
  * Created by Thibault on 18/11/16.
@@ -37,11 +39,28 @@ public class AdminController {
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     @ResponseBody public String getProducts(@RequestParam(value = "page", required = false) Integer page,
                                             @RequestParam(value = "size", required = false) Integer size) throws FunctionalException {
+        LOGGER.info("Receiving a GET request on /products");
+        String jsonArrayOfProducts = null;
+        Collection<String> products;
 
-        LOGGER.info("Request received");
+        if(page == null || size == null) {
+            products = productsRepository.findAll();
+        } else {
+            products = productsRepository.findPage(page, size);
+        }
 
-        return null;
+        try {
+            //The results serialized by the object mapper need some refactoring
+            jsonArrayOfProducts = OBJECT_MAPPER.writeValueAsString(products).replace("\\", "");
+            jsonArrayOfProducts = jsonArrayOfProducts.replace("\"{", "{");
+            jsonArrayOfProducts = jsonArrayOfProducts.replace("}\"", "}");
+        } catch (JsonProcessingException e) {
+            LOGGER.warn("Cannot serialize the result", e);
+        }
+
+        return jsonArrayOfProducts;
     }
+
 
     /**
      * Delete a product from the database
