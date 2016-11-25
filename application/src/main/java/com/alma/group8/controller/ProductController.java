@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.Collection;
 
 /**
@@ -41,9 +42,10 @@ public class ProductController {
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     @ResponseBody public String getProducts(@RequestParam(value = "page", required = false) Integer page,
                                             @RequestParam(value = "size", required = false) Integer size) throws FunctionalException {
-
         LOGGER.info("Receiving a GET request on /products");
-
+        System.out.println("Receiving a GET request -> message from system out println");
+        org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(ProductController.class);
+        logger.info("Receiving a GET request -> message from log4j logger");
         String jsonArrayOfProducts = null;
         Collection<String> products;
 
