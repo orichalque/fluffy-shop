@@ -1,6 +1,8 @@
 package com.alma.group8.configuration;
 
+import com.alma.group8.factories.ProductFactoryImpl;
 import com.alma.group8.handlers.ExceptionHandling;
+import com.alma.group8.interfaces.ProductFactory;
 import com.alma.group8.interfaces.ProductService;
 import com.alma.group8.exceptions.FunctionalException;
 import com.alma.group8.model.interfaces.ProductsRepository;
@@ -53,6 +55,15 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter{
     @Bean
     public ExceptionHandling exceptionHandling() {
         return new ExceptionHandling();
+    }
+
+    /**
+     * Create a ProductFactory and add it in the spring context
+     * @return the newly created {@link ProductFactory}
+     */
+    @Bean
+    public ProductFactory productFactory() {
+        return new ProductFactoryImpl();
     }
 
     @Override

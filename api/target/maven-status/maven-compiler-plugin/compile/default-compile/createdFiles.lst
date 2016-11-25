@@ -1,4 +1,4 @@
-com/alma/group8/interfaces/ProductFactory.class
-com/alma/group8/exceptions/TechnicalException.class
-com/alma/group8/interfaces/ProductService.class
-com/alma/group8/exceptions/FunctionalException.class
+com\alma\group8\exceptions\TechnicalException.class
+com\alma\group8\interfaces\ProductFactory.class
+com\alma\group8\exceptions\FunctionalException.class
+com\alma\group8\interfaces\ProductService.class

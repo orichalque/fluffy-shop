@@ -56,6 +56,7 @@ public class ProductController {
         }
 
         try {
+            //FIXME Use the productFactory
             //The results serialized by the object mapper need some refactoring
             jsonArrayOfProducts = new ObjectMapper().writeValueAsString(products).replace("\\", "");
             jsonArrayOfProducts = jsonArrayOfProducts.replace("\"{", "{");

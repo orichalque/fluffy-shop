@@ -54,6 +54,7 @@ public class AdminController {
         }
 
         try {
+            //FIXME : Use the Product Factory
             //The results serialized by the object mapper need some refactoring
             jsonArrayOfProducts = OBJECT_MAPPER.writeValueAsString(products).replace("\\", "");
             jsonArrayOfProducts = jsonArrayOfProducts.replace("\"{", "{");
@@ -77,20 +78,10 @@ public class AdminController {
 
     @RequestMapping(value = "/product", method = RequestMethod.POST, consumes = "application/json")
     public void addProduct(@RequestBody String productAsString) throws FunctionalException {
-        LOGGER.info("RECEPTION POST");
-        try {
-            OBJECT_MAPPER.readValue(productAsString, Product.class);
-        } catch (IOException e) {
-            LOGGER.warn("Incorrect product received", e);
-            throw new FunctionalException(e);
-        }
-        try {
-            productsRepository.store(productAsString);
-        }catch (AlreadyExistingProductException e){
-            LOGGER.warn("Already exists", e);
-            //TODO renvoyer des codes erreurs
-            throw new FunctionalException(e);
-        }
+        LOGGER.info("Receiving a POST method");
+
+        productFactory.deserialize(productAsString);
+        productsRepository.store(productAsString);
     }
 
 }
