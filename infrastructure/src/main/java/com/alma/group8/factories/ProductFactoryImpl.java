@@ -1,5 +1,6 @@
 package com.alma.group8.factories;
 
+import com.alma.group8.exceptions.FunctionalException;
 import com.alma.group8.interfaces.ProductFactory;
 import com.alma.group8.model.Product;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -14,21 +15,20 @@ public class ProductFactoryImpl implements ProductFactory<Product>{
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     @Override
-    public Product deserialize(String metierAsJson) {
+    public Product deserialize(String metierAsJson) throws FunctionalException {
         try {
             return OBJECT_MAPPER.readValue(metierAsJson, Product.class);
         } catch (IOException e) {
-            //TODO THrow functionalEx
+            throw new FunctionalException(e);
         }
-
     }
 
     @Override
-    public String serialize(Product object) {
+    public String serialize(Product object) throws FunctionalException {
         try {
             return OBJECT_MAPPER.writeValueAsString(object);
         } catch (JsonProcessingException e) {
-            //TODO THrow functionalEx
+            throw new FunctionalException(e);
         }
     }
 }
