@@ -52,7 +52,7 @@ public class AdminController {
         productsRepository.delete(id);
     }
 
-    @RequestMapping(value = "/product", method = RequestMethod.POST)
+    @RequestMapping(value = "/product", method = RequestMethod.POST, consumes = "application/json")
     public void addProduct(@RequestBody String productAsString) throws FunctionalException {
         try {
             OBJECT_MAPPER.readValue(productAsString, Product.class);
