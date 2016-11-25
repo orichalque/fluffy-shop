@@ -73,6 +73,7 @@ public class AdminController {
 
     @RequestMapping(value = "/product", method = RequestMethod.POST, consumes = "application/json")
     public void addProduct(@RequestBody String productAsString) throws FunctionalException {
+        LOGGER.info("RECEPTION POST");
         try {
             OBJECT_MAPPER.readValue(productAsString, Product.class);
         } catch (IOException e) {
