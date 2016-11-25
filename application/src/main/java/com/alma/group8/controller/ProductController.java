@@ -6,8 +6,7 @@ import com.alma.group8.model.interfaces.ProductsRepository;
 import com.alma.group8.util.CommonVariables;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +24,7 @@ public class ProductController {
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
+    private static final Logger LOGGER = Logger.getLogger(ProductController.class);
 
     @Autowired
     ProductsRepository productsRepository;
@@ -43,9 +42,6 @@ public class ProductController {
     @ResponseBody public String getProducts(@RequestParam(value = "page", required = false) Integer page,
                                             @RequestParam(value = "size", required = false) Integer size) throws FunctionalException {
         LOGGER.info("Receiving a GET request on /products");
-        System.out.println("Receiving a GET request -> message from system out println");
-        org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(ProductController.class);
-        logger.info("Receiving a GET request -> message from log4j logger");
         String jsonArrayOfProducts = null;
         Collection<String> products;
 

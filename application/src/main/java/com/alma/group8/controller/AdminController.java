@@ -6,15 +6,12 @@ import com.alma.group8.model.exceptions.AlreadyExistingProductException;
 import com.alma.group8.model.exceptions.FunctionalException;
 import com.alma.group8.model.interfaces.ProductsRepository;
 import com.alma.group8.util.CommonVariables;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.Collection;
 
 /**
  * Created by Thibault on 18/11/16.
@@ -33,7 +30,7 @@ public class AdminController {
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AdminController.class);
+    private static final Logger LOGGER = Logger.getLogger(AdminController.class);
 
 
     //TODO delete this method, ajouté pour verifier l'accès a /admin

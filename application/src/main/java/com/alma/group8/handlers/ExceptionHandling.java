@@ -7,8 +7,7 @@ import com.alma.group8.model.exceptions.NotEnoughProductsException;
 import com.alma.group8.model.exceptions.ProductNotFoundException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -25,7 +24,7 @@ import java.io.IOException;
 public class ExceptionHandling {
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-    private static final Logger LOGGER = LoggerFactory.getLogger(ExceptionHandling.class);
+    private static final Logger LOGGER = Logger.getLogger(ExceptionHandling.class);
 
     /**
      * Generate a custom error message when a {@link FunctionalException} is raised
@@ -103,9 +102,9 @@ public class ExceptionHandling {
 
     /**
      * Create an Error String
-     * @param httpStatus
-     * @param message
-     * @return
+     * @param httpStatus the HttpStatus
+     * @param message the message as a String
+     * @return the custom serialized Error
      */
     private String createErrorAsString(HttpStatus httpStatus, String message) {
         Error error = new Error();

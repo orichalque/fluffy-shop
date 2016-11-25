@@ -6,9 +6,8 @@ import com.alma.group8.model.interfaces.ProductsRepository;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.mongodb.client.MongoCollection;
+import org.apache.log4j.Logger;
 import org.bson.Document;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Repository;
@@ -29,7 +28,7 @@ public class MongoRepository implements ProductsRepository {
     @Autowired
     private MongoCollection<Document> mongoCollection;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ProductsRepository.class);
+    private static final Logger LOGGER = Logger.getLogger(ProductsRepository.class);
 
     @Override
     public String find(String uuid) throws ProductNotFoundException {
