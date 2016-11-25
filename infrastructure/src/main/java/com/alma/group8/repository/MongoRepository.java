@@ -7,6 +7,8 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Repository;
@@ -27,8 +29,11 @@ public class MongoRepository implements ProductsRepository {
     @Autowired
     private MongoCollection<Document> mongoCollection;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProductsRepository.class);
+
     @Override
     public String find(String uuid) throws ProductNotFoundException {
+        LOGGER.info(String.format("Requesting the database for the product with the id %s", uuid));
         //Returning the first item corresponding. the UUID are unique in the database so there is only 1 product, or none
         Document document = mongoCollection.find(eq("id", uuid)).first();
 
@@ -38,6 +43,7 @@ public class MongoRepository implements ProductsRepository {
             document.remove("_id");
             documentFoundAsString = document.toJson();
         } else {
+            LOGGER.info("The product was not found");
             throw new ProductNotFoundException(String.format("The product with the id %s is not in the database", uuid));
         }
         return documentFoundAsString;
@@ -45,6 +51,7 @@ public class MongoRepository implements ProductsRepository {
 
     @Override
     public Collection<String> findAll() {
+        LOGGER.info("Requesting the database for all the products");
         //Transform a List<Document> to a list<ProductDTO> and removes the _id property from Mongo
         List<Document> documentList = Lists.newArrayList(mongoCollection.find(Document.class));
 
@@ -57,6 +64,7 @@ public class MongoRepository implements ProductsRepository {
 
     @Override
     public Collection<String> findPage(int page, int size) {
+        LOGGER.info("Requesting the database for a page");
         //Skip the first results and returns the next page
         //Transform a List<Document> to a list<String> and removes the _id from mongoDb
         List<Document> documentList = Lists.newArrayList(mongoCollection.find().skip((page-1)*size).limit(size));
@@ -70,6 +78,7 @@ public class MongoRepository implements ProductsRepository {
 
     @Override
     public void store(String product) throws AlreadyExistingProductException {
+        LOGGER.info("Adding a product to the database");
         Document document = Document.parse(product);
 
         Document currentProduct = mongoCollection.find(eq("id", document.get("id"))).first();
@@ -84,6 +93,7 @@ public class MongoRepository implements ProductsRepository {
 
     @Override
     public void updateProduct(String product) throws ProductNotFoundException {
+        LOGGER.info("Updating a product to the database");
         Document document = Document.parse(product);
 
         //We delete the products before inserting it again
@@ -95,6 +105,7 @@ public class MongoRepository implements ProductsRepository {
 
     @Override
     public void delete(String uuid) throws ProductNotFoundException {
+        LOGGER.info("Deleting a product in the database");
         String currentProduct = find(uuid);
 
         if (Strings.isNullOrEmpty(currentProduct)) {

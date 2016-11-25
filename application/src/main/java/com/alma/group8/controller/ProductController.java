@@ -41,6 +41,9 @@ public class ProductController {
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     @ResponseBody public String getProducts(@RequestParam(value = "page", required = false) Integer page,
                                             @RequestParam(value = "size", required = false) Integer size) throws FunctionalException {
+
+        LOGGER.info("Receiving a GET request on /products");
+
         String jsonArrayOfProducts = null;
         Collection<String> products;
 
@@ -69,6 +72,7 @@ public class ProductController {
      */
     @RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
     @ResponseBody public String getProductById(@PathVariable String id) throws FunctionalException {
+        LOGGER.info("Receiving a GET request on a single product");
         return productsRepository.find(id);
     }
 
@@ -81,6 +85,7 @@ public class ProductController {
      */
     @RequestMapping(value = "/product/{id}/order/{quantity}", method = RequestMethod.POST)
     @ResponseBody public String orderProductById(@PathVariable String id ,@PathVariable int quantity) throws FunctionalException {
+        LOGGER.info("Receiving a POST request to order products");
         String productAsString = productsRepository.find(id);
 
         productAsString = productService.decreaseQuantity(productAsString, quantity);
