@@ -1,3 +1,4 @@
+com/alma/group8/factories/ProductFactoryImpl.class
 com/alma/group8/configuration/SpringMongoConfiguration.class
-com/alma/group8/repository/MongoRepository.class
 com/alma/group8/util/CommonVariables.class
+com/alma/group8/repository/MongoRepository.class

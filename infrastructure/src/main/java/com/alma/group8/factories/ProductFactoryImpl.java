@@ -10,6 +10,7 @@ import java.io.IOException;
 
 /**
  * Created by Dennis on 25/11/16.
+ * Factory implementation serializing and deserializing the Products
  */
 public class ProductFactoryImpl implements ProductFactory<Product>{
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();

@@ -1,8 +1,8 @@
 /comptes/E104607D/Desktop/fluffy-stock/domain/src/main/java/com/alma/group8/model/exceptions/NotEnoughProductsException.java
 /comptes/E104607D/Desktop/fluffy-stock/domain/src/main/java/com/alma/group8/model/interfaces/ProductsRepository.java
 /comptes/E104607D/Desktop/fluffy-stock/domain/src/main/java/com/alma/group8/model/Product.java
+/comptes/E104607D/Desktop/fluffy-stock/domain/src/main/java/com/alma/group8/model/exceptions/InvalidProductException.java
 /comptes/E104607D/Desktop/fluffy-stock/domain/src/main/java/com/alma/group8/model/Error.java
-/comptes/E104607D/Desktop/fluffy-stock/domain/src/main/java/com/alma/group8/model/exceptions/FunctionalException.java
 /comptes/E104607D/Desktop/fluffy-stock/domain/src/main/java/com/alma/group8/model/exceptions/AlreadyExistingProductException.java
 /comptes/E104607D/Desktop/fluffy-stock/domain/src/main/java/com/alma/group8/model/exceptions/ProductNotFoundException.java
 /comptes/E104607D/Desktop/fluffy-stock/domain/src/main/java/com/alma/group8/model/ProductType.java

@@ -1,5 +1,6 @@
 package com.alma.group8.controller;
 
+import com.alma.group8.interfaces.ProductFactory;
 import com.alma.group8.interfaces.ProductService;
 import com.alma.group8.model.Product;
 import com.alma.group8.model.exceptions.AlreadyExistingProductException;
@@ -27,6 +28,9 @@ public class AdminController {
 
     @Autowired
     ProductService productService;
+
+    @Autowired
+    private ProductFactory<Product> productFactory;
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 

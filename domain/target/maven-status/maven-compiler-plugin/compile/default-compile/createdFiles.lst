@@ -1,3 +1,4 @@
+com/alma/group8/model/exceptions/InvalidProductException.class
 com/alma/group8/model/service/ProductServiceImpl.class
 com/alma/group8/model/Error.class
 com/alma/group8/model/interfaces/ProductsRepository.class
@@ -6,4 +7,3 @@ com/alma/group8/model/exceptions/AlreadyExistingProductException.class
 com/alma/group8/model/Product.class
 com/alma/group8/model/ProductType.class
 com/alma/group8/model/exceptions/NotEnoughProductsException.class
-com/alma/group8/model/exceptions/FunctionalException.class

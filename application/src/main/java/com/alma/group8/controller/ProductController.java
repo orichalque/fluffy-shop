@@ -1,7 +1,9 @@
 package com.alma.group8.controller;
 
+import com.alma.group8.interfaces.ProductFactory;
 import com.alma.group8.interfaces.ProductService;
 import com.alma.group8.exceptions.FunctionalException;
+import com.alma.group8.model.Product;
 import com.alma.group8.model.interfaces.ProductsRepository;
 import com.alma.group8.util.CommonVariables;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -22,15 +24,17 @@ import java.util.Collection;
 @RequestMapping(value = CommonVariables.ROOT_URL, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class ProductController {
 
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-
     private static final Logger LOGGER = Logger.getLogger(ProductController.class);
 
     @Autowired
-    ProductsRepository productsRepository;
+    private ProductsRepository productsRepository;
 
     @Autowired
-    ProductService productService;
+    private ProductService productService;
+
+    @Autowired
+    private ProductFactory<Product> productFactory;
+
 
     /**
      * Get the product with a paginated result
@@ -53,7 +57,7 @@ public class ProductController {
 
         try {
             //The results serialized by the object mapper need some refactoring
-            jsonArrayOfProducts = OBJECT_MAPPER.writeValueAsString(products).replace("\\", "");
+            jsonArrayOfProducts = new ObjectMapper().writeValueAsString(products).replace("\\", "");
             jsonArrayOfProducts = jsonArrayOfProducts.replace("\"{", "{");
             jsonArrayOfProducts = jsonArrayOfProducts.replace("}\"", "}");
         } catch (JsonProcessingException e) {
