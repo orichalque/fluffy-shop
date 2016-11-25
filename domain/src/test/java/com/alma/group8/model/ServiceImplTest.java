@@ -1,5 +1,6 @@
 package com.alma.group8.model;
 
+import com.alma.group8.exceptions.FunctionalException;
 import com.alma.group8.interfaces.ProductService;
 import com.alma.group8.model.exceptions.NotEnoughProductsException;
 import com.alma.group8.model.service.ProductServiceImpl;
@@ -50,7 +51,7 @@ public class ServiceImplTest {
     }
 
     @Test
-    public void testIncreaseQuantity() throws IOException {
+    public void testIncreaseQuantity() throws IOException, FunctionalException {
         String productAsString = productService.increaseQuantity(OBJECT_MAPPER.writeValueAsString(product), 3);
         Assert.assertEquals(8, OBJECT_MAPPER.readValue(productAsString, Product.class).getQuantity());
     }

@@ -3,7 +3,7 @@ package com.alma.group8.controller;
 import com.alma.group8.interfaces.ProductService;
 import com.alma.group8.model.Product;
 import com.alma.group8.model.exceptions.AlreadyExistingProductException;
-import com.alma.group8.model.exceptions.FunctionalException;
+import com.alma.group8.exceptions.FunctionalException;
 import com.alma.group8.model.interfaces.ProductsRepository;
 import com.alma.group8.util.CommonVariables;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,7 +26,7 @@ public class AdminController {
     ProductsRepository productsRepository;
 
     @Autowired
-    ProductService<FunctionalException> productService;
+    ProductService productService;
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 

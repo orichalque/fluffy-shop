@@ -10,10 +10,10 @@ public interface ProductFactory<Metier>{
 
     /**
      * Convert the string param to a business Object
-     * @param dto the serialize object in Json stringify format
+     * @param metierAsJson the serialize object in Json stringify format
      * @return business object corresponding to the string param
      */
-     Metier deserialize(String dto);
+     Metier deserialize(String metierAsJson);
 
     /**
      * Serialize a business object

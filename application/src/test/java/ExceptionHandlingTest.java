@@ -1,7 +1,7 @@
 import com.alma.group8.handlers.ExceptionHandling;
 import com.alma.group8.model.Error;
 import com.alma.group8.model.exceptions.AlreadyExistingProductException;
-import com.alma.group8.model.exceptions.FunctionalException;
+import com.alma.group8.exceptions.FunctionalException;
 import com.alma.group8.model.exceptions.NotEnoughProductsException;
 import com.alma.group8.model.exceptions.ProductNotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;

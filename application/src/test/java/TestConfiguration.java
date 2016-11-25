@@ -1,7 +1,7 @@
 import com.alma.group8.controller.ProductController;
 import com.alma.group8.handlers.ExceptionHandling;
 import com.alma.group8.interfaces.ProductService;
-import com.alma.group8.model.exceptions.FunctionalException;
+import com.alma.group8.exceptions.FunctionalException;
 import com.alma.group8.model.interfaces.ProductsRepository;
 import com.alma.group8.model.service.ProductServiceImpl;
 import org.mockito.Mockito;
@@ -23,7 +23,7 @@ public class TestConfiguration {
     }
 
     @Bean
-    public ProductService<FunctionalException> productService() {
+    public ProductService productService() {
         return new ProductServiceImpl();
     }
 

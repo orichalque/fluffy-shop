@@ -1,5 +1,7 @@
 package com.alma.group8.model.exceptions;
 
+import com.alma.group8.exceptions.FunctionalException;
+
 /**
  * Exception raised when trying to update or delete an item not existing in the database
  */

@@ -1,7 +1,7 @@
 package com.alma.group8.controller;
 
 import com.alma.group8.interfaces.ProductService;
-import com.alma.group8.model.exceptions.FunctionalException;
+import com.alma.group8.exceptions.FunctionalException;
 import com.alma.group8.model.interfaces.ProductsRepository;
 import com.alma.group8.util.CommonVariables;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -30,7 +30,7 @@ public class ProductController {
     ProductsRepository productsRepository;
 
     @Autowired
-    ProductService<FunctionalException> productService;
+    ProductService productService;
 
     /**
      * Get the product with a paginated result

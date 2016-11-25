@@ -1,5 +1,7 @@
 package com.alma.group8.model.exceptions;
 
+import com.alma.group8.exceptions.FunctionalException;
+
 /**
  * Exception throwed when trying to withdraw more item in the database that there is
  */
