@@ -1,9 +1,9 @@
-import com.alma.group8.handlers.ExceptionHandling;
-import com.alma.group8.model.Error;
-import com.alma.group8.model.exceptions.AlreadyExistingProductException;
-import com.alma.group8.exceptions.FunctionalException;
-import com.alma.group8.model.exceptions.NotEnoughProductsException;
-import com.alma.group8.model.exceptions.ProductNotFoundException;
+import com.alma.group8.application.handlers.ExceptionHandling;
+import com.alma.group8.domain.model.Error;
+import com.alma.group8.domain.exceptions.AlreadyExistingProductException;
+import com.alma.group8.api.exceptions.FunctionalException;
+import com.alma.group8.domain.exceptions.NotEnoughProductsException;
+import com.alma.group8.domain.exceptions.ProductNotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Assert;
 import org.junit.Before;
@@ -15,7 +15,7 @@ import java.io.IOException;
 
 /**
  * Created by Thibault on 22/11/2016.
- * Tests the {@link com.alma.group8.handlers.ExceptionHandling} class
+ * Tests the {@link com.alma.group8.application.handlers.ExceptionHandling} class
  */
 public class ExceptionHandlingTest {
 

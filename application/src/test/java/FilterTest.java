@@ -1,11 +1,8 @@
-import com.alma.group8.configuration.CORSFilter;
+import com.alma.group8.application.configuration.CORSFilter;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
