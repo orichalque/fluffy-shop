@@ -40,26 +40,12 @@ public class AdminController {
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     @ResponseBody public String getProducts(@RequestParam(value = "page", required = false) Integer page,
                                             @RequestParam(value = "size", required = false) Integer size) throws FunctionalException {
-        String jsonArrayOfProducts = null;
-        Collection<String> products;
 
-        if(page == null || size == null) {
-            products = productsRepository.findAll();
-        } else {
-            products = productsRepository.findPage(page, size);
-        }
+        LOGGER.info("Request received");
 
-        try {
-            //The results serialized by the object mapper need some refactoring
-            jsonArrayOfProducts = OBJECT_MAPPER.writeValueAsString(products).replace("\\", "");
-            jsonArrayOfProducts = jsonArrayOfProducts.replace("\"{", "{");
-            jsonArrayOfProducts = jsonArrayOfProducts.replace("}\"", "}");
-        } catch (JsonProcessingException e) {
-            LOGGER.warn("Cannot serialize the result", e);
-        }
-
-        return jsonArrayOfProducts;
+        return null;
     }
+
     /**
      * Delete a product from the database
      * @param id the id of the product to delete
