@@ -1,4 +1,4 @@
-package com.alma.group8.config;
+package com.alma.group8.infrastructure.config;
 
 /**
  * Created by Thibault on 09/11/2016.

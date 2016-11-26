@@ -1,6 +1,6 @@
 package com.alma.group8.infrastructure.repository;
 
-import com.alma.group8.config.CommonTestVariables;
+import com.alma.group8.infrastructure.config.CommonTestVariables;
 import com.alma.group8.infrastructure.util.CommonVariables;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
