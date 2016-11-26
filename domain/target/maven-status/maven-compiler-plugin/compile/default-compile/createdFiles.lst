@@ -2,8 +2,11 @@ com\alma\group8\domain\service\ProductServiceImpl.class
 com\alma\group8\domain\exceptions\InvalidProductException.class
 com\alma\group8\domain\interfaces\ProductsRepository.class
 com\alma\group8\domain\model\Product.class
+com\alma\group8\domain\model\Role.class
 com\alma\group8\domain\model\Error.class
+com\alma\group8\domain\model\User.class
 com\alma\group8\domain\exceptions\AlreadyExistingProductException.class
 com\alma\group8\domain\exceptions\ProductNotFoundException.class
+com\alma\group8\domain\interfaces\MailVerifier.class
 com\alma\group8\domain\model\ProductType.class
 com\alma\group8\domain\exceptions\NotEnoughProductsException.class

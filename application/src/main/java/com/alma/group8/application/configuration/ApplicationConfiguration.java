@@ -77,6 +77,5 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter{
                 Charset.forName("UTF-8"));
         stringConverter.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON));
         converters.add(stringConverter);
-
     }
 }
