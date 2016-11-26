@@ -2,7 +2,6 @@ package com.alma.group8.application.util;
 
 import com.alma.group8.api.exceptions.TechnicalException;
 import com.alma.group8.domain.interfaces.MailVerifier;
-import com.cdyne.ws.EmailVerNoTestEmail;
 import com.cdyne.ws.EmailVerNoTestEmailSoap;
 import com.cdyne.ws.ReturnIndicator;
 
@@ -43,7 +42,7 @@ public class SoapMailVerifier implements MailVerifier {
     public boolean isValid(String email) {
         ReturnIndicator returnIndicator = verifyEmail.verifyEmail(email, "0");
 
-        return (returnIndicator.getResponseCode() != 0);
+        return returnIndicator.getResponseCode() != 0;
     }
 
 }

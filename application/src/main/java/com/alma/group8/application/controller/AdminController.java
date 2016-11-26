@@ -74,6 +74,11 @@ public class AdminController {
         productsRepository.delete(id);
     }
 
+    /**
+     * Add a product in the database
+     * @param productAsString the product
+     * @throws FunctionalException
+     */
     @RequestMapping(value = "/product", method = RequestMethod.POST, consumes = "application/json")
     public void addProduct(@RequestBody String productAsString) throws FunctionalException {
         LOGGER.info("Receiving a POST method");
