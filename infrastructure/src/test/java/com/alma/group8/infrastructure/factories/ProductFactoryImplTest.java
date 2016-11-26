@@ -29,7 +29,7 @@ public class ProductFactoryImplTest {
         product.setName("product");
         product.setDescription("description");
         product.setPrice(50.);
-        UUID uuid = UUID.randomUUID();
+        UUID uuid = UUID.fromString("3b80708b-447f-43a7-94ce-ff271353c52a");
         product.setId(uuid);
         product.setProductType(ProductType.BOIS);
         product.setQuantity(10);
