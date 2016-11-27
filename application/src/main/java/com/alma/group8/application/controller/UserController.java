@@ -1,10 +1,10 @@
 package com.alma.group8.application.controller;
 
 import com.alma.group8.api.exceptions.FunctionalException;
-import com.alma.group8.api.interfaces.ProductFactory;
 import com.alma.group8.application.util.CommonVariables;
+import com.alma.group8.domain.exceptions.AlreadyExistingUserException;
+import com.alma.group8.domain.exceptions.UserNotFoundException;
 import com.alma.group8.domain.interfaces.UserRepository;
-import com.alma.group8.domain.model.Product;
 import com.alma.group8.domain.model.Role;
 import com.alma.group8.domain.model.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -27,17 +27,24 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
+
     private static final Logger LOGGER = Logger.getLogger(UserController.class);
 
     /**
      * Get an user in the database from its email adress
+     * @param email the email
      * @return the {@link com.alma.group8.domain.model.User}
      */
     @RequestMapping(value ="/user/{email}", method = RequestMethod.GET)
     @ResponseBody public String getUser(@PathVariable String email) throws FunctionalException {
-        //FIXME invalid exception
         LOGGER.info(String.format("Receiving a GET Request to get an user from the email %s", email));
-        return userRepository.find(email);
+
+        try {
+            return userRepository.find(email);
+        } catch (FunctionalException e) {
+            throw new UserNotFoundException(e);
+        }
+
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
@@ -59,36 +66,42 @@ public class UserController {
         return jsonArrayOfUsers;
     }
 
+    /**
+     * Create an admin and adds it in the database
+     * @param email the mail of the admin
+     * @throws FunctionalException
+     */
     @RequestMapping(value = "/user/admin", method = RequestMethod.POST)
     public void insertAdmin(@RequestBody String email) throws FunctionalException {
-        //FIXME Invalid exception
         User user = new User();
         user.setMail(email);
         user.setRole(Role.ADMIN);
-        //FIXME use factory
 
-        String userAsString = null;
+        String userAsString;
         try {
             userAsString = new ObjectMapper().writeValueAsString(user);
         } catch (JsonProcessingException e) {
-            throw new FunctionalException(e);
+            throw new AlreadyExistingUserException(e);
         }
         userRepository.insert(userAsString);
     }
 
+    /**
+     * Create a user and adds it in the database
+     * @param email the email of the client
+     * @throws FunctionalException
+     */
     @RequestMapping(value = "/user/client", method = RequestMethod.POST)
     public void insertClient(@RequestBody String email) throws FunctionalException {
-        //FIXME Invalid exception
         User user = new User();
         user.setMail(email);
         user.setRole(Role.CLIENT);
-        //FIXME use factory
 
-        String userAsString = null;
+        String userAsString;
         try {
             userAsString = new ObjectMapper().writeValueAsString(user);
         } catch (JsonProcessingException e) {
-            throw new FunctionalException(e);
+            throw new AlreadyExistingUserException(e);
         }
         userRepository.insert(userAsString);
     }

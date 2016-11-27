@@ -1,6 +1,6 @@
 package com.alma.group8.application.controller;
 
-import com.alma.group8.api.interfaces.ProductFactory;
+import com.alma.group8.api.interfaces.FunctionalFactory;
 import com.alma.group8.api.interfaces.ProductService;
 import com.alma.group8.api.exceptions.FunctionalException;
 import com.alma.group8.domain.model.Product;
@@ -33,7 +33,7 @@ public class ProductController {
     private ProductService productService;
 
     @Autowired
-    private ProductFactory<Product> productFactory;
+    private FunctionalFactory<Product> functionalFactory;
 
 
     /**
@@ -56,7 +56,7 @@ public class ProductController {
         }
 
         try {
-            //FIXME Use the productFactory
+            //FIXME Use the functionalFactory
             //The results serialized by the object mapper need some refactoring
             jsonArrayOfProducts = new ObjectMapper().writeValueAsString(products).replace("\\", "");
             jsonArrayOfProducts = jsonArrayOfProducts.replace("\"{", "{");

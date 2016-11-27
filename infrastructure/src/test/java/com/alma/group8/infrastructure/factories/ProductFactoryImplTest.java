@@ -1,7 +1,7 @@
 package com.alma.group8.infrastructure.factories;
 
 import com.alma.group8.api.exceptions.FunctionalException;
-import com.alma.group8.api.interfaces.ProductFactory;
+import com.alma.group8.api.interfaces.FunctionalFactory;
 import com.alma.group8.domain.model.Product;
 import com.alma.group8.domain.model.ProductType;
 import org.junit.Assert;
@@ -16,11 +16,11 @@ import java.util.UUID;
  */
 public class ProductFactoryImplTest {
 
-    private ProductFactory productFactory;
+    private FunctionalFactory functionalFactory;
 
     @Before
     public void setUp() {
-        productFactory = new ProductFactoryImpl();
+        functionalFactory = new ProductFactoryImpl();
     }
 
     @Test
@@ -34,14 +34,14 @@ public class ProductFactoryImplTest {
         product.setProductType(ProductType.BOIS);
         product.setQuantity(10);
 
-        String productAsString = productFactory.serialize(product);
+        String productAsString = functionalFactory.serialize(product);
         Assert.assertEquals("{\"id\":\"3b80708b-447f-43a7-94ce-ff271353c52a\",\"name\":\"product\",\"description\":\"description\",\"productType\":\"BOIS\",\"price\":50.0,\"quantity\":10}", productAsString);
     }
 
     @Test
     public void testDeserialize() throws FunctionalException {
         String productAsString = "{\"id\":\"3b80708b-447f-43a7-94ce-ff271353c52a\",\"name\":\"product\",\"description\":\"description\",\"productType\":\"BOIS\",\"price\":50.0,\"quantity\":10}";
-        Product product = (Product) productFactory.deserialize(productAsString);
+        Product product = (Product) functionalFactory.deserialize(productAsString);
 
         Assert.assertEquals("product", product.getName());
         Assert.assertEquals("description", product.getDescription());

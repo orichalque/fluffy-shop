@@ -1,7 +1,7 @@
+import com.alma.group8.api.interfaces.FunctionalFactory;
 import com.alma.group8.application.controller.ProductController;
 import com.alma.group8.infrastructure.factories.ProductFactoryImpl;
 import com.alma.group8.application.handlers.ExceptionHandling;
-import com.alma.group8.api.interfaces.ProductFactory;
 import com.alma.group8.api.interfaces.ProductService;
 import com.alma.group8.domain.interfaces.ProductsRepository;
 import com.alma.group8.domain.service.ProductServiceImpl;
@@ -37,7 +37,7 @@ public class TestConfiguration {
     public ExceptionHandling exceptionHandling() { return new ExceptionHandling(); }
 
     @Bean
-    public ProductFactory productFactory() {
+    public FunctionalFactory productFactory() {
         return new ProductFactoryImpl();
     }
 }

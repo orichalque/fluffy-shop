@@ -1,6 +1,6 @@
 package com.alma.group8.application.controller;
 
-import com.alma.group8.api.interfaces.ProductFactory;
+import com.alma.group8.api.interfaces.FunctionalFactory;
 import com.alma.group8.api.interfaces.ProductService;
 import com.alma.group8.domain.model.Product;
 import com.alma.group8.api.exceptions.FunctionalException;
@@ -30,7 +30,7 @@ public class AdminController {
     ProductService productService;
 
     @Autowired
-    private ProductFactory<Product> productFactory;
+    private FunctionalFactory<Product> functionalFactory;
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
@@ -83,7 +83,7 @@ public class AdminController {
     public void addProduct(@RequestBody String productAsString) throws FunctionalException {
         LOGGER.info("Receiving a POST method");
 
-        productFactory.deserialize(productAsString);
+        functionalFactory.deserialize(productAsString);
         productsRepository.store(productAsString);
     }
 

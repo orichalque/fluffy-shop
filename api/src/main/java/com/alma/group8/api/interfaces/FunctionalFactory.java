@@ -6,7 +6,7 @@ import com.alma.group8.api.exceptions.FunctionalException;
  * Convert Business object to String and String to Business object
  * Created by Dennis on 25/11/16.
  */
-public interface ProductFactory<T>{
+public interface FunctionalFactory<T>{
 
     /**
      * Convert the string param to a business Object

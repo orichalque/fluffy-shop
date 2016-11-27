@@ -1,5 +1,5 @@
-com\alma\group8\api\interfaces\ProductFactory.class
 com\alma\group8\api\interfaces\MailVerifier.class
 com\alma\group8\api\interfaces\ProductService.class
 com\alma\group8\api\exceptions\FunctionalException.class
 com\alma\group8\api\exceptions\TechnicalException.class
+com\alma\group8\api\interfaces\FunctionalFactory.class

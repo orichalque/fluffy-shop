@@ -1,11 +1,12 @@
 package com.alma.group8.application.configuration;
 
+import com.alma.group8.api.interfaces.FunctionalFactory;
 import com.alma.group8.domain.interfaces.UserRepository;
 import com.alma.group8.infrastructure.factories.ProductFactoryImpl;
 import com.alma.group8.application.handlers.ExceptionHandling;
-import com.alma.group8.api.interfaces.ProductFactory;
 import com.alma.group8.api.interfaces.ProductService;
 import com.alma.group8.domain.interfaces.ProductsRepository;
+import com.alma.group8.infrastructure.factories.UserFactoryImpl;
 import com.alma.group8.infrastructure.repository.MongoProductRepository;
 import com.alma.group8.domain.service.ProductServiceImpl;
 import com.alma.group8.infrastructure.repository.MongoUserRepository;
@@ -68,13 +69,24 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter{
     }
 
     /**
-     * Create a ProductFactory and add it in the spring context
-     * @return the newly created {@link ProductFactory}
+     * Create a FunctionalFactory and add it in the spring context
+     * @return the newly created {@link FunctionalFactory}
      */
-    @Bean
-    public ProductFactory productFactory() {
+    @Bean(name = "productFactory")
+    public FunctionalFactory productFactory() {
         return new ProductFactoryImpl();
     }
+
+
+    /**
+     * Create a {@link UserFactoryImpl}
+     * @return the {@link UserFactoryImpl}
+     */
+    @Bean(name = "userFactory")
+    public FunctionalFactory userFactory() {
+        return new UserFactoryImpl();
+    }
+
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
