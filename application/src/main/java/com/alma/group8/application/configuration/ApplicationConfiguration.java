@@ -1,5 +1,6 @@
 package com.alma.group8.application.configuration;
 
+import com.alma.group8.domain.interfaces.UserRepository;
 import com.alma.group8.infrastructure.factories.ProductFactoryImpl;
 import com.alma.group8.application.handlers.ExceptionHandling;
 import com.alma.group8.api.interfaces.ProductFactory;
@@ -7,6 +8,7 @@ import com.alma.group8.api.interfaces.ProductService;
 import com.alma.group8.domain.interfaces.ProductsRepository;
 import com.alma.group8.infrastructure.repository.MongoProductRepository;
 import com.alma.group8.domain.service.ProductServiceImpl;
+import com.alma.group8.infrastructure.repository.MongoUserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -35,6 +37,15 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter{
     @Bean
     public ProductsRepository productsRepository() {
         return new MongoProductRepository();
+    }
+
+    /**
+     * Create the {@link UserRepository} and add it in the Sprring Context
+     * @return the {@link org.springframework.beans.factory.annotation.Autowired} {@link MongoUserRepository}
+     */
+    @Bean
+    public UserRepository userRepository() {
+        return new MongoUserRepository();
     }
 
     /**

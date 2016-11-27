@@ -1,6 +1,7 @@
 com\alma\group8\domain\service\ProductServiceImpl.class
 com\alma\group8\domain\exceptions\InvalidProductException.class
 com\alma\group8\domain\interfaces\ProductsRepository.class
+com\alma\group8\domain\interfaces\UserRepository.class
 com\alma\group8\domain\model\Product.class
 com\alma\group8\domain\model\Role.class
 com\alma\group8\domain\model\Error.class
