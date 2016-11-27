@@ -3,9 +3,11 @@ package com.alma.group8.application.controller;
 import com.alma.group8.api.interfaces.FunctionalFactory;
 import com.alma.group8.api.interfaces.ProductService;
 import com.alma.group8.api.exceptions.FunctionalException;
-import com.alma.group8.domain.model.Product;
-import com.alma.group8.domain.interfaces.ProductsRepository;
+import com.alma.group8.api.interfaces.ProductsRepository;
 import com.alma.group8.application.util.CommonVariables;
+import com.alma.group8.domain.exceptions.NotEnoughProductsException;
+import com.alma.group8.domain.exceptions.ProductNotFoundException;
+import com.alma.group8.domain.model.Product;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
@@ -44,7 +46,7 @@ public class ProductController {
      */
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     @ResponseBody public String getProducts(@RequestParam(value = "page", required = false) Integer page,
-                                            @RequestParam(value = "size", required = false) Integer size) throws FunctionalException {
+                                            @RequestParam(value = "size", required = false) Integer size) {
         LOGGER.info("Receiving a GET request on /products");
         String jsonArrayOfProducts = null;
         Collection<String> products;
@@ -74,9 +76,13 @@ public class ProductController {
      * @return a Gson containing the product with the corresponding name
      */
     @RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
-    @ResponseBody public String getProductById(@PathVariable String id) throws FunctionalException {
+    @ResponseBody public String getProductById(@PathVariable String id) throws ProductNotFoundException {
         LOGGER.info("Receiving a GET request on a single product");
-        return productsRepository.find(id);
+        try {
+            return productsRepository.find(id);
+        } catch (FunctionalException e) {
+            throw new ProductNotFoundException(e);
+        }
     }
 
     /**
@@ -89,11 +95,24 @@ public class ProductController {
     @RequestMapping(value = "/product/{id}/order/{quantity}", method = RequestMethod.POST)
     @ResponseBody public String orderProductById(@PathVariable String id ,@PathVariable int quantity) throws FunctionalException {
         LOGGER.info("Receiving a POST request to order products");
-        String productAsString = productsRepository.find(id);
+        String productAsString = null;
+        try {
+            productAsString = productsRepository.find(id);
+        } catch (FunctionalException e) {
+            throw new ProductNotFoundException(e);
+        }
 
-        productAsString = productService.decreaseQuantity(productAsString, quantity);
+        try {
+            productAsString = productService.decreaseQuantity(productAsString, quantity);
+        } catch (FunctionalException e) {
+            throw new NotEnoughProductsException(e);
+        }
 
-        productsRepository.updateProduct(productAsString);
+        try {
+            productsRepository.updateProduct(productAsString);
+        } catch (FunctionalException e) {
+            throw new ProductNotFoundException(e);
+        }
         return productAsString;
     }
 }

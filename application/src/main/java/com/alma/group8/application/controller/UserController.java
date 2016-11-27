@@ -1,10 +1,10 @@
 package com.alma.group8.application.controller;
 
 import com.alma.group8.api.exceptions.FunctionalException;
+import com.alma.group8.api.interfaces.UserRepository;
 import com.alma.group8.application.util.CommonVariables;
 import com.alma.group8.domain.exceptions.AlreadyExistingUserException;
 import com.alma.group8.domain.exceptions.UserNotFoundException;
-import com.alma.group8.domain.interfaces.UserRepository;
 import com.alma.group8.domain.model.Role;
 import com.alma.group8.domain.model.User;
 import com.fasterxml.jackson.core.JsonProcessingException;

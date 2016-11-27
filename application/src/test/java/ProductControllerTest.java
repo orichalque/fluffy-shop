@@ -1,6 +1,6 @@
+import com.alma.group8.api.interfaces.ProductsRepository;
 import com.alma.group8.domain.model.Product;
 import com.alma.group8.domain.exceptions.ProductNotFoundException;
-import com.alma.group8.domain.interfaces.ProductsRepository;
 import com.alma.group8.application.util.CommonVariables;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;

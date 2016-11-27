@@ -1,9 +1,9 @@
 import com.alma.group8.api.interfaces.FunctionalFactory;
+import com.alma.group8.api.interfaces.ProductsRepository;
 import com.alma.group8.application.controller.ProductController;
-import com.alma.group8.infrastructure.factories.ProductFactoryImpl;
+import com.alma.group8.domain.factories.ProductFactoryImpl;
 import com.alma.group8.application.handlers.ExceptionHandling;
 import com.alma.group8.api.interfaces.ProductService;
-import com.alma.group8.domain.interfaces.ProductsRepository;
 import com.alma.group8.domain.service.ProductServiceImpl;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;

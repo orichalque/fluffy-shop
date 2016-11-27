@@ -1,4 +1,4 @@
-package com.alma.group8.infrastructure.factories;
+package com.alma.group8.domain.factories;
 
 import com.alma.group8.api.exceptions.FunctionalException;
 import com.alma.group8.api.interfaces.FunctionalFactory;

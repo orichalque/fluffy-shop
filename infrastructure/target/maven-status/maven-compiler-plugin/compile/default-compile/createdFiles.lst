@@ -1,6 +1,4 @@
 com\alma\group8\infrastructure\util\CommonVariables.class
-com\alma\group8\infrastructure\factories\UserFactoryImpl.class
 com\alma\group8\infrastructure\configuration\SpringMongoConfiguration.class
-com\alma\group8\infrastructure\factories\ProductFactoryImpl.class
 com\alma\group8\infrastructure\repository\MongoProductRepository.class
 com\alma\group8\infrastructure\repository\MongoUserRepository.class

@@ -12,7 +12,6 @@ import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
 import org.bson.BsonDocument;
 import org.bson.Document;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

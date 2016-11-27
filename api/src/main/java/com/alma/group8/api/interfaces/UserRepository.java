@@ -1,4 +1,4 @@
-package com.alma.group8.domain.interfaces;
+package com.alma.group8.api.interfaces;
 
 import com.alma.group8.api.exceptions.FunctionalException;
 

@@ -1,8 +1,7 @@
 package com.alma.group8.infrastructure.repository;
 
-import com.alma.group8.domain.exceptions.AlreadyExistingProductException;
-import com.alma.group8.domain.exceptions.ProductNotFoundException;
-import com.alma.group8.domain.interfaces.ProductsRepository;
+import com.alma.group8.api.exceptions.FunctionalException;
+import com.alma.group8.api.interfaces.ProductsRepository;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.mongodb.client.MongoCollection;
@@ -31,7 +30,7 @@ public class MongoProductRepository implements ProductsRepository {
     private static final Logger LOGGER = Logger.getLogger(ProductsRepository.class);
 
     @Override
-    public String find(String uuid) throws ProductNotFoundException {
+    public String find(String uuid) throws FunctionalException {
         LOGGER.info(String.format("Requesting the database for the product with the id %s", uuid));
         //Returning the first item corresponding. the UUID are unique in the database so there is only 1 product, or none
         Document document = productCollection.find(eq("id", uuid)).first();
@@ -43,7 +42,7 @@ public class MongoProductRepository implements ProductsRepository {
             documentFoundAsString = document.toJson();
         } else {
             LOGGER.info("The product was not found");
-            throw new ProductNotFoundException(String.format("The product with the id %s is not in the database", uuid));
+            throw new FunctionalException(String.format("The product with the id %s is not in the database", uuid));
         }
         return documentFoundAsString;
     }
@@ -76,7 +75,7 @@ public class MongoProductRepository implements ProductsRepository {
     }
 
     @Override
-    public void store(String product) throws AlreadyExistingProductException {
+    public void store(String product) throws FunctionalException {
         LOGGER.info("Adding a product to the database");
         Document document = Document.parse(product);
 
@@ -86,12 +85,12 @@ public class MongoProductRepository implements ProductsRepository {
             //Product found, when we only want to insert it
             productCollection.insertOne(Document.parse(product));
         } else {
-            throw new AlreadyExistingProductException("The product already exists in the database, and thus cannot be stored");
+            throw new FunctionalException("The product already exists in the database, and thus cannot be stored");
         }
     }
 
     @Override
-    public void updateProduct(String product) throws ProductNotFoundException {
+    public void updateProduct(String product) throws FunctionalException {
         LOGGER.info("Updating a product to the database");
         Document document = Document.parse(product);
 
@@ -103,12 +102,12 @@ public class MongoProductRepository implements ProductsRepository {
     }
 
     @Override
-    public void delete(String uuid) throws ProductNotFoundException {
+    public void delete(String uuid) throws FunctionalException {
         LOGGER.info("Deleting a product in the database");
         String currentProduct = find(uuid);
 
         if (Strings.isNullOrEmpty(currentProduct)) {
-            throw new ProductNotFoundException("The product cannot be found in the database");
+            throw new FunctionalException("The product cannot be found in the database");
         } else {
             productCollection.deleteOne(Document.parse(currentProduct));
        }

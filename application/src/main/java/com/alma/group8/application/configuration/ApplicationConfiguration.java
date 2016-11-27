@@ -1,14 +1,14 @@
 package com.alma.group8.application.configuration;
 
 import com.alma.group8.api.interfaces.FunctionalFactory;
-import com.alma.group8.domain.interfaces.UserRepository;
-import com.alma.group8.infrastructure.factories.ProductFactoryImpl;
-import com.alma.group8.application.handlers.ExceptionHandling;
 import com.alma.group8.api.interfaces.ProductService;
-import com.alma.group8.domain.interfaces.ProductsRepository;
-import com.alma.group8.infrastructure.factories.UserFactoryImpl;
-import com.alma.group8.infrastructure.repository.MongoProductRepository;
+import com.alma.group8.api.interfaces.ProductsRepository;
+import com.alma.group8.api.interfaces.UserRepository;
+import com.alma.group8.application.handlers.ExceptionHandling;
+import com.alma.group8.domain.factories.ProductFactoryImpl;
+import com.alma.group8.domain.factories.UserFactoryImpl;
 import com.alma.group8.domain.service.ProductServiceImpl;
+import com.alma.group8.infrastructure.repository.MongoProductRepository;
 import com.alma.group8.infrastructure.repository.MongoUserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

@@ -1,8 +1,8 @@
 package com.alma.group8.infrastructure.repository;
 
 import com.alma.group8.api.exceptions.FunctionalException;
-import com.alma.group8.domain.interfaces.ProductsRepository;
-import com.alma.group8.domain.interfaces.UserRepository;
+import com.alma.group8.api.interfaces.ProductsRepository;
+import com.alma.group8.api.interfaces.UserRepository;
 import com.google.common.collect.Lists;
 import com.mongodb.client.MongoCollection;
 import org.apache.log4j.Logger;

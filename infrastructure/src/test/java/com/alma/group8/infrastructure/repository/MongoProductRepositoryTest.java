@@ -1,5 +1,7 @@
 package com.alma.group8.infrastructure.repository;
 
+import com.alma.group8.api.exceptions.FunctionalException;
+import com.alma.group8.domain.model.Product;
 import com.alma.group8.infrastructure.config.CommonTestVariables;
 import com.alma.group8.infrastructure.util.CommonVariables;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -7,9 +9,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
-import com.alma.group8.domain.model.Product;
-import com.alma.group8.domain.exceptions.AlreadyExistingProductException;
-import com.alma.group8.domain.exceptions.ProductNotFoundException;
 import org.bson.BsonDocument;
 import org.bson.Document;
 import org.junit.After;
@@ -73,7 +72,7 @@ public class MongoProductRepositoryTest {
 
         try {
             mongoProductRepository.store(objectMapper.writeValueAsString(product));
-        } catch (AlreadyExistingProductException e) {
+        } catch (FunctionalException e) {
             Assert.fail("The database should be empty");
         } catch (JsonProcessingException e) {
             Assert.fail("The product should be parsable");
@@ -83,7 +82,7 @@ public class MongoProductRepositoryTest {
 
         try {
             productDTOAsString = mongoProductRepository.find(uuid.toString());
-        } catch (ProductNotFoundException e) {
+        } catch (FunctionalException e) {
             Assert.fail();
         }
 
@@ -113,7 +112,7 @@ public class MongoProductRepositoryTest {
         try {
             String productAsString = objectMapper.writeValueAsString(product);
             mongoProductRepository.store(productAsString);
-        } catch (AlreadyExistingProductException e) {
+        } catch (FunctionalException e) {
             Assert.fail("The database should not contain the product");
         } catch (JsonProcessingException e) {
             Assert.fail("Cannot read the product");
@@ -122,7 +121,7 @@ public class MongoProductRepositoryTest {
         String currentProductInTheDatabaseAsJson = null;
         try {
             currentProductInTheDatabaseAsJson = mongoProductRepository.find(product.getId().toString());
-        } catch (ProductNotFoundException e) {
+        } catch (FunctionalException e) {
             Assert.fail();
         }
 
@@ -134,14 +133,14 @@ public class MongoProductRepositoryTest {
 
         try {
             mongoProductRepository.delete(product.getId().toString());
-        } catch (ProductNotFoundException e) {
+        } catch (FunctionalException e) {
             Assert.fail("The product should be in the database");
         }
 
         try {
             Assert.assertNull("The item should be in the database anymore", mongoProductRepository.find(product.getId().toString()));
             Assert.fail();
-        } catch (ProductNotFoundException e) {
+        } catch (FunctionalException e) {
 
         }
     }
@@ -159,7 +158,7 @@ public class MongoProductRepositoryTest {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             mongoProductRepository.store(objectMapper.writeValueAsString(product));
-        } catch (AlreadyExistingProductException e) {
+        } catch (FunctionalException e) {
             Assert.fail("The database should not contain the product");
         } catch (JsonProcessingException e) {
             Assert.fail("Cannot serialize the current Product");
@@ -169,7 +168,7 @@ public class MongoProductRepositoryTest {
 
         try {
             mongoProductRepository.updateProduct(objectMapper.writeValueAsString(product));
-        } catch (ProductNotFoundException e) {
+        } catch (FunctionalException e) {
             Assert.fail("The product should be in the database");
         } catch (JsonProcessingException e) {
             Assert.fail("Cannot serialize the current Product");
@@ -178,7 +177,7 @@ public class MongoProductRepositoryTest {
         String newProductAsString = null;
         try {
             newProductAsString = mongoProductRepository.find(product.getId().toString());
-        } catch (ProductNotFoundException e) {
+        } catch (FunctionalException e) {
             Assert.fail();
         }
 
@@ -201,7 +200,7 @@ public class MongoProductRepositoryTest {
         try {
             mongoProductRepository.store(objectMapper.writeValueAsString(product));
             mongoProductRepository.store(objectMapper.writeValueAsString(productDTO2));
-        } catch (AlreadyExistingProductException e) {
+        } catch (FunctionalException e) {
             Assert.fail("The database should not contain the product");
         } catch (JsonProcessingException e) {
             Assert.fail("Cannot serialize the product");
@@ -222,7 +221,7 @@ public class MongoProductRepositoryTest {
         try {
             mongoProductRepository.store(objectMapper.writeValueAsString(product));
             mongoProductRepository.store(objectMapper.writeValueAsString(productDTO2));
-        } catch (AlreadyExistingProductException e) {
+        } catch (FunctionalException e) {
             Assert.fail("The database should not contain the product");
         } catch (JsonProcessingException e) {
             Assert.fail("Cannot serialize the product");
@@ -231,8 +230,8 @@ public class MongoProductRepositoryTest {
         Assert.assertEquals("The database does not contain the elements", 1, mongoProductRepository.findPage(1, 1).size());
     }
 
-    @Test(expected = AlreadyExistingProductException.class)
-    public void checkStoreSameElement() throws AlreadyExistingProductException {
+    @Test(expected = FunctionalException.class)
+    public void checkStoreSameElement() throws FunctionalException {
         Product product = new Product();
         product.setId(UUID.randomUUID());
 
@@ -243,7 +242,7 @@ public class MongoProductRepositoryTest {
 
         try {
             mongoProductRepository.store(objectMapper.writeValueAsString(product));
-        } catch (AlreadyExistingProductException e) {
+        } catch (FunctionalException e) {
             Assert.fail("The repository should not contain this product already");
         } catch (JsonProcessingException e) {
             Assert.fail("Cannot serialize the product");
@@ -256,8 +255,8 @@ public class MongoProductRepositoryTest {
         }
     }
 
-    @Test(expected = ProductNotFoundException.class)
-    public void checkDeleteNoElement() throws ProductNotFoundException {
+    @Test(expected = FunctionalException.class)
+    public void checkDeleteNoElement() throws FunctionalException {
         mongoProductRepository.delete("uuid_not_in_the_database");
     }
 
