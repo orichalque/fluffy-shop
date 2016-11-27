@@ -5,7 +5,7 @@ import com.alma.group8.application.handlers.ExceptionHandling;
 import com.alma.group8.api.interfaces.ProductFactory;
 import com.alma.group8.api.interfaces.ProductService;
 import com.alma.group8.domain.interfaces.ProductsRepository;
-import com.alma.group8.infrastructure.repository.MongoRepository;
+import com.alma.group8.infrastructure.repository.MongoProductRepository;
 import com.alma.group8.domain.service.ProductServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -30,11 +30,11 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter{
 
     /**
      * Create the {@link ProductsRepository} and add it in the SpringContext
-     * @return the {@link org.springframework.beans.factory.annotation.Autowired} {@link MongoRepository}
+     * @return the {@link org.springframework.beans.factory.annotation.Autowired} {@link MongoProductRepository}
      */
     @Bean
     public ProductsRepository productsRepository() {
-        return new MongoRepository();
+        return new MongoProductRepository();
     }
 
     /**
