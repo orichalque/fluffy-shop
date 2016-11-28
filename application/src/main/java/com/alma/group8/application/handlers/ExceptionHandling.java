@@ -31,8 +31,20 @@ public class ExceptionHandling {
      * @param response the {@link HttpServletResponse}
      * @return the corresponding {@link Error}
      */
-    @ExceptionHandler({AlreadyExistingProductException.class, AlreadyExistingUserException.class})
-    public String handleAlreadyExistingProductException(Exception e, HttpServletResponse response) {
+    @ExceptionHandler({AlreadyExistingProductException.class})
+    public String handleAlreadyExistingProductException(AlreadyExistingProductException e, HttpServletResponse response) {
+        response.setStatus(HttpStatus.CONFLICT.value());
+        return createErrorAsString(HttpStatus.CONFLICT, e.getMessage());
+    }
+
+    /**
+     * Generate a custom error message when a {@link AlreadyExistingUserException} is raised
+     * @param e the {@link AlreadyExistingUserException}
+     * @param response the {@link HttpServletResponse}
+     * @return the corresponding {@link Error}
+     */
+    @ExceptionHandler({AlreadyExistingUserException.class})
+    public String handleAlreadyExistingUserException(AlreadyExistingUserException e, HttpServletResponse response) {
         response.setStatus(HttpStatus.CONFLICT.value());
         return createErrorAsString(HttpStatus.CONFLICT, e.getMessage());
     }
@@ -43,8 +55,20 @@ public class ExceptionHandling {
      * @param response the {@link HttpServletResponse}
      * @return the corresponding {@link Error}
      */
-    @ExceptionHandler({UserNotFoundException.class, NotEnoughProductsException.class})
-    public String handleNotFoundException(Exception e, HttpServletResponse response) {
+    @ExceptionHandler({UserNotFoundException.class})
+    public String handleUserNotFoundException(UserNotFoundException e, HttpServletResponse response) {
+        response.setStatus(HttpStatus.NOT_FOUND.value());
+        return createErrorAsString(HttpStatus.NOT_FOUND, e.getMessage());
+    }
+
+    /**
+     * Generate a custom error message when a {@link NotEnoughProductsException} is raised
+     * @param e the {@link FunctionalException}
+     * @param response the {@link HttpServletResponse}
+     * @return the corresponding {@link Error}
+     */
+    @ExceptionHandler({NotEnoughProductsException.class})
+    public String handleProductNotFoundException(NotEnoughProductsException e, HttpServletResponse response) {
         response.setStatus(HttpStatus.NOT_FOUND.value());
         return createErrorAsString(HttpStatus.NOT_FOUND, e.getMessage());
     }
@@ -67,20 +91,44 @@ public class ExceptionHandling {
      * @param response the {@link HttpServletResponse}
      * @return the custom {@link Error}
      */
-    @ExceptionHandler({IOException.class, FunctionalException.class})
-    public String handleIOException(Exception e, HttpServletResponse response) {
+    @ExceptionHandler({IOException.class})
+    public String handleIOException(IOException e, HttpServletResponse response) {
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         return createErrorAsString(HttpStatus.BAD_REQUEST, e.getMessage());
     }
 
     /**
-     * Generate a custom error when a {@link RuntimeException} or a {@link TechnicalException} is raised
-     * @param e the {@link Exception}
+     * Generate a custom error message when an {@link FunctionalException} is throwed
+     * @param e tje {@link FunctionalException}
+     * @param response the {@link HttpServletResponse}
+     * @return the custom {@link Error}
+     */
+    @ExceptionHandler({FunctionalException.class})
+    public String handleFunctional(FunctionalException e, HttpServletResponse response) {
+        response.setStatus(HttpStatus.BAD_REQUEST.value());
+        return createErrorAsString(HttpStatus.BAD_REQUEST, e.getMessage());
+    }
+
+    /**
+     * Generate a custom error when a {@link RuntimeException} is raised
+     * @param e the {@link RuntimeException}
      * @param response the {@link HttpServletResponse}
      * @return the corresponding {@link Error}
      */
-    @ExceptionHandler({RuntimeException.class, TechnicalException.class})
-    public String handleTechnicalException(Exception e, HttpServletResponse response) {
+    @ExceptionHandler({RuntimeException.class})
+    public String handleRuntimeException(RuntimeException e, HttpServletResponse response) {
+        response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        return createErrorAsString(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+    }
+
+    /**
+     * Generate a custom error when a {@link TechnicalException} is raised
+     * @param e the {@link TechnicalException}
+     * @param response the {@link HttpServletResponse}
+     * @return the corresponding {@link Error}
+     */
+    @ExceptionHandler({TechnicalException.class})
+    public String handleTechnicalException(TechnicalException e, HttpServletResponse response) {
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         return createErrorAsString(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
     }

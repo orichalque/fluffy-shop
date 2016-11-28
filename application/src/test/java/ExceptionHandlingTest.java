@@ -33,7 +33,7 @@ public class ExceptionHandlingTest {
     @Test
     public void testFunctionalExceptionHandler() throws IOException {
         FunctionalException functionalException = new FunctionalException("Functional Exception");
-        String errorAsString = exceptionHandling.handleIOException(functionalException, httpServletResponse);
+        String errorAsString = exceptionHandling.handleFunctional(functionalException, httpServletResponse);
         Error error = OBJECT_MAPPER.readValue(errorAsString, Error.class);
 
         Assert.assertEquals(400, error.getCode());
@@ -42,7 +42,7 @@ public class ExceptionHandlingTest {
     @Test
     public void testProductNotFoundException() throws IOException {
         ProductNotFoundException productNotFoundException = new ProductNotFoundException("product not found");
-        String errorAsString = exceptionHandling.handleNotFoundException(productNotFoundException, httpServletResponse);
+        String errorAsString = exceptionHandling.handleProductNotFoundException(productNotFoundException, httpServletResponse);
         Error error = OBJECT_MAPPER.readValue(errorAsString, Error.class);
 
         Assert.assertEquals(404, error.getCode());
@@ -51,7 +51,7 @@ public class ExceptionHandlingTest {
     @Test
     public void testRuntimeException() throws IOException {
         NullPointerException nullPointerException = new NullPointerException();
-        String errorAsString = exceptionHandling.handleTechnicalException(nullPointerException, httpServletResponse);
+        String errorAsString = exceptionHandling.handleRuntimeException(nullPointerException, httpServletResponse);
         Error error = OBJECT_MAPPER.readValue(errorAsString, Error.class);
 
         Assert.assertEquals(500, error.getCode());
@@ -69,7 +69,7 @@ public class ExceptionHandlingTest {
     @Test
     public void testNotEnoughProductException() throws IOException {
         NotEnoughProductsException notEnoughProductsException = new NotEnoughProductsException("Not Enough Product Exception");
-        String errorAsString = exceptionHandling.handleNotFoundException(notEnoughProductsException, httpServletResponse);
+        String errorAsString = exceptionHandling.handleProductNotFoundException(notEnoughProductsException, httpServletResponse);
         Error error = OBJECT_MAPPER.readValue(errorAsString, Error.class);
 
         Assert.assertEquals(404, error.getCode());
