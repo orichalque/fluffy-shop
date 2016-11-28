@@ -98,7 +98,7 @@ public class UserControllerTest {
             }
         }).when(userRepository).insert(Mockito.anyString());
 
-        mockMvc.perform(post("/admin/user/admin").contentType(MediaType.APPLICATION_JSON).content("mail3")).andExpect(status().isOk());
+        mockMvc.perform(post("/admin/user/admininistrator").contentType(MediaType.APPLICATION_JSON).content("mail3")).andExpect(status().isOk());
     }
 
     @Test

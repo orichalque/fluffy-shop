@@ -5,6 +5,7 @@ import com.alma.group8.api.interfaces.FunctionalFactory;
 import com.alma.group8.api.interfaces.UserRepository;
 import com.alma.group8.application.util.CommonVariables;
 import com.alma.group8.application.util.SoapMailVerifier;
+import com.alma.group8.domain.exceptions.AlreadyExistingUserException;
 import com.alma.group8.domain.exceptions.UserNotFoundException;
 import com.alma.group8.domain.model.Role;
 import com.alma.group8.domain.model.User;
@@ -76,7 +77,7 @@ public class UserController {
      * @param email the mail of the admin
      * @throws FunctionalException
      */
-    @RequestMapping(value = "/user/admin", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/admininistrator", method = RequestMethod.POST)
     public void insertAdmin(@RequestBody String email) throws FunctionalException {
         LOGGER.info(String.format("Receiving a POST Request to add an admin with the email %s", email));
 
@@ -92,7 +93,11 @@ public class UserController {
 
         userAsString = userFactory.serialize(user);
 
-        userRepository.insert(userAsString);
+        try {
+            userRepository.insert(userAsString);
+        } catch (FunctionalException e) {
+            throw new AlreadyExistingUserException(e);
+        }
     }
 
     /**
@@ -116,7 +121,11 @@ public class UserController {
 
         userAsString = userFactory.serialize(user);
 
-        userRepository.insert(userAsString);
+        try {
+            userRepository.insert(userAsString);
+        } catch (FunctionalException e) {
+            throw new AlreadyExistingUserException(e);
+        }
     }
 
 }
