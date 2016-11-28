@@ -44,7 +44,7 @@ public class UserController {
      * @return the {@link com.alma.group8.domain.model.User}
      */
     @RequestMapping(value ="/user/{email}", method = RequestMethod.GET)
-    @ResponseBody public String getUser(@PathVariable String email) throws UserNotFoundException {
+    public String getUser(@PathVariable String email) throws UserNotFoundException {
         LOGGER.info(String.format("Receiving a GET Request to get an user from the email %s", email));
 
         try {
@@ -55,7 +55,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
-    @ResponseBody public String getAllUsers() {
+    public String getAllUsers() {
         LOGGER.info("Receiving a GET Request to get all the users");
 
         Collection<String> userCollection = userRepository.findAll();
