@@ -1,5 +1,6 @@
 package com.alma.group8.application.handlers;
 
+import com.alma.group8.domain.exceptions.UserNotFoundException;
 import com.alma.group8.domain.model.Error;
 import com.alma.group8.domain.exceptions.AlreadyExistingProductException;
 import com.alma.group8.api.exceptions.FunctionalException;
@@ -57,7 +58,7 @@ public class ExceptionHandling {
      * @param response the {@link HttpServletResponse}
      * @return the corresponding {@link Error}
      */
-    @ExceptionHandler(ProductNotFoundException.class)
+    @ExceptionHandler({ProductNotFoundException.class, UserNotFoundException.class})
     public String handleProductNotFoundException(ProductNotFoundException e, HttpServletResponse response) {
         response.setStatus(HttpStatus.NOT_FOUND.value());
         return createErrorAsString(HttpStatus.NOT_FOUND, e.getMessage());

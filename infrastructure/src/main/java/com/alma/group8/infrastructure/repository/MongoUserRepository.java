@@ -48,10 +48,9 @@ public class MongoUserRepository implements UserRepository {
         LOGGER.info("Requesting the user database for all users");
         List<Document> documentList = Lists.newArrayList(userCollection.find(Document.class));
 
-        List<String> documentsAsString = new ArrayList<>();
-        documentList.forEach(document -> documentsAsString.add(document.toJson()));
+        documentList.forEach(document -> document.remove("_id"));
 
-        return documentsAsString;
+        return Lists.transform(documentList, Document::toJson);
     }
 
     @Override

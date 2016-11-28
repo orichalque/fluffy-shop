@@ -34,7 +34,7 @@ public class SpringMongoConfiguration{
      * @return the created {@link MongoCollection}
      */
     @DependsOn(MONGO_CLIENT)
-    @Bean(name = "ProductCollection")
+    @Bean(name = "productCollection")
     public MongoCollection<Document> productCollection() {
         MongoCollection<Document> mongoCollection;
         mongoCollection= mongoClient().getDatabase(CommonVariables.MONGO_DATABASE_NAME).getCollection(CommonVariables.PRODUCT_COLLECTION_NAME).withDocumentClass(Document.class);
@@ -43,7 +43,7 @@ public class SpringMongoConfiguration{
     }
 
     @DependsOn(MONGO_CLIENT)
-    @Bean(name = "UserCollection")
+    @Bean(name = "userCollection")
     public MongoCollection<Document> userCollection() {
         MongoCollection<Document> mongoCollection;
         mongoCollection= mongoClient().getDatabase(CommonVariables.MONGO_DATABASE_NAME).getCollection(CommonVariables.USER_COLLECTION_NAME).withDocumentClass(Document.class);

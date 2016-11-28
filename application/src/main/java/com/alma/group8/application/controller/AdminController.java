@@ -24,13 +24,13 @@ import java.util.Collection;
 @RequestMapping(value = CommonVariables.ADMIN_URL)
 public class AdminController {
     @Autowired
-    ProductsRepository productsRepository;
+    private ProductsRepository productsRepository;
 
     @Autowired
-    ProductService productService;
+    private ProductService productService;
 
     @Autowired
-    private FunctionalFactory<Product> functionalFactory;
+    private FunctionalFactory<Product> productFactory;
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
@@ -83,7 +83,7 @@ public class AdminController {
     public void addProduct(@RequestBody String productAsString) throws FunctionalException {
         LOGGER.info("Receiving a POST method");
 
-        functionalFactory.deserialize(productAsString);
+        productFactory.deserialize(productAsString);
         productsRepository.store(productAsString);
     }
 

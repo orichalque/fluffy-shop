@@ -1,6 +1,7 @@
 package com.alma.group8.application.controller;
 
 import com.alma.group8.api.exceptions.FunctionalException;
+import com.alma.group8.api.interfaces.FunctionalFactory;
 import com.alma.group8.api.interfaces.UserRepository;
 import com.alma.group8.application.util.CommonVariables;
 import com.alma.group8.domain.exceptions.AlreadyExistingUserException;
@@ -25,7 +26,10 @@ import java.util.Collection;
 public class UserController {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
+
+    @Autowired
+    private FunctionalFactory userFactory;
 
 
     private static final Logger LOGGER = Logger.getLogger(UserController.class);

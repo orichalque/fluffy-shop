@@ -53,9 +53,7 @@ public class MongoProductRepository implements ProductsRepository {
         //Transform a List<Document> to a list<ProductDTO> and removes the _id property from Mongo
         List<Document> documentList = Lists.newArrayList(productCollection.find(Document.class));
 
-        for (Document document : documentList) {
-            document.remove("_id");
-        }
+        documentList.forEach(document -> document.remove("_id"));
 
         return Lists.transform(documentList, Document::toJson);
     }

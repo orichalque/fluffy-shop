@@ -13,7 +13,7 @@ import java.io.IOException;
  */
 public class GenericFactory<T> implements FunctionalFactory<T> {
     //FIXME todo testing and usage in the controllers
-    
+
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     private final Class<T> type;
 
