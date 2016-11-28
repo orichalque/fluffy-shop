@@ -77,7 +77,7 @@ public class UserController {
      * @param email the mail of the admin
      * @throws FunctionalException
      */
-    @RequestMapping(value = "/user/admininistrator", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/administrator", method = RequestMethod.POST)
     public void insertAdmin(@RequestBody String email) throws FunctionalException {
         LOGGER.info(String.format("Receiving a POST Request to add an admin with the email %s", email));
 
