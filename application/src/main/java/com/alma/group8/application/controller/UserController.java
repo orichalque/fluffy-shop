@@ -44,7 +44,7 @@ public class UserController {
      * @return the {@link com.alma.group8.domain.model.User}
      */
     @RequestMapping(value ="/user/{email}", method = RequestMethod.GET)
-    @ResponseBody public String getUser(@PathVariable String email) throws FunctionalException {
+    @ResponseBody public String getUser(@PathVariable String email) throws UserNotFoundException {
         LOGGER.info(String.format("Receiving a GET Request to get an user from the email %s", email));
 
         try {

@@ -35,6 +35,7 @@ public class MongoUserRepository implements UserRepository {
             document.remove("_id");
             userFoundAsString = document.toJson();
         } else {
+            LOGGER.info("The user was not found");
             throw new FunctionalException("The user was not found");
         }
 

@@ -31,8 +31,19 @@ import java.util.List;
  * Configure the Spring Context
  */
 @Configuration
-@ComponentScan({"com.alma.group8.application.controller"})
+@ComponentScan({"com.alma.group8.application"})
 public class ApplicationConfiguration extends WebMvcConfigurerAdapter{
+
+
+    /**
+     * Create the ExceptionHandling and add it in the spring context
+     * He'll catch the exceptions throwed by the controller and build a custom http servlet answer
+     * @return the newly created ExceptionHandling
+     */
+    @Bean
+    public ExceptionHandling exceptionHandling() {
+        return new ExceptionHandling();
+    }
 
     /**
      * Create the {@link ProductsRepository} and add it in the SpringContext
@@ -82,17 +93,6 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter{
     @Bean
     public SoapMailVerifier soapMailVerifier() throws TechnicalException {
         return new SoapMailVerifier();
-    }
-
-
-    /**
-     * Create the ExceptionHandling and add it in the spring context
-     * He'll catch the exceptions throwed by the controller and build a custom http servlet answer
-     * @return the newly created ExceptionHandling
-     */
-    @Bean
-    public ExceptionHandling exceptionHandling() {
-        return new ExceptionHandling();
     }
 
     @Override

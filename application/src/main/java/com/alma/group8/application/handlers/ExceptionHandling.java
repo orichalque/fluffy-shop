@@ -1,16 +1,17 @@
 package com.alma.group8.application.handlers;
 
+import com.alma.group8.api.exceptions.FunctionalException;
 import com.alma.group8.api.exceptions.TechnicalException;
 import com.alma.group8.domain.exceptions.*;
 import com.alma.group8.domain.model.Error;
-import com.alma.group8.api.exceptions.FunctionalException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -21,6 +22,7 @@ import java.io.IOException;
  * when exception are throwed during the controller's job
  */
 @ControllerAdvice
+@EnableWebMvc
 public class ExceptionHandling {
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
@@ -32,8 +34,7 @@ public class ExceptionHandling {
      * @param response the {@link HttpServletResponse}
      * @return the corresponding {@link Error}
      */
-    @ExceptionHandler({AlreadyExistingProductException.class})
-    @ResponseBody
+    @ExceptionHandler(AlreadyExistingProductException.class)
     public String handleAlreadyExistingProductException(AlreadyExistingProductException e, HttpServletResponse response) {
         response.setStatus(HttpStatus.CONFLICT.value());
         return createErrorAsString(HttpStatus.CONFLICT, e.getMessage());
@@ -45,8 +46,7 @@ public class ExceptionHandling {
      * @param response the {@link HttpServletResponse}
      * @return the corresponding {@link Error}
      */
-    @ExceptionHandler({AlreadyExistingUserException.class})
-    @ResponseBody
+    @ExceptionHandler(AlreadyExistingUserException.class)
     public String handleAlreadyExistingUserException(AlreadyExistingUserException e, HttpServletResponse response) {
         response.setStatus(HttpStatus.CONFLICT.value());
         return createErrorAsString(HttpStatus.CONFLICT, e.getMessage());
@@ -58,10 +58,10 @@ public class ExceptionHandling {
      * @param response the {@link HttpServletResponse}
      * @return the corresponding {@link Error}
      */
-    @ExceptionHandler({UserNotFoundException.class})
-    @ResponseBody
+    @ExceptionHandler(UserNotFoundException.class)
     public String handleUserNotFoundException(UserNotFoundException e, HttpServletResponse response) {
         response.setStatus(HttpStatus.NOT_FOUND.value());
+        System.out.println("found");
         return createErrorAsString(HttpStatus.NOT_FOUND, e.getMessage());
     }
 
@@ -71,10 +71,10 @@ public class ExceptionHandling {
      * @param response the {@link HttpServletResponse}
      * @return the corresponding {@link Error}
      */
-    @ExceptionHandler({NotEnoughProductsException.class})
-    @ResponseBody
+    @ExceptionHandler(NotEnoughProductsException.class)
     public String handleProductNotFoundException(NotEnoughProductsException e, HttpServletResponse response) {
         response.setStatus(HttpStatus.NOT_FOUND.value());
+        System.out.print("Received");
         return createErrorAsString(HttpStatus.NOT_FOUND, e.getMessage());
     }
 
@@ -84,10 +84,10 @@ public class ExceptionHandling {
      * @param response the {@link HttpServletResponse}
      * @return the corresponding {@link Error}
      */
-    @ExceptionHandler({ProductNotFoundException.class})
-    @ResponseBody
+    @ExceptionHandler(ProductNotFoundException.class)
     public String handleProductNotFoundException(ProductNotFoundException e, HttpServletResponse response) {
         response.setStatus(HttpStatus.NOT_FOUND.value());
+        System.out.println("test");
         return createErrorAsString(HttpStatus.NOT_FOUND, e.getMessage());
     }
 
@@ -97,8 +97,7 @@ public class ExceptionHandling {
      * @param response the {@link HttpServletResponse}
      * @return the custom {@link Error}
      */
-    @ExceptionHandler({IOException.class})
-    @ResponseBody
+    @ExceptionHandler(IOException.class)
     public String handleIOException(IOException e, HttpServletResponse response) {
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         return createErrorAsString(HttpStatus.BAD_REQUEST, e.getMessage());
@@ -110,8 +109,7 @@ public class ExceptionHandling {
      * @param response the {@link HttpServletResponse}
      * @return the custom {@link Error}
      */
-    @ExceptionHandler({FunctionalException.class})
-    @ResponseBody
+    @ExceptionHandler(FunctionalException.class)
     public String handleFunctional(FunctionalException e, HttpServletResponse response) {
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         return createErrorAsString(HttpStatus.BAD_REQUEST, e.getMessage());
@@ -123,8 +121,7 @@ public class ExceptionHandling {
      * @param response the {@link HttpServletResponse}
      * @return the corresponding {@link Error}
      */
-    @ExceptionHandler({RuntimeException.class})
-    @ResponseBody
+    @ExceptionHandler(RuntimeException.class)
     public String handleRuntimeException(RuntimeException e, HttpServletResponse response) {
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         return createErrorAsString(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
@@ -136,8 +133,7 @@ public class ExceptionHandling {
      * @param response the {@link HttpServletResponse}
      * @return the corresponding {@link Error}
      */
-    @ExceptionHandler({TechnicalException.class})
-    @ResponseBody
+    @ExceptionHandler(TechnicalException.class)
     public String handleTechnicalException(TechnicalException e, HttpServletResponse response) {
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         return createErrorAsString(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
