@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -76,7 +77,7 @@ public class MongoProductRepository implements ProductsRepository {
     public void store(String product) throws FunctionalException {
         LOGGER.info("Adding a product to the database");
         Document document = Document.parse(product);
-
+        document.append("id", UUID.randomUUID().toString());
         Document currentProduct = productCollection.find(eq("id", document.get("id"))).first();
 
         if (currentProduct == null) {
