@@ -12,7 +12,13 @@ public enum ProductType {
     DIVERS("divers"),
     METAL("metal"),
     BOIS("bois"),
-    MINERAL("mineral");
+    MINERAL("mineral"),
+    ALIMENTAIRE("alimentaire"),
+    HYGIENE("hygiene"),
+    LIQUIDE("liquide"),
+    EPICERIE("epicerie"),
+    FRAIS("frais"),
+    BAZAR("bazar");
 
 
     private final String value;
