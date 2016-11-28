@@ -7,7 +7,10 @@ import com.alma.group8.api.interfaces.UserRepository;
 import com.alma.group8.application.handlers.ExceptionHandling;
 import com.alma.group8.domain.factories.ProductFactoryImpl;
 import com.alma.group8.domain.factories.UserFactoryImpl;
+import com.alma.group8.domain.model.Product;
+import com.alma.group8.domain.model.User;
 import com.alma.group8.domain.service.ProductServiceImpl;
+import com.alma.group8.infrastructure.factories.GenericFactory;
 import com.alma.group8.infrastructure.repository.MongoProductRepository;
 import com.alma.group8.infrastructure.repository.MongoUserRepository;
 import org.springframework.context.annotation.Bean;
@@ -74,7 +77,7 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter{
      */
     @Bean(name = "productFactory")
     public FunctionalFactory productFactory() {
-        return new ProductFactoryImpl();
+        return new GenericFactory(Product.class);
     }
 
 
@@ -84,7 +87,7 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter{
      */
     @Bean(name = "userFactory")
     public FunctionalFactory userFactory() {
-        return new UserFactoryImpl();
+        return new GenericFactory(User.class);
     }
 
 

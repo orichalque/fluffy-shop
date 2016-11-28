@@ -32,7 +32,7 @@ public class ExceptionHandling {
      * @return the corresponding {@link Error}
      */
     @ExceptionHandler({AlreadyExistingProductException.class, AlreadyExistingUserException.class})
-    public String handleAlreadyExistingProductException(AlreadyExistingProductException e, HttpServletResponse response) {
+    public String handleAlreadyExistingProductException(Exception e, HttpServletResponse response) {
         response.setStatus(HttpStatus.CONFLICT.value());
         return createErrorAsString(HttpStatus.CONFLICT, e.getMessage());
     }
@@ -43,8 +43,20 @@ public class ExceptionHandling {
      * @param response the {@link HttpServletResponse}
      * @return the corresponding {@link Error}
      */
-    @ExceptionHandler({ProductNotFoundException.class, UserNotFoundException.class, NotEnoughProductsException.class})
+    @ExceptionHandler({UserNotFoundException.class, NotEnoughProductsException.class})
     public String handleNotFoundException(Exception e, HttpServletResponse response) {
+        response.setStatus(HttpStatus.NOT_FOUND.value());
+        return createErrorAsString(HttpStatus.NOT_FOUND, e.getMessage());
+    }
+
+    /**
+     * Generate a custom error message when a {@link ProductNotFoundException} is raised
+     * @param e the {@link FunctionalException}
+     * @param response the {@link HttpServletResponse}
+     * @return the corresponding {@link Error}
+     */
+    @ExceptionHandler({ProductNotFoundException.class})
+    public String handleProductNotFoundException(ProductNotFoundException e, HttpServletResponse response) {
         response.setStatus(HttpStatus.NOT_FOUND.value());
         return createErrorAsString(HttpStatus.NOT_FOUND, e.getMessage());
     }
@@ -68,7 +80,7 @@ public class ExceptionHandling {
      * @return the corresponding {@link Error}
      */
     @ExceptionHandler({RuntimeException.class, TechnicalException.class})
-    public String handleTechnicalException(RuntimeException e, HttpServletResponse response) {
+    public String handleTechnicalException(Exception e, HttpServletResponse response) {
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         return createErrorAsString(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
     }
@@ -80,7 +92,7 @@ public class ExceptionHandling {
      * @return the custom serialized Error
      */
     private String createErrorAsString(HttpStatus httpStatus, String message) {
-        LOGGER.warn(String.format("%s error ra"));
+        LOGGER.warn(String.format("%s error", httpStatus));
         Error error = new Error();
         error.setCode(httpStatus.value());
         error.setMessage(message);

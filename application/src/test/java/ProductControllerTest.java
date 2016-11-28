@@ -1,3 +1,4 @@
+import com.alma.group8.api.exceptions.FunctionalException;
 import com.alma.group8.api.interfaces.ProductsRepository;
 import com.alma.group8.domain.model.Product;
 import com.alma.group8.domain.exceptions.ProductNotFoundException;
@@ -139,7 +140,7 @@ public class ProductControllerTest {
     //cas non passants
     @Test
     public void testNotFound() throws Exception {
-        Mockito.when(productsRepository.find(Mockito.anyString())).thenThrow(new ProductNotFoundException("Cannot find the product"));
+        Mockito.when(productsRepository.find(Mockito.anyString())).thenThrow(new FunctionalException("Cannot find the product"));
         mockMvc.perform(get("/api/product/id-not-in-the-database").accept(MediaType.ALL))
                 .andExpect(status().is(404));
     }

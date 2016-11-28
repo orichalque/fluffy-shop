@@ -76,6 +76,8 @@ public class UserController {
      */
     @RequestMapping(value = "/user/admin", method = RequestMethod.POST)
     public void insertAdmin(@RequestBody String email) throws FunctionalException {
+        LOGGER.info(String.format("Receiving a POST Request to add an admin with the email %s", email));
+
         User user = new User();
         user.setMail(email);
         user.setRole(Role.ADMIN);
@@ -96,6 +98,8 @@ public class UserController {
      */
     @RequestMapping(value = "/user/client", method = RequestMethod.POST)
     public void insertClient(@RequestBody String email) throws FunctionalException {
+        LOGGER.info(String.format("Receiving a POST Request to add an client with the email %s", email));
+
         User user = new User();
         user.setMail(email);
         user.setRole(Role.CLIENT);
@@ -103,6 +107,7 @@ public class UserController {
         String userAsString;
         try {
             userAsString = new ObjectMapper().writeValueAsString(user);
+
         } catch (JsonProcessingException e) {
             throw new AlreadyExistingUserException(e);
         }
