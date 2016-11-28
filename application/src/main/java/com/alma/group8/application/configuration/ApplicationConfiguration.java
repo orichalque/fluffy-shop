@@ -62,16 +62,6 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter{
     }
 
     /**
-     * Create the ExceptionHandling and add it in the spring context
-     * He'll catch the exceptions throwed by the controller and build a custom http servlet answer
-     * @return the newly created ExceptionHandling
-     */
-    @Bean
-    public ExceptionHandling exceptionHandling() {
-        return new ExceptionHandling();
-    }
-
-    /**
      * Create a FunctionalFactory and add it in the spring context
      * @return the newly created {@link FunctionalFactory}
      */
@@ -94,6 +84,16 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter{
         return new SoapMailVerifier();
     }
 
+
+    /**
+     * Create the ExceptionHandling and add it in the spring context
+     * He'll catch the exceptions throwed by the controller and build a custom http servlet answer
+     * @return the newly created ExceptionHandling
+     */
+    @Bean
+    public ExceptionHandling exceptionHandling() {
+        return new ExceptionHandling();
+    }
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {

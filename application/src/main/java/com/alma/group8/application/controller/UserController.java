@@ -13,6 +13,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -23,7 +24,7 @@ import java.util.Collection;
  */
 @CrossOrigin
 @RestController
-@RequestMapping(value = CommonVariables.ADMIN_URL)
+@RequestMapping(value = CommonVariables.ADMIN_URL, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class UserController {
 
     @Autowired
