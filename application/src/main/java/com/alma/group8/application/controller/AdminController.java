@@ -5,6 +5,7 @@ import com.alma.group8.api.interfaces.FunctionalFactory;
 import com.alma.group8.api.interfaces.ProductService;
 import com.alma.group8.api.interfaces.ProductsRepository;
 import com.alma.group8.application.util.CommonVariables;
+import com.alma.group8.domain.exceptions.AlreadyExistingProductException;
 import com.alma.group8.domain.model.Product;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -84,7 +85,11 @@ public class AdminController {
         LOGGER.info("Receiving a POST method");
 
         productFactory.deserialize(productAsString);
-        productsRepository.store(productAsString);
+        try {
+            productsRepository.store(productAsString);
+        } catch (FunctionalException e) {
+            throw new AlreadyExistingProductException(e);
+        }
     }
 
 }
