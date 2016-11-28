@@ -5,8 +5,6 @@ import com.alma.group8.api.interfaces.ProductService;
 import com.alma.group8.api.interfaces.ProductsRepository;
 import com.alma.group8.api.interfaces.UserRepository;
 import com.alma.group8.application.handlers.ExceptionHandling;
-import com.alma.group8.domain.factories.ProductFactoryImpl;
-import com.alma.group8.domain.factories.UserFactoryImpl;
 import com.alma.group8.domain.model.Product;
 import com.alma.group8.domain.model.User;
 import com.alma.group8.domain.service.ProductServiceImpl;
@@ -80,10 +78,9 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter{
         return new GenericFactory(Product.class);
     }
 
-
     /**
-     * Create a {@link UserFactoryImpl}
-     * @return the {@link UserFactoryImpl}
+     * Create a FunctionalFactory for users and add it in the spring context
+     * @return the newly created {@link FunctionalFactory}
      */
     @Bean(name = "userFactory")
     public FunctionalFactory userFactory() {

@@ -1,10 +1,8 @@
 com\alma\group8\domain\service\ProductServiceImpl.class
 com\alma\group8\domain\exceptions\InvalidProductException.class
-com\alma\group8\domain\factories\ProductFactoryImpl.class
 com\alma\group8\domain\model\Product.class
 com\alma\group8\domain\exceptions\AlreadyExistingUserException.class
 com\alma\group8\domain\model\Role.class
-com\alma\group8\domain\factories\UserFactoryImpl.class
 com\alma\group8\domain\model\Error.class
 com\alma\group8\domain\exceptions\UserNotFoundException.class
 com\alma\group8\domain\model\User.class

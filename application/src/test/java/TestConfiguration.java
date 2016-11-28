@@ -1,12 +1,13 @@
 import com.alma.group8.api.interfaces.FunctionalFactory;
+import com.alma.group8.api.interfaces.ProductService;
 import com.alma.group8.api.interfaces.ProductsRepository;
 import com.alma.group8.api.interfaces.UserRepository;
 import com.alma.group8.application.controller.ProductController;
 import com.alma.group8.application.controller.UserController;
-import com.alma.group8.domain.factories.ProductFactoryImpl;
 import com.alma.group8.application.handlers.ExceptionHandling;
-import com.alma.group8.api.interfaces.ProductService;
+import com.alma.group8.domain.model.Product;
 import com.alma.group8.domain.service.ProductServiceImpl;
+import com.alma.group8.infrastructure.factories.GenericFactory;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -48,6 +49,6 @@ public class TestConfiguration {
 
     @Bean
     public FunctionalFactory productFactory() {
-        return new ProductFactoryImpl();
+        return new GenericFactory(Product.class);
     }
 }

@@ -1,8 +1,8 @@
 package com.alma.group8.application.controller;
 
+import com.alma.group8.api.exceptions.FunctionalException;
 import com.alma.group8.api.interfaces.FunctionalFactory;
 import com.alma.group8.api.interfaces.ProductService;
-import com.alma.group8.api.exceptions.FunctionalException;
 import com.alma.group8.api.interfaces.ProductsRepository;
 import com.alma.group8.application.util.CommonVariables;
 import com.alma.group8.domain.exceptions.NotEnoughProductsException;
@@ -14,7 +14,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
 
 import java.util.Collection;
 
