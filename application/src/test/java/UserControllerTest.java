@@ -1,4 +1,5 @@
 import com.alma.group8.api.interfaces.UserRepository;
+import com.alma.group8.application.util.SoapMailVerifier;
 import com.alma.group8.domain.model.Role;
 import com.alma.group8.domain.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -42,6 +43,9 @@ public class UserControllerTest {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private SoapMailVerifier soapMailVerifier;
+
     private MockMvc mockMvc;
 
     private ArrayList<User> users;
@@ -49,6 +53,7 @@ public class UserControllerTest {
     @Before
     public void setUp() {
         users = new ArrayList<>();
+        Mockito.when(soapMailVerifier.isValid(Mockito.anyString())).thenReturn(Boolean.TRUE);
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
         User user = new User();

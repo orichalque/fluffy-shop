@@ -4,7 +4,7 @@ import com.alma.group8.api.exceptions.FunctionalException;
 import com.alma.group8.api.interfaces.FunctionalFactory;
 import com.alma.group8.api.interfaces.UserRepository;
 import com.alma.group8.application.util.CommonVariables;
-import com.alma.group8.domain.exceptions.AlreadyExistingUserException;
+import com.alma.group8.application.util.SoapMailVerifier;
 import com.alma.group8.domain.exceptions.UserNotFoundException;
 import com.alma.group8.domain.model.Role;
 import com.alma.group8.domain.model.User;
@@ -31,6 +31,8 @@ public class UserController {
     @Autowired
     private FunctionalFactory userFactory;
 
+    @Autowired
+    private SoapMailVerifier soapMailVerifier;
 
     private static final Logger LOGGER = Logger.getLogger(UserController.class);
 
@@ -78,16 +80,18 @@ public class UserController {
     public void insertAdmin(@RequestBody String email) throws FunctionalException {
         LOGGER.info(String.format("Receiving a POST Request to add an admin with the email %s", email));
 
+        if (! soapMailVerifier.isValid(email)){
+            throw new FunctionalException("Invalid email");
+        }
+
         User user = new User();
         user.setMail(email);
         user.setRole(Role.ADMIN);
 
         String userAsString;
-        try {
-            userAsString = new ObjectMapper().writeValueAsString(user);
-        } catch (JsonProcessingException e) {
-            throw new AlreadyExistingUserException(e);
-        }
+
+        userAsString = userFactory.serialize(user);
+
         userRepository.insert(userAsString);
     }
 
@@ -100,17 +104,18 @@ public class UserController {
     public void insertClient(@RequestBody String email) throws FunctionalException {
         LOGGER.info(String.format("Receiving a POST Request to add an client with the email %s", email));
 
+        if (! soapMailVerifier.isValid(email)){
+            throw new FunctionalException("Invalid email");
+        }
+
         User user = new User();
         user.setMail(email);
         user.setRole(Role.CLIENT);
 
         String userAsString;
-        try {
-            userAsString = new ObjectMapper().writeValueAsString(user);
 
-        } catch (JsonProcessingException e) {
-            throw new AlreadyExistingUserException(e);
-        }
+        userAsString = userFactory.serialize(user);
+
         userRepository.insert(userAsString);
     }
 

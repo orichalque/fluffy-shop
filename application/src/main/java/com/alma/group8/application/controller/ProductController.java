@@ -112,6 +112,9 @@ public class ProductController {
         } catch (FunctionalException e) {
             throw new ProductNotFoundException(e);
         }
+
+        //TODO: Get the body of the request and make the customer pay
+
         return productAsString;
     }
 }

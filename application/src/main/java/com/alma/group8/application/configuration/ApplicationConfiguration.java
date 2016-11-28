@@ -1,10 +1,12 @@
 package com.alma.group8.application.configuration;
 
+import com.alma.group8.api.exceptions.TechnicalException;
 import com.alma.group8.api.interfaces.FunctionalFactory;
 import com.alma.group8.api.interfaces.ProductService;
 import com.alma.group8.api.interfaces.ProductsRepository;
 import com.alma.group8.api.interfaces.UserRepository;
 import com.alma.group8.application.handlers.ExceptionHandling;
+import com.alma.group8.application.util.SoapMailVerifier;
 import com.alma.group8.domain.model.Product;
 import com.alma.group8.domain.model.User;
 import com.alma.group8.domain.service.ProductServiceImpl;
@@ -85,6 +87,11 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter{
     @Bean(name = "userFactory")
     public FunctionalFactory userFactory() {
         return new GenericFactory(User.class);
+    }
+
+    @Bean
+    public SoapMailVerifier soapMailVerifier() throws TechnicalException {
+        return new SoapMailVerifier();
     }
 
 
