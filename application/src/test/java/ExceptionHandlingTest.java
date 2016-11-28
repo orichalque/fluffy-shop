@@ -33,7 +33,7 @@ public class ExceptionHandlingTest {
     @Test
     public void testFunctionalExceptionHandler() throws IOException {
         FunctionalException functionalException = new FunctionalException("Functional Exception");
-        String errorAsString = exceptionHandling.handleFunctionalException(functionalException, httpServletResponse);
+        String errorAsString = exceptionHandling.handleIOException(functionalException, httpServletResponse);
         Error error = OBJECT_MAPPER.readValue(errorAsString, Error.class);
 
         Assert.assertEquals(400, error.getCode());
@@ -42,7 +42,7 @@ public class ExceptionHandlingTest {
     @Test
     public void testProductNotFoundException() throws IOException {
         ProductNotFoundException productNotFoundException = new ProductNotFoundException("product not found");
-        String errorAsString = exceptionHandling.handleProductNotFoundException(productNotFoundException, httpServletResponse);
+        String errorAsString = exceptionHandling.handleNotFoundException(productNotFoundException, httpServletResponse);
         Error error = OBJECT_MAPPER.readValue(errorAsString, Error.class);
 
         Assert.assertEquals(404, error.getCode());
@@ -69,7 +69,7 @@ public class ExceptionHandlingTest {
     @Test
     public void testNotEnoughProductException() throws IOException {
         NotEnoughProductsException notEnoughProductsException = new NotEnoughProductsException("Not Enough Product Exception");
-        String errorAsString = exceptionHandling.handleNotEnoughProductsException(notEnoughProductsException, httpServletResponse);
+        String errorAsString = exceptionHandling.handleNotFoundException(notEnoughProductsException, httpServletResponse);
         Error error = OBJECT_MAPPER.readValue(errorAsString, Error.class);
 
         Assert.assertEquals(404, error.getCode());

@@ -48,7 +48,6 @@ public class UserController {
         } catch (FunctionalException e) {
             throw new UserNotFoundException(e);
         }
-
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)

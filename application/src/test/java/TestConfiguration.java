@@ -1,6 +1,8 @@
 import com.alma.group8.api.interfaces.FunctionalFactory;
 import com.alma.group8.api.interfaces.ProductsRepository;
+import com.alma.group8.api.interfaces.UserRepository;
 import com.alma.group8.application.controller.ProductController;
+import com.alma.group8.application.controller.UserController;
 import com.alma.group8.domain.factories.ProductFactoryImpl;
 import com.alma.group8.application.handlers.ExceptionHandling;
 import com.alma.group8.api.interfaces.ProductService;
@@ -24,6 +26,11 @@ public class TestConfiguration {
     }
 
     @Bean
+    public UserRepository userRepository() {
+        return Mockito.mock(UserRepository.class);
+    }
+
+    @Bean
     public ProductService productService() {
         return new ProductServiceImpl();
     }
@@ -32,6 +39,9 @@ public class TestConfiguration {
     public ProductController productController() {
         return new ProductController();
     }
+
+    @Bean
+    public UserController userController() { return new UserController(); }
 
     @Bean
     public ExceptionHandling exceptionHandling() { return new ExceptionHandling(); }

@@ -1,11 +1,9 @@
 package com.alma.group8.application.handlers;
 
-import com.alma.group8.domain.exceptions.UserNotFoundException;
+import com.alma.group8.api.exceptions.TechnicalException;
+import com.alma.group8.domain.exceptions.*;
 import com.alma.group8.domain.model.Error;
-import com.alma.group8.domain.exceptions.AlreadyExistingProductException;
 import com.alma.group8.api.exceptions.FunctionalException;
-import com.alma.group8.domain.exceptions.NotEnoughProductsException;
-import com.alma.group8.domain.exceptions.ProductNotFoundException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
@@ -28,29 +26,16 @@ public class ExceptionHandling {
     private static final Logger LOGGER = Logger.getLogger(ExceptionHandling.class);
 
     /**
-     * Generate a custom error message when a {@link FunctionalException} is raised
-     * @param e the {@link FunctionalException}
-     * @param response the {@link HttpServletResponse}
-     * @return the corresponding {@link Error}
-     */
-    @ExceptionHandler(FunctionalException.class)
-    public String handleFunctionalException(FunctionalException e, HttpServletResponse response) {
-        response.setStatus(HttpStatus.BAD_REQUEST.value());
-        return createErrorAsString(HttpStatus.BAD_REQUEST, e.getMessage());
-    }
-
-    /**
      * Generate a custom error message when a {@link AlreadyExistingProductException} is raised
      * @param e the {@link AlreadyExistingProductException}
      * @param response the {@link HttpServletResponse}
      * @return the corresponding {@link Error}
      */
-    @ExceptionHandler(AlreadyExistingProductException.class)
+    @ExceptionHandler({AlreadyExistingProductException.class, AlreadyExistingUserException.class})
     public String handleAlreadyExistingProductException(AlreadyExistingProductException e, HttpServletResponse response) {
         response.setStatus(HttpStatus.CONFLICT.value());
         return createErrorAsString(HttpStatus.CONFLICT, e.getMessage());
     }
-
 
     /**
      * Generate a custom error message when a {@link ProductNotFoundException} is raised
@@ -58,20 +43,8 @@ public class ExceptionHandling {
      * @param response the {@link HttpServletResponse}
      * @return the corresponding {@link Error}
      */
-    @ExceptionHandler({ProductNotFoundException.class, UserNotFoundException.class})
-    public String handleProductNotFoundException(ProductNotFoundException e, HttpServletResponse response) {
-        response.setStatus(HttpStatus.NOT_FOUND.value());
-        return createErrorAsString(HttpStatus.NOT_FOUND, e.getMessage());
-    }
-
-    /**
-     * Generate a custom error message when a {@link FunctionalException} is raised
-     * @param e the {@link FunctionalException}
-     * @param response the {@link HttpServletResponse}
-     * @return the corresponding {@link Error}
-     */
-    @ExceptionHandler(NotEnoughProductsException.class)
-    public String handleNotEnoughProductsException(NotEnoughProductsException e, HttpServletResponse response) {
+    @ExceptionHandler({ProductNotFoundException.class, UserNotFoundException.class, NotEnoughProductsException.class})
+    public String handleNotFoundException(Exception e, HttpServletResponse response) {
         response.setStatus(HttpStatus.NOT_FOUND.value());
         return createErrorAsString(HttpStatus.NOT_FOUND, e.getMessage());
     }
@@ -82,23 +55,22 @@ public class ExceptionHandling {
      * @param response the {@link HttpServletResponse}
      * @return the custom {@link Error}
      */
-    @ExceptionHandler(IOException.class)
-    public String handleIOException(IOException e, HttpServletResponse response) {
+    @ExceptionHandler({IOException.class, FunctionalException.class})
+    public String handleIOException(Exception e, HttpServletResponse response) {
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         return createErrorAsString(HttpStatus.BAD_REQUEST, e.getMessage());
     }
 
     /**
-     * Generate a custom error when a {@link RuntimeException} is raised
-     * @param e the {@link RuntimeException}
+     * Generate a custom error when a {@link RuntimeException} or a {@link TechnicalException} is raised
+     * @param e the {@link Exception}
      * @param response the {@link HttpServletResponse}
      * @return the corresponding {@link Error}
      */
-    @ExceptionHandler(RuntimeException.class)
+    @ExceptionHandler({RuntimeException.class, TechnicalException.class})
     public String handleTechnicalException(RuntimeException e, HttpServletResponse response) {
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         return createErrorAsString(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
-
     }
 
     /**
@@ -108,6 +80,7 @@ public class ExceptionHandling {
      * @return the custom serialized Error
      */
     private String createErrorAsString(HttpStatus httpStatus, String message) {
+        LOGGER.warn(String.format("%s error ra"));
         Error error = new Error();
         error.setCode(httpStatus.value());
         error.setMessage(message);
