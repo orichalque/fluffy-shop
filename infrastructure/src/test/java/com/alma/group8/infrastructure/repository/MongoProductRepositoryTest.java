@@ -228,7 +228,6 @@ public class MongoProductRepositoryTest {
     }
 
     @Test(expected = FunctionalException.class)
-    @Ignore
     public void checkStoreSameElement() throws FunctionalException {
         Product product = new Product();
         product.setId(UUID.randomUUID());

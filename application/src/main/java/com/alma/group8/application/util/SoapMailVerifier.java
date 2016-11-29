@@ -4,6 +4,7 @@ import com.alma.group8.api.exceptions.TechnicalException;
 import com.alma.group8.api.interfaces.MailVerifier;
 import com.cdyne.ws.EmailVerNoTestEmailSoap;
 import com.cdyne.ws.ReturnIndicator;
+import org.apache.log4j.Logger;
 
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
@@ -17,6 +18,8 @@ import java.net.URL;
 public class SoapMailVerifier implements MailVerifier {
 
     private EmailVerNoTestEmailSoap verifyEmail;
+
+    private static final Logger LOGGER = Logger.getLogger(MailVerifier.class);
 
     /**
      * Constructor : Fetch the SOAP WebService
@@ -40,8 +43,9 @@ public class SoapMailVerifier implements MailVerifier {
      */
     @Override
     public boolean isValid(String email) {
+        LOGGER.info(String.format("Verifying the email %s", email));
         ReturnIndicator returnIndicator = verifyEmail.verifyEmail(email, "0");
-
+        LOGGER.debug(returnIndicator.getResponseText());
         return returnIndicator.getResponseCode() != 0;
     }
 

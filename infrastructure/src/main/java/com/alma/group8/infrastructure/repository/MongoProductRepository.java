@@ -77,7 +77,11 @@ public class MongoProductRepository implements ProductsRepository {
     public void store(String product) throws FunctionalException {
         LOGGER.info("Adding a product to the database");
         Document document = Document.parse(product);
-        document.append("id", UUID.randomUUID().toString());
+
+        if (document.get("id") == null) {
+            document.append("id", UUID.randomUUID().toString());
+        }
+
         Document currentProduct = productCollection.find(eq("id", document.get("id"))).first();
 
         if (currentProduct == null) {

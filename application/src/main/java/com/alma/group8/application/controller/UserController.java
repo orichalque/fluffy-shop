@@ -110,7 +110,7 @@ public class UserController {
     public void insertClient(@RequestBody String email) throws FunctionalException {
         LOGGER.info(String.format("Receiving a POST Request to add an client with the email %s", email));
 
-        if (! soapMailVerifier.isValid(email)){
+        if (! soapMailVerifier.isValid(email.replaceAll("\\*", "."))){
             throw new FunctionalException("Invalid email");
         }
 
