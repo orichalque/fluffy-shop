@@ -7,13 +7,9 @@ import com.alma.group8.api.interfaces.ProductsRepository;
 import com.alma.group8.application.util.CommonVariables;
 import com.alma.group8.domain.exceptions.AlreadyExistingProductException;
 import com.alma.group8.domain.model.Product;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Collection;
 
 /**
  * Created by Thibault on 18/11/16.
@@ -33,38 +29,7 @@ public class AdminController {
     @Autowired
     private FunctionalFactory<Product> productFactory;
 
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-
     private static final Logger LOGGER = Logger.getLogger(AdminController.class);
-
-
-    //TODO delete this method, ajouté pour verifier l'accès a /admin
-    @RequestMapping(value = "/products", method = RequestMethod.GET)
-    @ResponseBody public String getProducts(@RequestParam(value = "page", required = false) Integer page,
-                                            @RequestParam(value = "size", required = false) Integer size) throws FunctionalException {
-        LOGGER.info("Receiving a GET request on /products");
-        String jsonArrayOfProducts = null;
-        Collection<String> products;
-
-        if(page == null || size == null) {
-            products = productsRepository.findAll();
-        } else {
-            products = productsRepository.findPage(page, size);
-        }
-
-        try {
-            //FIXME : Use the Product Factory
-            //The results serialized by the object mapper need some refactoring
-            jsonArrayOfProducts = OBJECT_MAPPER.writeValueAsString(products).replace("\\", "");
-            jsonArrayOfProducts = jsonArrayOfProducts.replace("\"{", "{");
-            jsonArrayOfProducts = jsonArrayOfProducts.replace("}\"", "}");
-        } catch (JsonProcessingException e) {
-            LOGGER.warn("Cannot serialize the result", e);
-        }
-
-        return jsonArrayOfProducts;
-    }
-
 
     /**
      * Delete a product from the database

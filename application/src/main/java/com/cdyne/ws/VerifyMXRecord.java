@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * <p>Classe Java pour anonymous complex type.
  * 
- * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
+ * <p>Le fragment de schema suivant indique le contenu attendu figurant dans cette classe.
  * 
  * <pre>
  * &lt;complexType>
@@ -41,7 +41,7 @@ public class VerifyMXRecord {
     protected String licenseKey;
 
     /**
-     * Obtient la valeur de la propriété email.
+     * Obtient la valeur de la propriete email.
      * 
      * @return
      *     possible object is
@@ -53,7 +53,7 @@ public class VerifyMXRecord {
     }
 
     /**
-     * Définit la valeur de la propriété email.
+     * Definit la valeur de la propriete email.
      * 
      * @param value
      *     allowed object is
@@ -65,7 +65,7 @@ public class VerifyMXRecord {
     }
 
     /**
-     * Obtient la valeur de la propriété licenseKey.
+     * Obtient la valeur de la propriete licenseKey.
      * 
      * @return
      *     possible object is
@@ -77,7 +77,7 @@ public class VerifyMXRecord {
     }
 
     /**
-     * Définit la valeur de la propriété licenseKey.
+     * Definit la valeur de la propriete licenseKey.
      * 
      * @param value
      *     allowed object is

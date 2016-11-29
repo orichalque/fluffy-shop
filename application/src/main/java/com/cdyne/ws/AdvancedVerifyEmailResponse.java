@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * <p>Classe Java pour anonymous complex type.
  * 
- * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
+ * <p>Le fragment de schema suivant indique le contenu attendu figurant dans cette classe.
  * 
  * <pre>
  * &lt;complexType>
@@ -38,7 +38,7 @@ public class AdvancedVerifyEmailResponse {
     protected ReturnIndicator advancedVerifyEmailResult;
 
     /**
-     * Obtient la valeur de la propriété advancedVerifyEmailResult.
+     * Obtient la valeur de la propriete advancedVerifyEmailResult.
      * 
      * @return
      *     possible object is
@@ -50,7 +50,7 @@ public class AdvancedVerifyEmailResponse {
     }
 
     /**
-     * Définit la valeur de la propriété advancedVerifyEmailResult.
+     * Definit la valeur de la propriete advancedVerifyEmailResult.
      * 
      * @param value
      *     allowed object is

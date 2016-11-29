@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * <p>Classe Java pour anonymous complex type.
  * 
- * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
+ * <p>Le fragment de schema suivant indique le contenu attendu figurant dans cette classe.
  * 
  * <pre>
  * &lt;complexType>
@@ -38,7 +38,7 @@ public class VerifyMXRecordResponse {
     protected int verifyMXRecordResult;
 
     /**
-     * Obtient la valeur de la propriété verifyMXRecordResult.
+     * Obtient la valeur de la propriete verifyMXRecordResult.
      * 
      */
     public int getVerifyMXRecordResult() {
@@ -46,7 +46,7 @@ public class VerifyMXRecordResponse {
     }
 
     /**
-     * Définit la valeur de la propriété verifyMXRecordResult.
+     * Definit la valeur de la propriete verifyMXRecordResult.
      * 
      */
     public void setVerifyMXRecordResult(int value) {

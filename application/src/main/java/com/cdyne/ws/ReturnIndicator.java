@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * <p>Classe Java pour ReturnIndicator complex type.
  * 
- * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
+ * <p>Le fragment de schema suivant indique le contenu attendu figurant dans cette classe.
  * 
  * <pre>
  * &lt;complexType name="ReturnIndicator">
@@ -48,7 +48,7 @@ public class ReturnIndicator {
     protected boolean goodEmail;
 
     /**
-     * Obtient la valeur de la propriété responseText.
+     * Obtient la valeur de la propriete responseText.
      * 
      * @return
      *     possible object is
@@ -60,7 +60,7 @@ public class ReturnIndicator {
     }
 
     /**
-     * Définit la valeur de la propriété responseText.
+     * Definit la valeur de la propriete responseText.
      * 
      * @param value
      *     allowed object is
@@ -72,7 +72,7 @@ public class ReturnIndicator {
     }
 
     /**
-     * Obtient la valeur de la propriété responseCode.
+     * Obtient la valeur de la propriete responseCode.
      * 
      */
     public int getResponseCode() {
@@ -80,7 +80,7 @@ public class ReturnIndicator {
     }
 
     /**
-     * Définit la valeur de la propriété responseCode.
+     * Definit la valeur de la propriete responseCode.
      * 
      */
     public void setResponseCode(int value) {
@@ -88,7 +88,7 @@ public class ReturnIndicator {
     }
 
     /**
-     * Obtient la valeur de la propriété lastMailServer.
+     * Obtient la valeur de la propriete lastMailServer.
      * 
      * @return
      *     possible object is
@@ -100,7 +100,7 @@ public class ReturnIndicator {
     }
 
     /**
-     * Définit la valeur de la propriété lastMailServer.
+     * Definit la valeur de la propriete lastMailServer.
      * 
      * @param value
      *     allowed object is
@@ -112,7 +112,7 @@ public class ReturnIndicator {
     }
 
     /**
-     * Obtient la valeur de la propriété goodEmail.
+     * Obtient la valeur de la propriete goodEmail.
      * 
      */
     public boolean isGoodEmail() {
@@ -120,7 +120,7 @@ public class ReturnIndicator {
     }
 
     /**
-     * Définit la valeur de la propriété goodEmail.
+     * Definit la valeur de la propriete goodEmail.
      * 
      */
     public void setGoodEmail(boolean value) {

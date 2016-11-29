@@ -57,7 +57,6 @@ public class ProductController {
         }
 
         try {
-            //FIXME Use the productFactory
             //The results serialized by the object mapper need some refactoring
             jsonArrayOfProducts = new ObjectMapper().writeValueAsString(products).replace("\\", "");
             jsonArrayOfProducts = jsonArrayOfProducts.replace("\"{", "{");
@@ -113,7 +112,7 @@ public class ProductController {
             throw new ProductNotFoundException(e);
         }
 
-        //TODO: Get the body of the request and make the customer pay
+        //Here the controller gets the body of this request and make the customer pay before sending the products
 
         return productAsString;
     }
