@@ -1,3 +1,4 @@
+import com.alma.group8.api.exceptions.FunctionalException;
 import com.alma.group8.api.interfaces.UserRepository;
 import com.alma.group8.application.util.SoapMailVerifier;
 import com.alma.group8.domain.model.Role;
@@ -10,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
@@ -88,14 +90,11 @@ public class UserControllerTest {
 
     @Test
     public void testPostAdmin() throws Exception {
-        Mockito.doAnswer(new Answer<Void>() {
-            @Override
-            public Void answer(InvocationOnMock invocationOnMock) throws Throwable {
-                User user = new ObjectMapper().readValue((String) invocationOnMock.getArguments()[0], User.class);
-                Assert.assertEquals("mail3", user.getMail());
-                Assert.assertEquals(Role.ADMIN, user.getRole());
-                return null;
-            }
+        Mockito.doAnswer(invocationOnMock -> {
+            User user = new ObjectMapper().readValue((String) invocationOnMock.getArguments()[0], User.class);
+            Assert.assertEquals("mail3", user.getMail());
+            Assert.assertEquals(Role.ADMIN, user.getRole());
+            return null;
         }).when(userRepository).insert(Mockito.anyString());
 
         mockMvc.perform(post("/admin/user/admin").contentType(MediaType.APPLICATION_JSON).content("mail3")).andExpect(status().isOk());
@@ -103,16 +102,36 @@ public class UserControllerTest {
 
     @Test
     public void testPostClient() throws Exception {
-        Mockito.doAnswer(new Answer<Void>() {
-            @Override
-            public Void answer(InvocationOnMock invocationOnMock) throws Throwable {
-                User user = new ObjectMapper().readValue((String) invocationOnMock.getArguments()[0], User.class);
-                Assert.assertEquals("mail3", user.getMail());
-                Assert.assertEquals(Role.CLIENT, user.getRole());
-                return null;
-            }
+        Mockito.doAnswer(invocationOnMock -> {
+            User user = new ObjectMapper().readValue((String) invocationOnMock.getArguments()[0], User.class);
+            Assert.assertEquals("mail3", user.getMail());
+            Assert.assertEquals(Role.CLIENT, user.getRole());
+            return null;
         }).when(userRepository).insert(Mockito.anyString());
 
         mockMvc.perform(post("/admin/user/client").contentType(MediaType.APPLICATION_JSON).content("mail3")).andExpect(status().isOk());
     }
+
+    @Test
+    public void testGetUserNok() throws Exception {
+        Mockito.when(userRepository.find(Mockito.anyString())).thenThrow(new FunctionalException("Cannot find user"));
+
+        mockMvc.perform(get("/admin/user/mail1"))
+                .andExpect(status().is(404));
+    }
+
+    @Test
+    public void testPostAdminNok() throws Exception {
+        Mockito.doThrow(new FunctionalException("err")).when(userRepository).insert(Mockito.anyString());
+
+        mockMvc.perform(post("/admin/user/admin").contentType(MediaType.APPLICATION_JSON).content("mail3")).andExpect(status().is(409));
+    }
+
+    @Test
+    public void testPostClientNok() throws Exception {
+        Mockito.doThrow(new FunctionalException("err")).when(userRepository).insert(Mockito.anyString());
+
+        mockMvc.perform(post("/admin/user/client").contentType(MediaType.APPLICATION_JSON).content("mail3")).andExpect(status().is(409));
+    }
+
 }
