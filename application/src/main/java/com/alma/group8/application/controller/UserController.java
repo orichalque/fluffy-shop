@@ -129,4 +129,13 @@ public class UserController {
         }
     }
 
+    /**
+     * Delete a user (client/admin) from the database
+     * @param id the id of the user to delete
+     */
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
+    public void deleteProduct(@PathVariable String id) throws FunctionalException {
+        userRepository.delete(id);
+    }
+
 }

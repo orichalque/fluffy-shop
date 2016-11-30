@@ -2,6 +2,7 @@ package com.alma.group8.api.interfaces;
 
 import com.alma.group8.api.exceptions.FunctionalException;
 
+import java.rmi.server.UID;
 import java.util.Collection;
 
 /**
@@ -30,4 +31,11 @@ public interface UserRepository {
      * @throws FunctionalException if the user already exists
      */
     void insert(String userAsString) throws FunctionalException;
+
+    /**
+     * Delete the user in the database with the ID
+     * @param uuid the id of the user to remove
+     * @throws FunctionalException if the uuid doesn't match with any user
+     */
+    void delete(String uuid) throws FunctionalException;
 }
