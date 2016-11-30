@@ -2,6 +2,7 @@ import com.alma.group8.api.interfaces.FunctionalFactory;
 import com.alma.group8.api.interfaces.ProductService;
 import com.alma.group8.api.interfaces.ProductsRepository;
 import com.alma.group8.api.interfaces.UserRepository;
+import com.alma.group8.application.controller.AdminController;
 import com.alma.group8.application.controller.ProductController;
 import com.alma.group8.application.controller.UserController;
 import com.alma.group8.application.handlers.ExceptionHandling;
@@ -34,6 +35,7 @@ public class TestConfiguration {
 
     @Bean
     public SoapMailVerifier soapMailVerifier() { return Mockito.mock(SoapMailVerifier.class); }
+
     @Bean
     public ProductService productService() {
         return new ProductServiceImpl();
@@ -46,6 +48,11 @@ public class TestConfiguration {
 
     @Bean
     public UserController userController() { return new UserController(); }
+
+    @Bean
+    public AdminController adminController() {
+        return new AdminController();
+    }
 
     @Bean
     public ExceptionHandling exceptionHandling() { return new ExceptionHandling(); }

@@ -11,6 +11,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 /**
  * Created by Thibault on 18/11/16.
  * Spring controller meant to access to the private functionalities of fluffy-stock
@@ -49,7 +51,10 @@ public class AdminController {
     public void addProduct(@RequestBody String productAsString) throws FunctionalException {
         LOGGER.info("Receiving a POST method");
 
-        productFactory.deserialize(productAsString);
+        Product product = productFactory.deserialize(productAsString);
+        product.setId(UUID.randomUUID()); //TODO add this method in the Service from the domain
+        //TODO validate the product with a method from the domain's service
+        productAsString = productFactory.serialize(product);
         try {
             productsRepository.store(productAsString);
         } catch (FunctionalException e) {
