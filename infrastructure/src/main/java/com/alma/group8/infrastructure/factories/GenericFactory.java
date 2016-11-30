@@ -12,14 +12,13 @@ import java.io.IOException;
  * Generic factory using ObjectMapper
  */
 public class GenericFactory<T> implements FunctionalFactory<T> {
-    //FIXME todo testing and usage in the controllers
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     private final Class<T> type;
 
     /**
-     * Constructor
-     * @param type
+     * Constructor with a type
+     * @param type the type
      */
     public GenericFactory(Class<T> type) {
         this.type = type;

@@ -23,7 +23,7 @@ public class SoapMailVerifierTest {
 
     @Test
     public void testMailVerifierNok() {
-        Assert.assertTrue(soapMailVerifier.isValid("email@not_existing_email.com"));
+        Assert.assertFalse(soapMailVerifier.isValid("qsdfzrz"));
     }
 
 }
