@@ -2,6 +2,7 @@ import com.alma.group8.api.interfaces.FunctionalFactory;
 import com.alma.group8.api.interfaces.ProductsRepository;
 import com.alma.group8.domain.model.Product;
 import com.alma.group8.domain.model.ProductType;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +19,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
@@ -92,6 +94,27 @@ public class AdminControllerTest {
         }).when(productsRepository).delete(Mockito.anyString());
 
         mockMvc.perform(delete("/admin/product/123456789")).andExpect(status().isOk());
+
+        Assert.assertTrue(viewed);
+    }
+
+    @Test
+    public void testUpdateProduct() throws Exception {
+
+        Mockito.doAnswer(invocationOnMock -> {
+            Product product = new ObjectMapper().readValue((String) invocationOnMock.getArguments()[0], Product.class);
+            Assert.assertEquals("wrong name", "name" , product.getName());
+            viewed = true;
+            return null;
+        }).when(productsRepository).updateProduct(Mockito.anyString());
+
+        Product product = new Product();
+        product.setName("name");
+        product.setProductType(ProductType.ALIMENTAIRE);
+
+        mockMvc.perform(put("/admin/product/123456789") .contentType(MediaType.APPLICATION_JSON)
+                                                        .content(new ObjectMapper().writeValueAsString(product)))
+                                                        .andExpect(status().isOk());
 
         Assert.assertTrue(viewed);
     }
