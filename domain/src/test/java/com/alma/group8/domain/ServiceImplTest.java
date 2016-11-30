@@ -89,4 +89,15 @@ public class ServiceImplTest {
         product.setPrice(-50.);
         productService.validate(OBJECT_MAPPER.writeValueAsString(product));
     }
+
+    @Test
+    public void testGenerateId() throws IOException, FunctionalException {
+        Product product = new Product();
+        String productAsString = OBJECT_MAPPER.writeValueAsString(product);
+        Assert.assertNull(product.getId());
+        String productWithIdAsString = productService.generateId(productAsString);
+
+        Product product1 = OBJECT_MAPPER.readValue(productWithIdAsString, Product.class);
+        Assert.assertNotNull(product1.getId());
+    }
 }

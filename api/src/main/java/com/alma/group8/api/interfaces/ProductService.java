@@ -33,4 +33,11 @@ public interface ProductService  {
      */
     void validate(String product) throws FunctionalException;
 
+    /**
+     * Add an id to a product
+     * @param product the product as a string
+     * @throws FunctionalException if the product is not correct
+     */
+    String generateId(String product) throws FunctionalException;
+
 }

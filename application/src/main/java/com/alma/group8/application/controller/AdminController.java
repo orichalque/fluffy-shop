@@ -1,17 +1,13 @@
 package com.alma.group8.application.controller;
 
 import com.alma.group8.api.exceptions.FunctionalException;
-import com.alma.group8.api.interfaces.FunctionalFactory;
 import com.alma.group8.api.interfaces.ProductService;
 import com.alma.group8.api.interfaces.ProductsRepository;
 import com.alma.group8.application.util.CommonVariables;
 import com.alma.group8.domain.exceptions.AlreadyExistingProductException;
-import com.alma.group8.domain.model.Product;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.UUID;
 
 /**
  * Created by Thibault on 18/11/16.
@@ -26,10 +22,7 @@ public class AdminController {
     private ProductsRepository productsRepository;
 
     @Autowired
-    private ProductService productService;
-
-    @Autowired
-    private FunctionalFactory<Product> productFactory;
+    private ProductService productService; 
 
     private static final Logger LOGGER = Logger.getLogger(AdminController.class);
 
@@ -49,14 +42,15 @@ public class AdminController {
      */
     @RequestMapping(value = "/product", method = RequestMethod.POST, consumes = "application/json")
     public void addProduct(@RequestBody String productAsString) throws FunctionalException {
-        LOGGER.info("Receiving a POST method");
+        LOGGER.info("Receiving a POST method to add the product");
+        LOGGER.debug(String.format("POST on /admin/product with body %s", productAsString));
 
-        Product product = productFactory.deserialize(productAsString);
-        product.setId(UUID.randomUUID()); //TODO add this method in the Service from the domain
-        //TODO validate the product with a method from the domain's service
-        productAsString = productFactory.serialize(product);
+        productService.validate(productAsString);
+
+        String productAsStringWithId = productService.generateId(productAsString);
+
         try {
-            productsRepository.store(productAsString);
+            productsRepository.store(productAsStringWithId);
         } catch (FunctionalException e) {
             throw new AlreadyExistingProductException(e);
         }

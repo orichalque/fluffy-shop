@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.UUID;
 
 /**
  * Created by Thibault on 15/11/16.
@@ -72,6 +73,17 @@ public class ProductServiceImpl implements ProductService {
             }
         } catch (IOException e) {
             throw new InvalidProductException(e);
+        }
+    }
+
+    @Override
+    public String generateId(String productAsString) throws FunctionalException {
+        try {
+            Product product = OBJECT_MAPPER.readValue(productAsString, Product.class);
+            product.setId(UUID.randomUUID());
+            return OBJECT_MAPPER.writeValueAsString(product);
+        } catch (IOException e) {
+            throw new FunctionalException(e);
         }
     }
 }
