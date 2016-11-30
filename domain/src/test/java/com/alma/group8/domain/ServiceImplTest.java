@@ -1,11 +1,13 @@
 package com.alma.group8.domain;
 
+import com.alma.group8.domain.exceptions.InvalidProductException;
 import com.alma.group8.domain.model.Product;
 import com.alma.group8.domain.model.ProductType;
 import com.alma.group8.api.exceptions.FunctionalException;
 import com.alma.group8.api.interfaces.ProductService;
 import com.alma.group8.domain.exceptions.NotEnoughProductsException;
 import com.alma.group8.domain.service.ProductServiceImpl;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Assert;
 import org.junit.Before;
@@ -29,7 +31,6 @@ public class ServiceImplTest {
 
     @Before
     public void setUp() {
-        LOGGER.warn("Salut");
         product = new Product();
         product.setId(UUID.randomUUID());
         product.setQuantity(5);
@@ -55,5 +56,37 @@ public class ServiceImplTest {
     public void testIncreaseQuantity() throws IOException, FunctionalException {
         String productAsString = productService.increaseQuantity(OBJECT_MAPPER.writeValueAsString(product), 3);
         Assert.assertEquals(8, OBJECT_MAPPER.readValue(productAsString, Product.class).getQuantity());
+    }
+
+    @Test(expected = FunctionalException.class)
+    public void testValidateNullName() throws JsonProcessingException, FunctionalException {
+        Product product = new Product();
+        product.setProductType(ProductType.ALIMENTAIRE);
+        productService.validate(OBJECT_MAPPER.writeValueAsString(product));
+    }
+
+    @Test(expected = FunctionalException.class)
+    public void testValidateNullType() throws JsonProcessingException, FunctionalException {
+        Product product = new Product();
+        product.setName("name");
+        productService.validate(OBJECT_MAPPER.writeValueAsString(product));
+    }
+
+    @Test(expected = FunctionalException.class)
+    public void testValidateNegativePrice() throws JsonProcessingException, FunctionalException {
+        Product product = new Product();
+        product.setName("name");
+        product.setProductType(ProductType.ALIMENTAIRE);
+        product.setQuantity(-5);
+        productService.validate(OBJECT_MAPPER.writeValueAsString(product));
+    }
+
+    @Test(expected = FunctionalException.class)
+    public void testValidateNegativeQuantity() throws JsonProcessingException, FunctionalException {
+        Product product = new Product();
+        product.setName("name");
+        product.setProductType(ProductType.ALIMENTAIRE);
+        product.setPrice(-50.);
+        productService.validate(OBJECT_MAPPER.writeValueAsString(product));
     }
 }

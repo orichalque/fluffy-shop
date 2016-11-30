@@ -3,6 +3,7 @@ package com.alma.group8.infrastructure.factories;
 import com.alma.group8.api.exceptions.FunctionalException;
 import com.alma.group8.api.interfaces.FunctionalFactory;
 import com.alma.group8.domain.model.Product;
+import com.alma.group8.domain.model.ProductType;
 import com.alma.group8.domain.model.Role;
 import com.alma.group8.domain.model.User;
 import org.junit.Assert;

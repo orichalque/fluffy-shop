@@ -90,7 +90,7 @@ public class AdminControllerTest {
             viewed = true;
             return null;
         }).when(productsRepository).delete(Mockito.anyString());
-        
+
         mockMvc.perform(delete("/admin/product/123456789")).andExpect(status().isOk());
 
         Assert.assertTrue(viewed);

@@ -63,8 +63,12 @@ public class ProductServiceImpl implements ProductService {
     public void validate(String productAsString) throws FunctionalException {
         try {
             Product product = OBJECT_MAPPER.readValue(productAsString, Product.class);
-            if (product.getQuantity() < 0 ) {
-                throw new InvalidProductException("Product not valid");
+
+            if ((product.getQuantity() < 0)
+                    || product.getName() == null
+                    || product.getProductType() == null
+                    || (product.getPrice() < 0)) {
+                throw new InvalidProductException("Product not valid: Forbidden values");
             }
         } catch (IOException e) {
             throw new InvalidProductException(e);
