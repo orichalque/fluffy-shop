@@ -69,9 +69,9 @@ public class MongoUserRepository implements UserRepository {
     }
 
     @Override
-    public void delete(String uuid) throws FunctionalException {
+    public void delete(String mail) throws FunctionalException {
         LOGGER.info("Deleting a user in the database");
-        String currentUser = find(uuid);
+        String currentUser = find(mail);
 
         if (Strings.isNullOrEmpty(currentUser)) {
             throw new FunctionalException("The user cannot be found in the database");
