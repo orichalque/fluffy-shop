@@ -46,11 +46,12 @@ public class UserControllerTest {
     private SoapMailVerifier soapMailVerifier;
 
     private MockMvc mockMvc;
-
+    private boolean viewed;
     private ArrayList<User> users;
 
     @Before
     public void setUp() {
+        viewed = false;
         users = new ArrayList<>();
         Mockito.when(soapMailVerifier.isValid(Mockito.anyString())).thenReturn(Boolean.TRUE);
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
@@ -131,6 +132,14 @@ public class UserControllerTest {
         mockMvc.perform(post("/admin/user/client").contentType(MediaType.APPLICATION_JSON).content("mail3")).andExpect(status().is(409));
     }
 
+    @Test
+    public void testDeleteOk() throws Exception {
+        Mockito.doAnswer(invocationOnMock -> {viewed = true; return null;}).when(userRepository).delete(Mockito.anyString());
+
+        mockMvc.perform(delete("/admin/user/idToCheck")).andExpect(status().isOk());
+
+        Assert.assertTrue(viewed);
+    }
 
     @Test
     public void testDeleteNok() throws Exception {
