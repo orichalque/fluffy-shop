@@ -1,6 +1,7 @@
 import com.alma.group8.api.exceptions.FunctionalException;
 import com.alma.group8.api.interfaces.UserRepository;
 import com.alma.group8.application.util.SoapMailVerifier;
+import com.alma.group8.domain.exceptions.UserNotFoundException;
 import com.alma.group8.domain.model.Role;
 import com.alma.group8.domain.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,9 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
-import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
@@ -25,8 +23,7 @@ import java.util.ArrayList;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -132,6 +129,14 @@ public class UserControllerTest {
         Mockito.doThrow(new FunctionalException("err")).when(userRepository).insert(Mockito.anyString());
 
         mockMvc.perform(post("/admin/user/client").contentType(MediaType.APPLICATION_JSON).content("mail3")).andExpect(status().is(409));
+    }
+
+
+    @Test
+    public void testDeleteNok() throws Exception {
+        Mockito.doThrow(new UserNotFoundException("not found")).when(userRepository).delete(Mockito.anyString());
+
+        mockMvc.perform(delete("/admin/user/idToCheck")).andExpect(status().is(404));
     }
 
 }

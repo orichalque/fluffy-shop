@@ -1,4 +1,4 @@
-package com.alma.group8.api.interfaces;
+package com.alma.group8.application.util;
 
 /**
  * Created by Thibault on 26/11/2016.
@@ -7,5 +7,10 @@ package com.alma.group8.api.interfaces;
 @FunctionalInterface
 public interface MailVerifier {
 
+    /**
+     * Check if an email is valid
+     * @param email the email to check
+     * @return true if valid, false if not
+     */
     boolean isValid(String email);
 }
