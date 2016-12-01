@@ -4,7 +4,7 @@ import com.alma.group8.api.exceptions.FunctionalException;
 import com.alma.group8.api.interfaces.FunctionalFactory;
 import com.alma.group8.api.interfaces.UserRepository;
 import com.alma.group8.application.util.CommonVariables;
-import com.alma.group8.application.util.SoapMailVerifier;
+import com.alma.group8.application.util.MailVerifier;
 import com.alma.group8.domain.exceptions.AlreadyExistingUserException;
 import com.alma.group8.domain.exceptions.UserNotFoundException;
 import com.alma.group8.domain.model.Role;
@@ -34,7 +34,7 @@ public class UserController {
     private FunctionalFactory userFactory;
 
     @Autowired
-    private SoapMailVerifier soapMailVerifier;
+    private MailVerifier mailVerifier;
 
     private static final Logger LOGGER = Logger.getLogger(UserController.class);
 
@@ -82,7 +82,8 @@ public class UserController {
     public void insertAdmin(@RequestBody String email) throws FunctionalException {
         LOGGER.info(String.format("Receiving a POST Request to add an admin with the email %s", email));
 
-        if (! soapMailVerifier.isValid(email)){
+        if (! mailVerifier.isValid(email.replaceAll("\\*", "."))){
+            LOGGER.warn(String.format("Invalid email received: %s", email));
             throw new FunctionalException("Invalid email");
         }
 
@@ -110,7 +111,8 @@ public class UserController {
     public void insertClient(@RequestBody String email) throws FunctionalException {
         LOGGER.info(String.format("Receiving a POST Request to add an client with the email %s", email));
 
-        if (! soapMailVerifier.isValid(email.replaceAll("\\*", "."))){
+        if (! mailVerifier.isValid(email.replaceAll("\\*", "."))){
+            LOGGER.warn(String.format("Invalid email received: %s", email));
             throw new FunctionalException("Invalid email");
         }
 
@@ -127,6 +129,15 @@ public class UserController {
         } catch (FunctionalException e) {
             throw new AlreadyExistingUserException(e);
         }
+    }
+
+    /**
+     * Delete a user (client/admin) from the database
+     * @param id the mail of the user to delete
+     */
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
+    public void deleteProduct(@PathVariable String id) throws FunctionalException {
+        userRepository.delete(id);
     }
 
 }

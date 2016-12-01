@@ -5,6 +5,7 @@ import com.alma.group8.api.interfaces.ProductService;
 import com.alma.group8.api.interfaces.ProductsRepository;
 import com.alma.group8.application.util.CommonVariables;
 import com.alma.group8.domain.exceptions.AlreadyExistingProductException;
+import com.alma.group8.domain.exceptions.ProductNotFoundException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class AdminController {
     private ProductsRepository productsRepository;
 
     @Autowired
-    private ProductService productService; 
+    private ProductService productService;
 
     private static final Logger LOGGER = Logger.getLogger(AdminController.class);
 
@@ -56,4 +57,23 @@ public class AdminController {
         }
     }
 
+    /**
+     * Update a product in the database
+     * @param productAsString the product as a string
+     * @param id the id of the product
+     * @throws FunctionalException if the product is not in the database
+     */
+    @RequestMapping(value = "/product/{id}", method = RequestMethod.PUT, consumes = "application/json")
+    public void updateProduct(@RequestBody String productAsString, @PathVariable String id) throws FunctionalException {
+        LOGGER.info(String.format("Receiving a PUT method to update a product with the id %s", id));
+        LOGGER.debug(String.format("PUT on /admin/product with body %s", productAsString));
+
+        productService.validate(productAsString);
+
+        try {
+            productsRepository.updateProduct(productAsString);
+        } catch (FunctionalException e) {
+            throw new ProductNotFoundException(e);
+        }
+    }
 }

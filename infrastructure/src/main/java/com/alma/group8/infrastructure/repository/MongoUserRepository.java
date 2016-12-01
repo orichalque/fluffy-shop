@@ -3,6 +3,7 @@ package com.alma.group8.infrastructure.repository;
 import com.alma.group8.api.exceptions.FunctionalException;
 import com.alma.group8.api.interfaces.ProductsRepository;
 import com.alma.group8.api.interfaces.UserRepository;
+import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.mongodb.client.MongoCollection;
 import org.apache.log4j.Logger;
@@ -64,6 +65,18 @@ public class MongoUserRepository implements UserRepository {
             throw new FunctionalException("The user is already in the base");
         } else {
             userCollection.insertOne(document);
+        }
+    }
+
+    @Override
+    public void delete(String mail) throws FunctionalException {
+        LOGGER.info("Deleting a user in the database");
+        String currentUser = find(mail);
+
+        if (Strings.isNullOrEmpty(currentUser)) {
+            throw new FunctionalException("The user cannot be found in the database");
+        } else {
+            userCollection.deleteOne(Document.parse(currentUser));
         }
     }
 }

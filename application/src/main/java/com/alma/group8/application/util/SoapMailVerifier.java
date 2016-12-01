@@ -1,7 +1,6 @@
 package com.alma.group8.application.util;
 
 import com.alma.group8.api.exceptions.TechnicalException;
-import com.alma.group8.api.interfaces.MailVerifier;
 import com.cdyne.ws.EmailVerNoTestEmailSoap;
 import com.cdyne.ws.ReturnIndicator;
 import org.apache.log4j.Logger;

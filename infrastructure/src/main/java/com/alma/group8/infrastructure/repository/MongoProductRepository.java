@@ -99,6 +99,7 @@ public class MongoProductRepository implements ProductsRepository {
 
         //We delete the products before inserting it again
         //The delete will throw the ProductNotFoundException if the product doesn't exist
+
         delete(document.getString("id"));
 
         productCollection.insertOne(document);
