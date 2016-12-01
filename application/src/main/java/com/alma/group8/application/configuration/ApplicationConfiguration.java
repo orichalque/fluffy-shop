@@ -6,6 +6,7 @@ import com.alma.group8.api.interfaces.ProductService;
 import com.alma.group8.api.interfaces.ProductsRepository;
 import com.alma.group8.api.interfaces.UserRepository;
 import com.alma.group8.application.handlers.ExceptionHandling;
+import com.alma.group8.application.util.MailVerifier;
 import com.alma.group8.application.util.SoapMailVerifier;
 import com.alma.group8.domain.model.Product;
 import com.alma.group8.domain.model.User;
@@ -33,7 +34,6 @@ import java.util.List;
 @Configuration
 @ComponentScan({"com.alma.group8.application"})
 public class ApplicationConfiguration extends WebMvcConfigurerAdapter{
-
 
     /**
      * Create the ExceptionHandling and add it in the spring context
@@ -91,7 +91,7 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter{
     }
 
     @Bean
-    public SoapMailVerifier soapMailVerifier() throws TechnicalException {
+    public MailVerifier mailVerifier() throws TechnicalException {
         return new SoapMailVerifier();
     }
 

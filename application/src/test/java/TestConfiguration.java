@@ -6,6 +6,7 @@ import com.alma.group8.application.controller.AdminController;
 import com.alma.group8.application.controller.ProductController;
 import com.alma.group8.application.controller.UserController;
 import com.alma.group8.application.handlers.ExceptionHandling;
+import com.alma.group8.application.util.MailVerifier;
 import com.alma.group8.application.util.SoapMailVerifier;
 import com.alma.group8.domain.model.Product;
 import com.alma.group8.domain.service.ProductServiceImpl;
@@ -34,7 +35,7 @@ public class TestConfiguration {
     }
 
     @Bean
-    public SoapMailVerifier soapMailVerifier() { return Mockito.mock(SoapMailVerifier.class); }
+    public MailVerifier mailVerifier() { return Mockito.mock(SoapMailVerifier.class); }
 
     @Bean
     public ProductService productService() {

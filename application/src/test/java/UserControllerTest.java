@@ -1,6 +1,6 @@
 import com.alma.group8.api.exceptions.FunctionalException;
 import com.alma.group8.api.interfaces.UserRepository;
-import com.alma.group8.application.util.SoapMailVerifier;
+import com.alma.group8.application.util.MailVerifier;
 import com.alma.group8.domain.exceptions.UserNotFoundException;
 import com.alma.group8.domain.model.Role;
 import com.alma.group8.domain.model.User;
@@ -43,7 +43,7 @@ public class UserControllerTest {
     private UserRepository userRepository;
 
     @Autowired
-    private SoapMailVerifier soapMailVerifier;
+    private MailVerifier mailVerifier;
 
     private MockMvc mockMvc;
     private boolean viewed;
@@ -53,7 +53,7 @@ public class UserControllerTest {
     public void setUp() {
         viewed = false;
         users = new ArrayList<>();
-        Mockito.when(soapMailVerifier.isValid(Mockito.anyString())).thenReturn(Boolean.TRUE);
+        Mockito.when(mailVerifier.isValid(Mockito.anyString())).thenReturn(Boolean.TRUE);
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
         User user = new User();
@@ -121,7 +121,6 @@ public class UserControllerTest {
     @Test
     public void testPostAdminNok() throws Exception {
         Mockito.doThrow(new FunctionalException("err")).when(userRepository).insert(Mockito.anyString());
-
         mockMvc.perform(post("/admin/user/admin").contentType(MediaType.APPLICATION_JSON).content("mail3")).andExpect(status().is(409));
     }
 
@@ -130,6 +129,20 @@ public class UserControllerTest {
         Mockito.doThrow(new FunctionalException("err")).when(userRepository).insert(Mockito.anyString());
 
         mockMvc.perform(post("/admin/user/client").contentType(MediaType.APPLICATION_JSON).content("mail3")).andExpect(status().is(409));
+    }
+
+    @Test
+    public void testPostAdminWrongMailNok() throws Exception {
+        Mockito.doReturn(false).when(mailVerifier).isValid(Mockito.anyString());
+
+        mockMvc.perform(post("/admin/user/admin").contentType(MediaType.APPLICATION_JSON).content("mail3")).andExpect(status().is(400));
+    }
+
+    @Test
+    public void testPostClientWrongMailNok() throws Exception {
+        Mockito.doReturn(false).when(mailVerifier).isValid(Mockito.anyString());
+
+        mockMvc.perform(post("/admin/user/client").contentType(MediaType.APPLICATION_JSON).content("mail3")).andExpect(status().is(400));
     }
 
     @Test
