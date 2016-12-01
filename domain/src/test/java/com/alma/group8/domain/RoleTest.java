@@ -21,7 +21,6 @@ public class RoleTest {
 
         @Test
         public void testFromValue() {
-            ProductType productType = ProductType.fromValue("bois");
             Role role = Role.fromValue("admin");
 
             Assert.assertEquals("From value non fonctionnel", role, Role.ADMIN);

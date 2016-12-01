@@ -93,7 +93,7 @@ public class ProductController {
     @RequestMapping(value = "/product/{id}/order/{quantity}", method = RequestMethod.POST)
     @ResponseBody public String orderProductById(@PathVariable String id ,@PathVariable int quantity) throws FunctionalException {
         LOGGER.info("Receiving a POST request to order products");
-        String productAsString = null;
+        String productAsString;
         try {
             productAsString = productsRepository.find(id);
         } catch (FunctionalException e) {

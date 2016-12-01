@@ -1,8 +1,7 @@
 import com.alma.group8.api.exceptions.FunctionalException;
 import com.alma.group8.api.interfaces.ProductsRepository;
-import com.alma.group8.domain.model.Product;
-import com.alma.group8.domain.exceptions.ProductNotFoundException;
 import com.alma.group8.application.util.CommonVariables;
+import com.alma.group8.domain.model.Product;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;

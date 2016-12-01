@@ -2,14 +2,10 @@ package com.alma.group8.infrastructure.factories;
 
 import com.alma.group8.api.exceptions.FunctionalException;
 import com.alma.group8.api.interfaces.FunctionalFactory;
-import com.alma.group8.domain.model.Product;
-import com.alma.group8.domain.model.ProductType;
 import com.alma.group8.domain.model.Role;
 import com.alma.group8.domain.model.User;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.UUID;
 
 /**
  * Created by Thibault on 28/11/2016.

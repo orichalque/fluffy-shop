@@ -1,11 +1,10 @@
 package com.alma.group8.domain;
 
-import com.alma.group8.domain.exceptions.InvalidProductException;
-import com.alma.group8.domain.model.Product;
-import com.alma.group8.domain.model.ProductType;
 import com.alma.group8.api.exceptions.FunctionalException;
 import com.alma.group8.api.interfaces.ProductService;
 import com.alma.group8.domain.exceptions.NotEnoughProductsException;
+import com.alma.group8.domain.model.Product;
+import com.alma.group8.domain.model.ProductType;
 import com.alma.group8.domain.service.ProductServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

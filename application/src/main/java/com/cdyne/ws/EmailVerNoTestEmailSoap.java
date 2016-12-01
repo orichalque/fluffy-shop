@@ -35,11 +35,11 @@ public interface EmailVerNoTestEmailSoap {
     @WebResult(name = "VerifyMXRecordResult", targetNamespace = "http://ws.cdyne.com/")
     @RequestWrapper(localName = "VerifyMXRecord", targetNamespace = "http://ws.cdyne.com/", className = "com.cdyne.ws.VerifyMXRecord")
     @ResponseWrapper(localName = "VerifyMXRecordResponse", targetNamespace = "http://ws.cdyne.com/", className = "com.cdyne.ws.VerifyMXRecordResponse")
-    public int verifyMXRecord(
+    int verifyMXRecord(
             @WebParam(name = "email", targetNamespace = "http://ws.cdyne.com/")
-                    String email,
+            String email,
             @WebParam(name = "LicenseKey", targetNamespace = "http://ws.cdyne.com/")
-                    String licenseKey);
+            String licenseKey);
 
     /**
      * This function will verify an email address and also includes the ability to timeout the verification process.  The Verification can be slowed down by the email server being verified against. <b>Timeout is in seconds</b> Use a licensekey of 0 for testing <br> NOTE: A timeout error (7) does not mean an email will not go through.  You should treat this as a good email address.
@@ -54,13 +54,13 @@ public interface EmailVerNoTestEmailSoap {
     @WebResult(name = "AdvancedVerifyEmailResult", targetNamespace = "http://ws.cdyne.com/")
     @RequestWrapper(localName = "AdvancedVerifyEmail", targetNamespace = "http://ws.cdyne.com/", className = "com.cdyne.ws.AdvancedVerifyEmail")
     @ResponseWrapper(localName = "AdvancedVerifyEmailResponse", targetNamespace = "http://ws.cdyne.com/", className = "com.cdyne.ws.AdvancedVerifyEmailResponse")
-    public ReturnIndicator advancedVerifyEmail(
+    ReturnIndicator advancedVerifyEmail(
             @WebParam(name = "email", targetNamespace = "http://ws.cdyne.com/")
-                    String email,
+            String email,
             @WebParam(name = "timeout", targetNamespace = "http://ws.cdyne.com/")
-                    int timeout,
+            int timeout,
             @WebParam(name = "LicenseKey", targetNamespace = "http://ws.cdyne.com/")
-                    String licenseKey);
+            String licenseKey);
 
     /**
      * This function allows you to verify an email address against the mail servers it belongs to.  This function differs from the advanced function only by it automatically setting a timeout of 5 seconds
@@ -74,11 +74,11 @@ public interface EmailVerNoTestEmailSoap {
     @WebResult(name = "VerifyEmailResult", targetNamespace = "http://ws.cdyne.com/")
     @RequestWrapper(localName = "VerifyEmail", targetNamespace = "http://ws.cdyne.com/", className = "com.cdyne.ws.VerifyEmail")
     @ResponseWrapper(localName = "VerifyEmailResponse", targetNamespace = "http://ws.cdyne.com/", className = "com.cdyne.ws.VerifyEmailResponse")
-    public ReturnIndicator verifyEmail(
+    ReturnIndicator verifyEmail(
             @WebParam(name = "email", targetNamespace = "http://ws.cdyne.com/")
-                    String email,
+            String email,
             @WebParam(name = "LicenseKey", targetNamespace = "http://ws.cdyne.com/")
-                    String licenseKey);
+            String licenseKey);
 
     /**
      * This function will give you all the possible code returns
@@ -90,6 +90,6 @@ public interface EmailVerNoTestEmailSoap {
     @WebResult(name = "ReturnCodesResult", targetNamespace = "http://ws.cdyne.com/")
     @RequestWrapper(localName = "ReturnCodes", targetNamespace = "http://ws.cdyne.com/", className = "com.cdyne.ws.ReturnCodes")
     @ResponseWrapper(localName = "ReturnCodesResponse", targetNamespace = "http://ws.cdyne.com/", className = "com.cdyne.ws.ReturnCodesResponse")
-    public ArrayOfAnyType returnCodes();
+    ArrayOfAnyType returnCodes();
 
 }

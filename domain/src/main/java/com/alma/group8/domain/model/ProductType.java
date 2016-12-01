@@ -30,7 +30,7 @@ public enum ProductType {
         }
     }
 
-    private ProductType(String value) {
+    ProductType(String value) {
         this.value = value;
     }
 
