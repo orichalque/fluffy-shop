@@ -54,6 +54,10 @@ public class UserController {
         }
     }
 
+    /**
+     * Get all the usrs in the database
+     * @return the list of all {@link com.alma.group8.domain.model.User}
+     */
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String getAllUsers() {
         LOGGER.info("Receiving a GET Request to get all the users");
